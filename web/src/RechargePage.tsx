@@ -7,6 +7,18 @@ import { t } from './i18n';
 
 // 进行中订单的恢复锚点(localStorage):值为 out_trade_no
 const RESUME_ORDER_KEY = 'epay_last_order';
+const DEFAULT_AMOUNTS = [10, 30, 50, 100, 200, 500];
+
+function availablePresetAmounts(minAmount: number, maxAmount: number): number[] {
+  const amounts = DEFAULT_AMOUNTS.filter((value) => value >= minAmount && value <= maxAmount);
+  if (minAmount > DEFAULT_AMOUNTS[0] && minAmount <= maxAmount && !amounts.includes(minAmount)) {
+    amounts.unshift(minAmount);
+  }
+  if (!amounts.length && minAmount <= maxAmount) {
+    amounts.push(minAmount);
+  }
+  return amounts;
+}
 
 /**
  * RechargePage 充值页面（用户级独立页面）
@@ -23,6 +35,8 @@ export default function RechargePage() {
   const [methods, setMethods] = useState<MethodInfo[]>([]);
   const [methodsLoading, setMethodsLoading] = useState(true);
   const [methodsErr, setMethodsErr] = useState<string | null>(null);
+  const [minAmount, setMinAmount] = useState(1);
+  const [maxAmount, setMaxAmount] = useState(10000);
 
   const [amount, setAmount] = useState<number>(30);
   const [method, setMethod] = useState<string>('');
@@ -46,7 +60,7 @@ export default function RechargePage() {
   //   pending → 恢复二维码+轮询;paid(24h 内) → 直接呈现成功卡;
   //   其余终态或已超时 → 静默清除,不打扰。
   useEffect(() => {
-    let saved: string | null = null;
+    let saved: string | null;
     try {
       saved = localStorage.getItem(RESUME_ORDER_KEY);
     } catch {
@@ -76,21 +90,32 @@ export default function RechargePage() {
     api.methods()
       .then((res) => {
         setMethods(res.methods || []);
+        setMinAmount(res.min_amount > 0 ? res.min_amount : 1);
+        setMaxAmount(res.max_amount > 0 ? res.max_amount : 10000);
         if (res.methods?.length) setMethod(res.methods[0].key);
       })
       .catch((e) => setMethodsErr(String(e?.message || e)))
       .finally(() => setMethodsLoading(false));
     api.packages()
       .then((res) => {
-        const list = res.list || [];
-        setPackages(list);
-        if (list.length && !userChoseAmountRef.current) {
-          setSelectedPackageId(list[0].id);
-          setAmount(list[0].amount);
-        }
+        setPackages(res.list || []);
       })
       .catch(() => setPackages([]));
   }, []);
+
+  // 配置或套餐任一先返回都没关系：只在用户尚未操作时，选择当前限额内的首个合法档位。
+  useEffect(() => {
+    if (userChoseAmountRef.current) return;
+    const firstPackage = packages.find((item) => item.amount >= minAmount && item.amount <= maxAmount);
+    if (firstPackage) {
+      setSelectedPackageId(firstPackage.id);
+      setAmount(firstPackage.amount);
+      return;
+    }
+    setSelectedPackageId(null);
+    const [firstPreset] = availablePresetAmounts(minAmount, maxAmount);
+    if (firstPreset !== undefined) setAmount(firstPreset);
+  }, [packages, minAmount, maxAmount]);
 
   // 2) 订单状态轮询
   useEffect(() => {
@@ -149,8 +174,16 @@ export default function RechargePage() {
       setError(t('请选择支付方式'));
       return;
     }
-    if (!amount || amount <= 0) {
+    if (!Number.isFinite(amount)) {
       setError(t('请输入有效金额'));
+      return;
+    }
+    if (!amount || amount < minAmount) {
+      setError(`${t('最低充值金额为')} ${formatRechargeCredit(minAmount)}`);
+      return;
+    }
+    if (amount > maxAmount) {
+      setError(`${t('单笔充值金额不能超过')} ${formatRechargeCredit(maxAmount)}`);
       return;
     }
     setSubmitting(true);
@@ -276,6 +309,8 @@ export default function RechargePage() {
   }
 
   // 默认态：金额 + 渠道选择 + 提交
+  const availablePackages = packages.filter((item) => item.amount >= minAmount && item.amount <= maxAmount);
+  const presetAmounts = availablePresetAmounts(minAmount, maxAmount);
   return (
     <div style={containerStyle}>
       <h2 style={titleStyle}>{t('账户充值')}</h2>
@@ -285,10 +320,10 @@ export default function RechargePage() {
           {t('充值比例：')}<strong style={{ color: cssVar('text') }}>1 CNY = $1</strong>
         </p>
         <section>
-          <h3 style={sectionTitleStyle}>{packages.length ? t('选择套餐') : t('选择金额')}</h3>
+          <h3 style={sectionTitleStyle}>{availablePackages.length ? t('选择套餐') : t('选择金额')}</h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {packages.length
-              ? packages.map((p) => (
+            {availablePackages.length
+              ? availablePackages.map((p) => (
                 <button
                   key={p.id}
                   type="button"
@@ -304,11 +339,11 @@ export default function RechargePage() {
                   )}
                 </button>
               ))
-              : [10, 30, 50, 100, 200, 500].map((v) => (
+              : presetAmounts.map((v) => (
                 <button
                   key={v}
                   type="button"
-                  onClick={() => { userChoseAmountRef.current = true; setAmount(v); }}
+                  onClick={() => { userChoseAmountRef.current = true; setSelectedPackageId(null); setAmount(v); }}
                   style={amount === v ? amountBtnActive : amountBtn}
                 >
                   {formatRechargeCredit(v, { compact: true })}
@@ -316,11 +351,11 @@ export default function RechargePage() {
               ))}
           </div>
           <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 8, color: cssVar('textSecondary'), fontSize: 13 }}>
-            <span>{t('自定义金额')}{packages.length ? t('（不参与套餐赠送）') : ''}</span>
+            <span>{t('自定义金额')}{availablePackages.length ? t('（不参与套餐赠送）') : ''}</span>
             <input
               type="number"
-              min={1}
-              max={10000}
+              min={minAmount}
+              max={maxAmount}
               step={1}
               value={amount}
               onChange={(e) => { userChoseAmountRef.current = true; setSelectedPackageId(null); setAmount(Number(e.target.value)); }}

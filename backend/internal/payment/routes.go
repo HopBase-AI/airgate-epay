@@ -208,6 +208,8 @@ func (p *Plugin) handleListMethods(w http.ResponseWriter, _ *http.Request) {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"methods":    []provider.MethodInfo{},
 			"configured": false,
+			"min_amount": 1.0,
+			"max_amount": 10000.0,
 			"message":    "支付插件尚未配置，请联系管理员",
 		})
 		return
@@ -215,6 +217,8 @@ func (p *Plugin) handleListMethods(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{
 		"methods":    p.svc.AvailableMethods(),
 		"configured": true,
+		"min_amount": p.svc.minAmount,
+		"max_amount": p.svc.maxAmount,
 	})
 }
 

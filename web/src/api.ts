@@ -76,6 +76,14 @@ export interface MethodInfo {
   description?: string;
 }
 
+export interface MethodsResponse {
+  methods: MethodInfo[];
+  configured: boolean;
+  min_amount: number;
+  max_amount: number;
+  message?: string;
+}
+
 export interface Order {
   id: number;
   out_trade_no: string;
@@ -155,9 +163,7 @@ export const api = {
 
   /** 列出当前可用的支付方式（PayMethod，不是 Provider） */
   methods: () =>
-    request<{ methods: MethodInfo[]; configured: boolean; message?: string }>(
-      'GET', '/user/methods',
-    ),
+    request<MethodsResponse>('GET', '/user/methods'),
 
   createOrder: (input: { amount: number; method: string; subject?: string; package_id?: number }) =>
     request<Order>('POST', '/user/orders', input),
