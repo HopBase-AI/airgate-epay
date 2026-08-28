@@ -10,9 +10,9 @@
 //
 // 注意：Admin*.tsx 管理页保持中文，不接入本模块。
 
-type Lang = 'zh' | 'zh-HK' | 'en' | 'ja';
+type Lang = 'zh' | 'zh-HK' | 'en' | 'ja' | 'es';
 
-const SUPPORTED = new Set<string>(['zh', 'zh-HK', 'en', 'ja']);
+const SUPPORTED = new Set<string>(['zh', 'zh-HK', 'en', 'ja', 'es']);
 
 function normalize(lang: string | null | undefined): Lang | null {
   return lang && SUPPORTED.has(lang) ? (lang as Lang) : null;
@@ -32,6 +32,7 @@ function detectBrowserLanguage(): Lang {
     if (lang === 'zh-hk' || lang === 'zh-tw' || lang === 'zh-mo' || lang.includes('hant')) return 'zh-HK';
     if (lang.startsWith('zh')) return 'zh';
     if (lang.startsWith('ja')) return 'ja';
+    if (lang.startsWith('es')) return 'es';
     if (lang.startsWith('en')) return 'en';
   }
   return 'en';
@@ -259,10 +260,79 @@ const ja: Record<string, string> = {
   '已退款': '返金済み',
 };
 
+const es: Record<string, string> = {
+  '加载中...': 'Cargando...',
+  '加载失败: ': 'Error al cargar: ',
+  '加载支付方式失败: ': 'Error al cargar los métodos de pago: ',
+  '充值功能暂未开放，请联系管理员。': 'La función de recarga aún no está disponible. Póngase en contacto con el administrador.',
+  '账户充值': 'Recargar cuenta',
+  '充值比例：': 'Tasa de recarga: ',
+  '充值成功': 'Recarga exitosa',
+  '再次充值': 'Recargar de nuevo',
+  '订单': 'Pedido',
+  '已支付，金额': 'ha sido pagado; importe',
+  '已入账': 'acreditado',
+  '，套餐赠送': ', bono del paquete',
+  '已同步到账': 'también acreditado',
+  '。': '.',
+  '扫码付款': 'Escanear para pagar',
+  '付款二维码': 'Código QR de pago',
+  '生成二维码中...': 'Generando código QR...',
+  '支付成功后另赠': 'Bono tras el pago:',
+  '请使用': 'Use',
+  '扫码完成付款': 'para escanear y completar el pago',
+  '订单号：': 'N.º de pedido: ',
+  '支付完成后本页将自动跳转到结果页（每 3 秒检查一次）': 'Esta página se redirigirá automáticamente en cuanto se complete el pago (se comprueba cada 3 segundos).',
+  '离开或刷新本页也没关系，支付结果会在你回来时自动恢复。': 'No pasa nada si sale o actualiza esta página: el resultado del pago se restaurará automáticamente cuando regrese.',
+  '支付完成后将自动刷新（每 3 秒检查一次）': 'Se actualiza automáticamente tras el pago (se comprueba cada 3 segundos).',
+  '扫码不便？': '¿No puede escanear el código?',
+  '点此在新窗口打开付款页 →': 'Abrir la página de pago en una ventana nueva →',
+  '取消': 'Cancelar',
+  '关闭': 'Cerrar',
+  '订单已': 'Pedido ',
+  '订单已过期': 'Pedido vencido',
+  '订单已失败': 'Pedido fallido',
+  '订单已取消': 'Pedido cancelado',
+  '订单已退款': 'Pedido reembolsado',
+  '该订单无法继续支付，请重新发起充值。': 'Este pedido ya no se puede pagar. Inicie una nueva recarga.',
+  '重新发起': 'Intentar de nuevo',
+  '选择套餐': 'Seleccionar paquete',
+  '选择金额': 'Seleccionar importe',
+  '送': 'Bono',
+  '自定义金额': 'Importe personalizado',
+  '（不参与套餐赠送）': ' (no incluye bono del paquete)',
+  '选择支付方式': 'Seleccionar método de pago',
+  '处理中...': 'Procesando...',
+  '立即支付': 'Pagar ahora',
+  '请选择支付方式': 'Seleccione un método de pago',
+  '请输入有效金额': 'Introduzca un importe válido',
+  '最低充值金额为': 'Importe mínimo de recarga:',
+  '单笔充值金额不能超过': 'Importe máximo de recarga:',
+  '支付宝': 'Alipay',
+  '微信支付': 'WeChat Pay',
+  '支付成功': 'Pago exitoso',
+  '暂无充值记录': 'Aún no hay registros de recarga',
+  '订单号': 'N.º de pedido',
+  '金额': 'Importe',
+  '支付方式': 'Método de pago',
+  '状态': 'Estado',
+  '创建时间': 'Fecha de creación',
+  '支付时间': 'Fecha de pago',
+  '操作': 'Acciones',
+  '继续支付': 'Continuar pago',
+  '待支付': 'Pendiente',
+  '已支付': 'Pagado',
+  '已过期': 'Vencido',
+  '失败': 'Fallido',
+  '已取消': 'Cancelado',
+  '已退款': 'Reembolsado',
+};
+
 const TABLES: Partial<Record<Lang, Record<string, string>>> = {
   'zh-HK': zhHK,
   en,
   ja,
+  es,
 };
 
 /** 翻译：简体原文即 key；zh 直接返回原文，其余语言查表，缺 key 兜底原文。 */
