@@ -266,6 +266,70 @@ export function getSiteName(): Promise<string> {
   return siteNamePromise;
 }
 
+// ============ 充值消耗明细导出 ============
+//
+// 用量数据属于 core，插件后端拿不到（Host 没有读 usage_logs 的 method），
+// 因此直接调 core 的用户级导出端点——与上面 getSiteName() 直连 core 同一个思路。
+// 该端点按当前登录用户返回，天然不会越权。
+//
+// 区间语义：[本笔充值到账时刻, 下一笔充值到账时刻)，最后一笔的右边界由后端取「至今」。
+
+/** 触发浏览器下载某笔充值区间内的使用明细 CSV。失败时抛出可展示的错误。 */
+export async function downloadOrderUsage(order: Order, nextPaidAt?: string): Promise<void> {
+  const qs = new URLSearchParams();
+  qs.set('start_time', new Date(order.paid_at!).toISOString());
+  if (nextPaidAt) {
+    qs.set('end_time', new Date(nextPaidAt).toISOString());
+  }
+  qs.set('order_no', order.out_trade_no);
+  try {
+    qs.set('tz', Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+  } catch {
+    /* 拿不到时区就交给后端默认值 */
+  }
+
+  const headers: Record<string, string> = {};
+  const token = localStorage.getItem('token');
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const resp = await fetch(`/api/v1/usage/export?${qs.toString()}`, { headers });
+  if (!resp.ok) {
+    if (resp.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+      return;
+    }
+    // 失败走 core 的 {code,message,data} 包装
+    let msg = `HTTP ${resp.status}`;
+    try {
+      const body = (await resp.json()) as CoreApiResp<unknown>;
+      msg = body?.message || msg;
+    } catch {
+      /* 非 JSON 错误体，保留状态码 */
+    }
+    throw new Error(msg);
+  }
+
+  // core 版本滞后（如 ToC 实例同步前）时，未匹配的 /api/v1 路径会返回 200 + SPA
+  // 页面外壳；不拦下来的话用户会存下一个内容是 HTML 的 .csv 且毫无报错。
+  const contentType = resp.headers.get('content-type') || '';
+  if (!contentType.includes('text/csv')) {
+    throw new Error('导出功能暂不可用，请稍后再试（服务端版本过旧）');
+  }
+
+  const blob = await resp.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `usage-${order.out_trade_no}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  // 必须延后回收：同步 revoke 会与 click 处于同一个 tick，
+  // Firefox / Safari 可能还没开始读 blob 就被吊销，表现为点了没反应也不报错。
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+}
+
 export interface OrderStats {
   total: number;
   paid: number;
