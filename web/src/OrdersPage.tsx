@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
 import { cssVar } from '@doudou-start/airgate-theme';
-import { api, type Order } from './api';
+import { api, downloadOrderUsage, type Order } from './api';
 import { formatRechargeCredit } from './money';
 import { t } from './i18n';
 
@@ -9,6 +9,9 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
+
+  const [exportingId, setExportingId] = useState<number | null>(null);
+  const [exportErr, setExportErr] = useState<string | null>(null);
 
   const [payingOrder, setPayingOrder] = useState<Order | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
@@ -64,6 +67,34 @@ export default function OrdersPage() {
 
   const handleContinuePay = (order: Order) => {
     setPayingOrder(order);
+  };
+
+  // 「这笔充值花在哪了」= 从本笔到账时刻起，到下一笔充值到账为止的消耗。
+  // 最后一笔没有右边界，交给后端按「至今」处理。
+  const nextPaidAtOf = (order: Order): string | undefined => {
+    if (!order.paid_at) return undefined;
+    const current = new Date(order.paid_at).getTime();
+    let next: number | undefined;
+    for (const o of orders) {
+      if (o.status !== 'paid' || !o.paid_at || o.id === order.id) continue;
+      const t = new Date(o.paid_at).getTime();
+      if (t > current && (next === undefined || t < next)) next = t;
+    }
+    return next === undefined ? undefined : new Date(next).toISOString();
+  };
+
+  const handleExport = async (order: Order) => {
+    setExportingId(order.id);
+    setExportErr(null);
+    try {
+      await downloadOrderUsage(order, nextPaidAtOf(order));
+    } catch (e) {
+      // 带上订单号：错误条是页面级的，不注明的话看不出是哪一单失败。
+      setExportErr(`${order.out_trade_no}: ${String((e as Error)?.message || e)}`);
+    } finally {
+      // 只清自己占用的槽位，防止并发触发时把别的订单的进行中状态误清掉。
+      setExportingId((prev) => (prev === order.id ? null : prev));
+    }
   };
 
   const closePayModal = () => {
@@ -130,6 +161,10 @@ export default function OrdersPage() {
         </div>
       )}
 
+      {exportErr && (
+        <div style={exportErrStyle}>{t('导出失败: ')}{exportErr}</div>
+      )}
+
       <div style={panelStyle}>
         {orders.length === 0 ? (
           <p style={emptyStyle}>{t('暂无充值记录')}</p>
@@ -160,6 +195,15 @@ export default function OrdersPage() {
                       {o.status === 'pending' && (o.qr_code_content || o.payment_url) ? (
                         <button style={continuePayBtnStyle} onClick={() => handleContinuePay(o)}>
                           {t('继续支付')}
+                        </button>
+                      ) : o.status === 'paid' && o.paid_at ? (
+                        // 单槽位状态：任一导出进行中时全部按钮禁用，避免并发触发互相干扰
+                        <button
+                          style={exportingId !== null ? exportBtnBusyStyle : exportBtnStyle}
+                          disabled={exportingId !== null}
+                          onClick={() => handleExport(o)}
+                        >
+                          {exportingId === o.id ? t('导出中...') : t('导出明细')}
                         </button>
                       ) : null}
                     </td>
@@ -306,6 +350,33 @@ const btnSecondaryStyle: React.CSSProperties = {
   color: cssVar('textSecondary'),
   fontSize: 14,
   cursor: 'pointer',
+};
+
+const exportErrStyle: React.CSSProperties = {
+  marginBottom: 12,
+  padding: '10px 14px',
+  borderRadius: cssVar('radiusMd'),
+  border: `1px solid ${cssVar('glassBorder')}`,
+  background: cssVar('bgElevated'),
+  color: cssVar('danger'),
+  fontSize: 13,
+};
+
+const exportBtnStyle: React.CSSProperties = {
+  padding: '4px 12px',
+  border: `1px solid ${cssVar('glassBorder')}`,
+  borderRadius: cssVar('radiusMd'),
+  background: 'transparent',
+  color: cssVar('textSecondary'),
+  fontSize: 12,
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+};
+
+const exportBtnBusyStyle: React.CSSProperties = {
+  ...exportBtnStyle,
+  cursor: 'default',
+  color: cssVar('textTertiary'),
 };
 
 const continuePayBtnStyle: React.CSSProperties = {

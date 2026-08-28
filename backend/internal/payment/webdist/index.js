@@ -1,10 +1,10 @@
-import { jsx as l, jsxs as p, Fragment as ce } from "react/jsx-runtime";
-import { useState as L, useRef as de, useEffect as U, useCallback as ie, useMemo as kn } from "react";
-function Cn(e) {
+import { jsx as l, jsxs as y, Fragment as ce } from "react/jsx-runtime";
+import { useState as L, useRef as de, useEffect as U, useCallback as ie, useMemo as Cn } from "react";
+function Tn(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
 var re = {}, Ce, st;
-function Tn() {
+function En() {
   return st || (st = 1, Ce = function() {
     return typeof Promise == "function" && Promise.prototype && Promise.prototype.then;
   }), Ce;
@@ -79,7 +79,7 @@ function ee() {
     return e(o);
   }, K;
 }
-var Be = {}, dt;
+var Ee = {}, dt;
 function rt() {
   return dt || (dt = 1, (function(e) {
     e.L = { bit: 1 }, e.M = { bit: 0 }, e.Q = { bit: 3 }, e.H = { bit: 2 };
@@ -114,11 +114,11 @@ function rt() {
         return r;
       }
     };
-  })(Be)), Be;
+  })(Ee)), Ee;
 }
-var Ee, ut;
+var Be, ut;
 function Bn() {
-  if (ut) return Ee;
+  if (ut) return Be;
   ut = 1;
   function e() {
     this.buffer = [], this.length = 0;
@@ -139,11 +139,11 @@ function Bn() {
       const a = Math.floor(this.length / 8);
       this.buffer.length <= a && this.buffer.push(0), i && (this.buffer[a] |= 128 >>> this.length % 8), this.length++;
     }
-  }, Ee = e, Ee;
+  }, Be = e, Be;
 }
-var Re, gt;
-function En() {
-  if (gt) return Re;
+var _e, gt;
+function _n() {
+  if (gt) return _e;
   gt = 1;
   function e(i) {
     if (!i || i < 1)
@@ -159,31 +159,31 @@ function En() {
     this.data[i * this.size + a] ^= o;
   }, e.prototype.isReserved = function(i, a) {
     return this.reservedBit[i * this.size + a];
-  }, Re = e, Re;
+  }, _e = e, _e;
 }
-var _e = {}, ht;
+var Re = {}, ht;
 function Rn() {
   return ht || (ht = 1, (function(e) {
     const i = ee().getSymbolSize;
     e.getRowColCoords = function(o) {
       if (o === 1) return [];
-      const r = Math.floor(o / 7) + 2, n = i(o), s = n === 145 ? 26 : Math.ceil((n - 13) / (2 * r - 2)) * 2, d = [n - 7];
-      for (let c = 1; c < r - 1; c++)
-        d[c] = d[c - 1] - s;
+      const r = Math.floor(o / 7) + 2, n = i(o), c = n === 145 ? 26 : Math.ceil((n - 13) / (2 * r - 2)) * 2, d = [n - 7];
+      for (let s = 1; s < r - 1; s++)
+        d[s] = d[s - 1] - c;
       return d.push(6), d.reverse();
     }, e.getPositions = function(o) {
-      const r = [], n = e.getRowColCoords(o), s = n.length;
-      for (let d = 0; d < s; d++)
-        for (let c = 0; c < s; c++)
-          d === 0 && c === 0 || // top-left
-          d === 0 && c === s - 1 || // bottom-left
-          d === s - 1 && c === 0 || r.push([n[d], n[c]]);
+      const r = [], n = e.getRowColCoords(o), c = n.length;
+      for (let d = 0; d < c; d++)
+        for (let s = 0; s < c; s++)
+          d === 0 && s === 0 || // top-left
+          d === 0 && s === c - 1 || // bottom-left
+          d === c - 1 && s === 0 || r.push([n[d], n[s]]);
       return r;
     };
-  })(_e)), _e;
+  })(Re)), Re;
 }
 var Ie = {}, ft;
-function _n() {
+function In() {
   if (ft) return Ie;
   ft = 1;
   const e = ee().getSymbolSize, i = 7;
@@ -200,7 +200,7 @@ function _n() {
   }, Ie;
 }
 var Pe = {}, pt;
-function In() {
+function Pn() {
   return pt || (pt = 1, (function(e) {
     e.Patterns = {
       PATTERN000: 0,
@@ -224,39 +224,39 @@ function In() {
       return e.isValid(r) ? parseInt(r, 10) : void 0;
     }, e.getPenaltyN1 = function(r) {
       const n = r.size;
-      let s = 0, d = 0, c = 0, u = null, h = null;
-      for (let f = 0; f < n; f++) {
-        d = c = 0, u = h = null;
-        for (let b = 0; b < n; b++) {
-          let v = r.get(f, b);
-          v === u ? d++ : (d >= 5 && (s += i.N1 + (d - 5)), u = v, d = 1), v = r.get(b, f), v === h ? c++ : (c >= 5 && (s += i.N1 + (c - 5)), h = v, c = 1);
+      let c = 0, d = 0, s = 0, h = null, u = null;
+      for (let p = 0; p < n; p++) {
+        d = s = 0, h = u = null;
+        for (let x = 0; x < n; x++) {
+          let w = r.get(p, x);
+          w === h ? d++ : (d >= 5 && (c += i.N1 + (d - 5)), h = w, d = 1), w = r.get(x, p), w === u ? s++ : (s >= 5 && (c += i.N1 + (s - 5)), u = w, s = 1);
         }
-        d >= 5 && (s += i.N1 + (d - 5)), c >= 5 && (s += i.N1 + (c - 5));
+        d >= 5 && (c += i.N1 + (d - 5)), s >= 5 && (c += i.N1 + (s - 5));
       }
-      return s;
+      return c;
     }, e.getPenaltyN2 = function(r) {
       const n = r.size;
-      let s = 0;
+      let c = 0;
       for (let d = 0; d < n - 1; d++)
-        for (let c = 0; c < n - 1; c++) {
-          const u = r.get(d, c) + r.get(d, c + 1) + r.get(d + 1, c) + r.get(d + 1, c + 1);
-          (u === 4 || u === 0) && s++;
+        for (let s = 0; s < n - 1; s++) {
+          const h = r.get(d, s) + r.get(d, s + 1) + r.get(d + 1, s) + r.get(d + 1, s + 1);
+          (h === 4 || h === 0) && c++;
         }
-      return s * i.N2;
+      return c * i.N2;
     }, e.getPenaltyN3 = function(r) {
       const n = r.size;
-      let s = 0, d = 0, c = 0;
-      for (let u = 0; u < n; u++) {
-        d = c = 0;
-        for (let h = 0; h < n; h++)
-          d = d << 1 & 2047 | r.get(u, h), h >= 10 && (d === 1488 || d === 93) && s++, c = c << 1 & 2047 | r.get(h, u), h >= 10 && (c === 1488 || c === 93) && s++;
+      let c = 0, d = 0, s = 0;
+      for (let h = 0; h < n; h++) {
+        d = s = 0;
+        for (let u = 0; u < n; u++)
+          d = d << 1 & 2047 | r.get(h, u), u >= 10 && (d === 1488 || d === 93) && c++, s = s << 1 & 2047 | r.get(u, h), u >= 10 && (s === 1488 || s === 93) && c++;
       }
-      return s * i.N3;
+      return c * i.N3;
     }, e.getPenaltyN4 = function(r) {
       let n = 0;
-      const s = r.data.length;
-      for (let c = 0; c < s; c++) n += r.data[c];
-      return Math.abs(Math.ceil(n * 100 / s / 5) - 10) * i.N4;
+      const c = r.data.length;
+      for (let s = 0; s < c; s++) n += r.data[s];
+      return Math.abs(Math.ceil(n * 100 / c / 5) - 10) * i.N4;
     };
     function a(o, r, n) {
       switch (o) {
@@ -281,17 +281,17 @@ function In() {
       }
     }
     e.applyMask = function(r, n) {
-      const s = n.size;
-      for (let d = 0; d < s; d++)
-        for (let c = 0; c < s; c++)
-          n.isReserved(c, d) || n.xor(c, d, a(r, c, d));
+      const c = n.size;
+      for (let d = 0; d < c; d++)
+        for (let s = 0; s < c; s++)
+          n.isReserved(s, d) || n.xor(s, d, a(r, s, d));
     }, e.getBestMask = function(r, n) {
-      const s = Object.keys(e.Patterns).length;
-      let d = 0, c = 1 / 0;
-      for (let u = 0; u < s; u++) {
-        n(u), e.applyMask(u, r);
-        const h = e.getPenaltyN1(r) + e.getPenaltyN2(r) + e.getPenaltyN3(r) + e.getPenaltyN4(r);
-        e.applyMask(u, r), h < c && (c = h, d = u);
+      const c = Object.keys(e.Patterns).length;
+      let d = 0, s = 1 / 0;
+      for (let h = 0; h < c; h++) {
+        n(h), e.applyMask(h, r);
+        const u = e.getPenaltyN1(r) + e.getPenaltyN2(r) + e.getPenaltyN3(r) + e.getPenaltyN4(r);
+        e.applyMask(h, r), u < s && (s = u, d = h);
       }
       return d;
     };
@@ -655,7 +655,7 @@ function tn() {
   }, ge;
 }
 var Me = {}, ae = {}, mt;
-function Pn() {
+function Mn() {
   if (mt) return ae;
   mt = 1;
   const e = new Uint8Array(512), i = new Uint8Array(256);
@@ -675,21 +675,21 @@ function Pn() {
   }, ae;
 }
 var bt;
-function Mn() {
+function An() {
   return bt || (bt = 1, (function(e) {
-    const i = Pn();
+    const i = Mn();
     e.mul = function(o, r) {
       const n = new Uint8Array(o.length + r.length - 1);
-      for (let s = 0; s < o.length; s++)
+      for (let c = 0; c < o.length; c++)
         for (let d = 0; d < r.length; d++)
-          n[s + d] ^= i.mul(o[s], r[d]);
+          n[c + d] ^= i.mul(o[c], r[d]);
       return n;
     }, e.mod = function(o, r) {
       let n = new Uint8Array(o);
       for (; n.length - r.length >= 0; ) {
-        const s = n[0];
-        for (let c = 0; c < r.length; c++)
-          n[c] ^= i.mul(r[c], s);
+        const c = n[0];
+        for (let s = 0; s < r.length; s++)
+          n[s] ^= i.mul(r[s], c);
         let d = 0;
         for (; d < n.length && n[d] === 0; ) d++;
         n = n.slice(d);
@@ -704,10 +704,10 @@ function Mn() {
   })(Me)), Me;
 }
 var Ae, St;
-function An() {
+function zn() {
   if (St) return Ae;
   St = 1;
-  const e = Mn();
+  const e = An();
   function i(a) {
     this.genPoly = void 0, this.degree = a, this.degree && this.initialize(this.degree);
   }
@@ -718,10 +718,10 @@ function An() {
       throw new Error("Encoder not initialized");
     const r = new Uint8Array(o.length + this.degree);
     r.set(o);
-    const n = e.mod(r, this.genPoly), s = this.degree - n.length;
-    if (s > 0) {
+    const n = e.mod(r, this.genPoly), c = this.degree - n.length;
+    if (c > 0) {
       const d = new Uint8Array(this.degree);
-      return d.set(n, s), d;
+      return d.set(n, c), d;
     }
     return n;
   }, Ae = i, Ae;
@@ -742,13 +742,13 @@ function rn() {
   const o = "(?:(?![A-Z0-9 $%*+\\-./:]|" + a + `)(?:.|[\r
 ]))+`;
   j.KANJI = new RegExp(a, "g"), j.BYTE_KANJI = new RegExp("[^A-Z0-9 $%*+\\-./:]+", "g"), j.BYTE = new RegExp(o, "g"), j.NUMERIC = new RegExp(e, "g"), j.ALPHANUMERIC = new RegExp(i, "g");
-  const r = new RegExp("^" + a + "$"), n = new RegExp("^" + e + "$"), s = new RegExp("^[A-Z0-9 $%*+\\-./:]+$");
-  return j.testKanji = function(c) {
-    return r.test(c);
-  }, j.testNumeric = function(c) {
-    return n.test(c);
-  }, j.testAlphanumeric = function(c) {
-    return s.test(c);
+  const r = new RegExp("^" + a + "$"), n = new RegExp("^" + e + "$"), c = new RegExp("^[A-Z0-9 $%*+\\-./:]+$");
+  return j.testKanji = function(s) {
+    return r.test(s);
+  }, j.testNumeric = function(s) {
+    return n.test(s);
+  }, j.testAlphanumeric = function(s) {
+    return c.test(s);
   }, j;
 }
 var vt;
@@ -773,11 +773,11 @@ function te() {
       ccBits: [8, 10, 12]
     }, e.MIXED = {
       bit: -1
-    }, e.getCharCountIndicator = function(n, s) {
+    }, e.getCharCountIndicator = function(n, c) {
       if (!n.ccBits) throw new Error("Invalid mode: " + n);
-      if (!i.isValid(s))
-        throw new Error("Invalid version: " + s);
-      return s >= 1 && s < 10 ? n.ccBits[0] : s < 27 ? n.ccBits[1] : n.ccBits[2];
+      if (!i.isValid(c))
+        throw new Error("Invalid version: " + c);
+      return c >= 1 && c < 10 ? n.ccBits[0] : c < 27 ? n.ccBits[1] : n.ccBits[2];
     }, e.getBestModeForData = function(n) {
       return a.testNumeric(n) ? e.NUMERIC : a.testAlphanumeric(n) ? e.ALPHANUMERIC : a.testKanji(n) ? e.KANJI : e.BYTE;
     }, e.toString = function(n) {
@@ -802,98 +802,98 @@ function te() {
           throw new Error("Unknown mode: " + r);
       }
     }
-    e.from = function(n, s) {
+    e.from = function(n, c) {
       if (e.isValid(n))
         return n;
       try {
         return o(n);
       } catch {
-        return s;
+        return c;
       }
     };
   })(Le)), Le;
 }
 var kt;
-function zn() {
+function Ln() {
   return kt || (kt = 1, (function(e) {
-    const i = ee(), a = tn(), o = rt(), r = te(), n = nn(), s = 7973, d = i.getBCHDigit(s);
-    function c(b, v, S) {
-      for (let _ = 1; _ <= 40; _++)
-        if (v <= e.getCapacity(_, S, b))
-          return _;
+    const i = ee(), a = tn(), o = rt(), r = te(), n = nn(), c = 7973, d = i.getBCHDigit(c);
+    function s(x, w, C) {
+      for (let P = 1; P <= 40; P++)
+        if (w <= e.getCapacity(P, C, x))
+          return P;
     }
-    function u(b, v) {
-      return r.getCharCountIndicator(b, v) + 4;
+    function h(x, w) {
+      return r.getCharCountIndicator(x, w) + 4;
     }
-    function h(b, v) {
-      let S = 0;
-      return b.forEach(function(_) {
-        const y = u(_.mode, v);
-        S += y + _.getBitsLength();
-      }), S;
+    function u(x, w) {
+      let C = 0;
+      return x.forEach(function(P) {
+        const m = h(P.mode, w);
+        C += m + P.getBitsLength();
+      }), C;
     }
-    function f(b, v) {
-      for (let S = 1; S <= 40; S++)
-        if (h(b, S) <= e.getCapacity(S, v, r.MIXED))
-          return S;
+    function p(x, w) {
+      for (let C = 1; C <= 40; C++)
+        if (u(x, C) <= e.getCapacity(C, w, r.MIXED))
+          return C;
     }
-    e.from = function(v, S) {
-      return n.isValid(v) ? parseInt(v, 10) : S;
-    }, e.getCapacity = function(v, S, _) {
-      if (!n.isValid(v))
+    e.from = function(w, C) {
+      return n.isValid(w) ? parseInt(w, 10) : C;
+    }, e.getCapacity = function(w, C, P) {
+      if (!n.isValid(w))
         throw new Error("Invalid QR Code version");
-      typeof _ > "u" && (_ = r.BYTE);
-      const y = i.getSymbolTotalCodewords(v), g = a.getTotalCodewordsCount(v, S), I = (y - g) * 8;
-      if (_ === r.MIXED) return I;
-      const A = I - u(_, v);
-      switch (_) {
+      typeof P > "u" && (P = r.BYTE);
+      const m = i.getSymbolTotalCodewords(w), f = a.getTotalCodewordsCount(w, C), R = (m - f) * 8;
+      if (P === r.MIXED) return R;
+      const I = R - h(P, w);
+      switch (P) {
         case r.NUMERIC:
-          return Math.floor(A / 10 * 3);
+          return Math.floor(I / 10 * 3);
         case r.ALPHANUMERIC:
-          return Math.floor(A / 11 * 2);
+          return Math.floor(I / 11 * 2);
         case r.KANJI:
-          return Math.floor(A / 13);
+          return Math.floor(I / 13);
         case r.BYTE:
         default:
-          return Math.floor(A / 8);
+          return Math.floor(I / 8);
       }
-    }, e.getBestVersionForData = function(v, S) {
-      let _;
-      const y = o.from(S, o.M);
-      if (Array.isArray(v)) {
-        if (v.length > 1)
-          return f(v, y);
-        if (v.length === 0)
+    }, e.getBestVersionForData = function(w, C) {
+      let P;
+      const m = o.from(C, o.M);
+      if (Array.isArray(w)) {
+        if (w.length > 1)
+          return p(w, m);
+        if (w.length === 0)
           return 1;
-        _ = v[0];
+        P = w[0];
       } else
-        _ = v;
-      return c(_.mode, _.getLength(), y);
-    }, e.getEncodedBits = function(v) {
-      if (!n.isValid(v) || v < 7)
+        P = w;
+      return s(P.mode, P.getLength(), m);
+    }, e.getEncodedBits = function(w) {
+      if (!n.isValid(w) || w < 7)
         throw new Error("Invalid QR Code version");
-      let S = v << 12;
-      for (; i.getBCHDigit(S) - d >= 0; )
-        S ^= s << i.getBCHDigit(S) - d;
-      return v << 12 | S;
+      let C = w << 12;
+      for (; i.getBCHDigit(C) - d >= 0; )
+        C ^= c << i.getBCHDigit(C) - d;
+      return w << 12 | C;
     };
   })(ze)), ze;
 }
 var $e = {}, Ct;
-function Ln() {
+function Nn() {
   if (Ct) return $e;
   Ct = 1;
   const e = ee(), i = 1335, a = 21522, o = e.getBCHDigit(i);
-  return $e.getEncodedBits = function(n, s) {
-    const d = n.bit << 3 | s;
-    let c = d << 10;
-    for (; e.getBCHDigit(c) - o >= 0; )
-      c ^= i << e.getBCHDigit(c) - o;
-    return (d << 10 | c) ^ a;
+  return $e.getEncodedBits = function(n, c) {
+    const d = n.bit << 3 | c;
+    let s = d << 10;
+    for (; e.getBCHDigit(s) - o >= 0; )
+      s ^= i << e.getBCHDigit(s) - o;
+    return (d << 10 | s) ^ a;
   }, $e;
 }
 var De = {}, Fe, Tt;
-function Nn() {
+function $n() {
   if (Tt) return Fe;
   Tt = 1;
   const e = te();
@@ -907,17 +907,17 @@ function Nn() {
   }, i.prototype.getBitsLength = function() {
     return i.getBitsLength(this.data.length);
   }, i.prototype.write = function(o) {
-    let r, n, s;
+    let r, n, c;
     for (r = 0; r + 3 <= this.data.length; r += 3)
-      n = this.data.substr(r, 3), s = parseInt(n, 10), o.put(s, 10);
+      n = this.data.substr(r, 3), c = parseInt(n, 10), o.put(c, 10);
     const d = this.data.length - r;
-    d > 0 && (n = this.data.substr(r), s = parseInt(n, 10), o.put(s, d * 3 + 1));
+    d > 0 && (n = this.data.substr(r), c = parseInt(n, 10), o.put(c, d * 3 + 1));
   }, Fe = i, Fe;
 }
-var Ue, Bt;
-function $n() {
-  if (Bt) return Ue;
-  Bt = 1;
+var Ue, Et;
+function Dn() {
+  if (Et) return Ue;
+  Et = 1;
   const e = te(), i = [
     "0",
     "1",
@@ -977,16 +977,16 @@ function $n() {
   }, a.prototype.write = function(r) {
     let n;
     for (n = 0; n + 2 <= this.data.length; n += 2) {
-      let s = i.indexOf(this.data[n]) * 45;
-      s += i.indexOf(this.data[n + 1]), r.put(s, 11);
+      let c = i.indexOf(this.data[n]) * 45;
+      c += i.indexOf(this.data[n + 1]), r.put(c, 11);
     }
     this.data.length % 2 && r.put(i.indexOf(this.data[n]), 6);
   }, Ue = a, Ue;
 }
-var qe, Et;
-function Dn() {
-  if (Et) return qe;
-  Et = 1;
+var qe, Bt;
+function Fn() {
+  if (Bt) return qe;
+  Bt = 1;
   const e = te();
   function i(a) {
     this.mode = e.BYTE, typeof a == "string" ? this.data = new TextEncoder().encode(a) : this.data = new Uint8Array(a);
@@ -1002,10 +1002,10 @@ function Dn() {
       a.put(this.data[o], 8);
   }, qe = i, qe;
 }
-var We, Rt;
-function Fn() {
-  if (Rt) return We;
-  Rt = 1;
+var We, _t;
+function Un() {
+  if (_t) return We;
+  _t = 1;
   const e = te(), i = ee();
   function a(o) {
     this.mode = e.KANJI, this.data = o;
@@ -1033,23 +1033,23 @@ Make sure your charset is UTF-8`
     }
   }, We = a, We;
 }
-var Oe = { exports: {} }, _t;
-function Un() {
-  return _t || (_t = 1, (function(e) {
+var Oe = { exports: {} }, Rt;
+function qn() {
+  return Rt || (Rt = 1, (function(e) {
     var i = {
       single_source_shortest_paths: function(a, o, r) {
-        var n = {}, s = {};
-        s[o] = 0;
+        var n = {}, c = {};
+        c[o] = 0;
         var d = i.PriorityQueue.make();
         d.push(o, 0);
-        for (var c, u, h, f, b, v, S, _, y; !d.empty(); ) {
-          c = d.pop(), u = c.value, f = c.cost, b = a[u] || {};
-          for (h in b)
-            b.hasOwnProperty(h) && (v = b[h], S = f + v, _ = s[h], y = typeof s[h] > "u", (y || _ > S) && (s[h] = S, d.push(h, S), n[h] = u));
+        for (var s, h, u, p, x, w, C, P, m; !d.empty(); ) {
+          s = d.pop(), h = s.value, p = s.cost, x = a[h] || {};
+          for (u in x)
+            x.hasOwnProperty(u) && (w = x[u], C = p + w, P = c[u], m = typeof c[u] > "u", (m || P > C) && (c[u] = C, d.push(u, C), n[u] = h));
         }
-        if (typeof r < "u" && typeof s[r] > "u") {
-          var g = ["Could not find a path from ", o, " to ", r, "."].join("");
-          throw new Error(g);
+        if (typeof r < "u" && typeof c[r] > "u") {
+          var f = ["Could not find a path from ", o, " to ", r, "."].join("");
+          throw new Error(f);
         }
         return n;
       },
@@ -1102,274 +1102,274 @@ function Un() {
   })(Oe)), Oe.exports;
 }
 var It;
-function qn() {
+function Wn() {
   return It || (It = 1, (function(e) {
-    const i = te(), a = Nn(), o = $n(), r = Dn(), n = Fn(), s = rn(), d = ee(), c = Un();
-    function u(g) {
-      return unescape(encodeURIComponent(g)).length;
+    const i = te(), a = $n(), o = Dn(), r = Fn(), n = Un(), c = rn(), d = ee(), s = qn();
+    function h(f) {
+      return unescape(encodeURIComponent(f)).length;
     }
-    function h(g, I, A) {
-      const w = [];
+    function u(f, R, I) {
+      const g = [];
       let N;
-      for (; (N = g.exec(A)) !== null; )
-        w.push({
+      for (; (N = f.exec(I)) !== null; )
+        g.push({
           data: N[0],
           index: N.index,
-          mode: I,
+          mode: R,
           length: N[0].length
         });
-      return w;
+      return g;
     }
-    function f(g) {
-      const I = h(s.NUMERIC, i.NUMERIC, g), A = h(s.ALPHANUMERIC, i.ALPHANUMERIC, g);
-      let w, N;
-      return d.isKanjiModeEnabled() ? (w = h(s.BYTE, i.BYTE, g), N = h(s.KANJI, i.KANJI, g)) : (w = h(s.BYTE_KANJI, i.BYTE, g), N = []), I.concat(A, w, N).sort(function(x, E) {
-        return x.index - E.index;
-      }).map(function(x) {
+    function p(f) {
+      const R = u(c.NUMERIC, i.NUMERIC, f), I = u(c.ALPHANUMERIC, i.ALPHANUMERIC, f);
+      let g, N;
+      return d.isKanjiModeEnabled() ? (g = u(c.BYTE, i.BYTE, f), N = u(c.KANJI, i.KANJI, f)) : (g = u(c.BYTE_KANJI, i.BYTE, f), N = []), R.concat(I, g, N).sort(function(b, E) {
+        return b.index - E.index;
+      }).map(function(b) {
         return {
-          data: x.data,
-          mode: x.mode,
-          length: x.length
+          data: b.data,
+          mode: b.mode,
+          length: b.length
         };
       });
     }
-    function b(g, I) {
-      switch (I) {
+    function x(f, R) {
+      switch (R) {
         case i.NUMERIC:
-          return a.getBitsLength(g);
+          return a.getBitsLength(f);
         case i.ALPHANUMERIC:
-          return o.getBitsLength(g);
+          return o.getBitsLength(f);
         case i.KANJI:
-          return n.getBitsLength(g);
+          return n.getBitsLength(f);
         case i.BYTE:
-          return r.getBitsLength(g);
+          return r.getBitsLength(f);
       }
     }
-    function v(g) {
-      return g.reduce(function(I, A) {
-        const w = I.length - 1 >= 0 ? I[I.length - 1] : null;
-        return w && w.mode === A.mode ? (I[I.length - 1].data += A.data, I) : (I.push(A), I);
+    function w(f) {
+      return f.reduce(function(R, I) {
+        const g = R.length - 1 >= 0 ? R[R.length - 1] : null;
+        return g && g.mode === I.mode ? (R[R.length - 1].data += I.data, R) : (R.push(I), R);
       }, []);
     }
-    function S(g) {
-      const I = [];
-      for (let A = 0; A < g.length; A++) {
-        const w = g[A];
-        switch (w.mode) {
+    function C(f) {
+      const R = [];
+      for (let I = 0; I < f.length; I++) {
+        const g = f[I];
+        switch (g.mode) {
           case i.NUMERIC:
-            I.push([
-              w,
-              { data: w.data, mode: i.ALPHANUMERIC, length: w.length },
-              { data: w.data, mode: i.BYTE, length: w.length }
+            R.push([
+              g,
+              { data: g.data, mode: i.ALPHANUMERIC, length: g.length },
+              { data: g.data, mode: i.BYTE, length: g.length }
             ]);
             break;
           case i.ALPHANUMERIC:
-            I.push([
-              w,
-              { data: w.data, mode: i.BYTE, length: w.length }
+            R.push([
+              g,
+              { data: g.data, mode: i.BYTE, length: g.length }
             ]);
             break;
           case i.KANJI:
-            I.push([
-              w,
-              { data: w.data, mode: i.BYTE, length: u(w.data) }
+            R.push([
+              g,
+              { data: g.data, mode: i.BYTE, length: h(g.data) }
             ]);
             break;
           case i.BYTE:
-            I.push([
-              { data: w.data, mode: i.BYTE, length: u(w.data) }
+            R.push([
+              { data: g.data, mode: i.BYTE, length: h(g.data) }
             ]);
         }
       }
-      return I;
+      return R;
     }
-    function _(g, I) {
-      const A = {}, w = { start: {} };
+    function P(f, R) {
+      const I = {}, g = { start: {} };
       let N = ["start"];
-      for (let C = 0; C < g.length; C++) {
-        const x = g[C], E = [];
-        for (let T = 0; T < x.length; T++) {
-          const P = x[T], B = "" + C + T;
-          E.push(B), A[B] = { node: P, lastCount: 0 }, w[B] = {};
-          for (let M = 0; M < N.length; M++) {
-            const R = N[M];
-            A[R] && A[R].node.mode === P.mode ? (w[R][B] = b(A[R].lastCount + P.length, P.mode) - b(A[R].lastCount, P.mode), A[R].lastCount += P.length) : (A[R] && (A[R].lastCount = P.length), w[R][B] = b(P.length, P.mode) + 4 + i.getCharCountIndicator(P.mode, I));
+      for (let v = 0; v < f.length; v++) {
+        const b = f[v], E = [];
+        for (let T = 0; T < b.length; T++) {
+          const M = b[T], B = "" + v + T;
+          E.push(B), I[B] = { node: M, lastCount: 0 }, g[B] = {};
+          for (let A = 0; A < N.length; A++) {
+            const _ = N[A];
+            I[_] && I[_].node.mode === M.mode ? (g[_][B] = x(I[_].lastCount + M.length, M.mode) - x(I[_].lastCount, M.mode), I[_].lastCount += M.length) : (I[_] && (I[_].lastCount = M.length), g[_][B] = x(M.length, M.mode) + 4 + i.getCharCountIndicator(M.mode, R));
           }
         }
         N = E;
       }
-      for (let C = 0; C < N.length; C++)
-        w[N[C]].end = 0;
-      return { map: w, table: A };
+      for (let v = 0; v < N.length; v++)
+        g[N[v]].end = 0;
+      return { map: g, table: I };
     }
-    function y(g, I) {
-      let A;
-      const w = i.getBestModeForData(g);
-      if (A = i.from(I, w), A !== i.BYTE && A.bit < w.bit)
-        throw new Error('"' + g + '" cannot be encoded with mode ' + i.toString(A) + `.
- Suggested mode is: ` + i.toString(w));
-      switch (A === i.KANJI && !d.isKanjiModeEnabled() && (A = i.BYTE), A) {
+    function m(f, R) {
+      let I;
+      const g = i.getBestModeForData(f);
+      if (I = i.from(R, g), I !== i.BYTE && I.bit < g.bit)
+        throw new Error('"' + f + '" cannot be encoded with mode ' + i.toString(I) + `.
+ Suggested mode is: ` + i.toString(g));
+      switch (I === i.KANJI && !d.isKanjiModeEnabled() && (I = i.BYTE), I) {
         case i.NUMERIC:
-          return new a(g);
+          return new a(f);
         case i.ALPHANUMERIC:
-          return new o(g);
+          return new o(f);
         case i.KANJI:
-          return new n(g);
+          return new n(f);
         case i.BYTE:
-          return new r(g);
+          return new r(f);
       }
     }
-    e.fromArray = function(I) {
-      return I.reduce(function(A, w) {
-        return typeof w == "string" ? A.push(y(w, null)) : w.data && A.push(y(w.data, w.mode)), A;
+    e.fromArray = function(R) {
+      return R.reduce(function(I, g) {
+        return typeof g == "string" ? I.push(m(g, null)) : g.data && I.push(m(g.data, g.mode)), I;
       }, []);
-    }, e.fromString = function(I, A) {
-      const w = f(I, d.isKanjiModeEnabled()), N = S(w), C = _(N, A), x = c.find_path(C.map, "start", "end"), E = [];
-      for (let T = 1; T < x.length - 1; T++)
-        E.push(C.table[x[T]].node);
-      return e.fromArray(v(E));
-    }, e.rawSplit = function(I) {
+    }, e.fromString = function(R, I) {
+      const g = p(R, d.isKanjiModeEnabled()), N = C(g), v = P(N, I), b = s.find_path(v.map, "start", "end"), E = [];
+      for (let T = 1; T < b.length - 1; T++)
+        E.push(v.table[b[T]].node);
+      return e.fromArray(w(E));
+    }, e.rawSplit = function(R) {
       return e.fromArray(
-        f(I, d.isKanjiModeEnabled())
+        p(R, d.isKanjiModeEnabled())
       );
     };
   })(De)), De;
 }
 var Pt;
-function Wn() {
+function On() {
   if (Pt) return Te;
   Pt = 1;
-  const e = ee(), i = rt(), a = Bn(), o = En(), r = Rn(), n = _n(), s = In(), d = tn(), c = An(), u = zn(), h = Ln(), f = te(), b = qn();
-  function v(C, x) {
-    const E = C.size, T = n.getPositions(x);
-    for (let P = 0; P < T.length; P++) {
-      const B = T[P][0], M = T[P][1];
-      for (let R = -1; R <= 7; R++)
-        if (!(B + R <= -1 || E <= B + R))
+  const e = ee(), i = rt(), a = Bn(), o = _n(), r = Rn(), n = In(), c = Pn(), d = tn(), s = zn(), h = Ln(), u = Nn(), p = te(), x = Wn();
+  function w(v, b) {
+    const E = v.size, T = n.getPositions(b);
+    for (let M = 0; M < T.length; M++) {
+      const B = T[M][0], A = T[M][1];
+      for (let _ = -1; _ <= 7; _++)
+        if (!(B + _ <= -1 || E <= B + _))
           for (let z = -1; z <= 7; z++)
-            M + z <= -1 || E <= M + z || (R >= 0 && R <= 6 && (z === 0 || z === 6) || z >= 0 && z <= 6 && (R === 0 || R === 6) || R >= 2 && R <= 4 && z >= 2 && z <= 4 ? C.set(B + R, M + z, !0, !0) : C.set(B + R, M + z, !1, !0));
+            A + z <= -1 || E <= A + z || (_ >= 0 && _ <= 6 && (z === 0 || z === 6) || z >= 0 && z <= 6 && (_ === 0 || _ === 6) || _ >= 2 && _ <= 4 && z >= 2 && z <= 4 ? v.set(B + _, A + z, !0, !0) : v.set(B + _, A + z, !1, !0));
     }
   }
-  function S(C) {
-    const x = C.size;
-    for (let E = 8; E < x - 8; E++) {
+  function C(v) {
+    const b = v.size;
+    for (let E = 8; E < b - 8; E++) {
       const T = E % 2 === 0;
-      C.set(E, 6, T, !0), C.set(6, E, T, !0);
+      v.set(E, 6, T, !0), v.set(6, E, T, !0);
     }
   }
-  function _(C, x) {
-    const E = r.getPositions(x);
+  function P(v, b) {
+    const E = r.getPositions(b);
     for (let T = 0; T < E.length; T++) {
-      const P = E[T][0], B = E[T][1];
-      for (let M = -2; M <= 2; M++)
-        for (let R = -2; R <= 2; R++)
-          M === -2 || M === 2 || R === -2 || R === 2 || M === 0 && R === 0 ? C.set(P + M, B + R, !0, !0) : C.set(P + M, B + R, !1, !0);
+      const M = E[T][0], B = E[T][1];
+      for (let A = -2; A <= 2; A++)
+        for (let _ = -2; _ <= 2; _++)
+          A === -2 || A === 2 || _ === -2 || _ === 2 || A === 0 && _ === 0 ? v.set(M + A, B + _, !0, !0) : v.set(M + A, B + _, !1, !0);
     }
   }
-  function y(C, x) {
-    const E = C.size, T = u.getEncodedBits(x);
-    let P, B, M;
-    for (let R = 0; R < 18; R++)
-      P = Math.floor(R / 3), B = R % 3 + E - 8 - 3, M = (T >> R & 1) === 1, C.set(P, B, M, !0), C.set(B, P, M, !0);
+  function m(v, b) {
+    const E = v.size, T = h.getEncodedBits(b);
+    let M, B, A;
+    for (let _ = 0; _ < 18; _++)
+      M = Math.floor(_ / 3), B = _ % 3 + E - 8 - 3, A = (T >> _ & 1) === 1, v.set(M, B, A, !0), v.set(B, M, A, !0);
   }
-  function g(C, x, E) {
-    const T = C.size, P = h.getEncodedBits(x, E);
-    let B, M;
+  function f(v, b, E) {
+    const T = v.size, M = u.getEncodedBits(b, E);
+    let B, A;
     for (B = 0; B < 15; B++)
-      M = (P >> B & 1) === 1, B < 6 ? C.set(B, 8, M, !0) : B < 8 ? C.set(B + 1, 8, M, !0) : C.set(T - 15 + B, 8, M, !0), B < 8 ? C.set(8, T - B - 1, M, !0) : B < 9 ? C.set(8, 15 - B - 1 + 1, M, !0) : C.set(8, 15 - B - 1, M, !0);
-    C.set(T - 8, 8, 1, !0);
+      A = (M >> B & 1) === 1, B < 6 ? v.set(B, 8, A, !0) : B < 8 ? v.set(B + 1, 8, A, !0) : v.set(T - 15 + B, 8, A, !0), B < 8 ? v.set(8, T - B - 1, A, !0) : B < 9 ? v.set(8, 15 - B - 1 + 1, A, !0) : v.set(8, 15 - B - 1, A, !0);
+    v.set(T - 8, 8, 1, !0);
   }
-  function I(C, x) {
-    const E = C.size;
-    let T = -1, P = E - 1, B = 7, M = 0;
-    for (let R = E - 1; R > 0; R -= 2)
-      for (R === 6 && R--; ; ) {
+  function R(v, b) {
+    const E = v.size;
+    let T = -1, M = E - 1, B = 7, A = 0;
+    for (let _ = E - 1; _ > 0; _ -= 2)
+      for (_ === 6 && _--; ; ) {
         for (let z = 0; z < 2; z++)
-          if (!C.isReserved(P, R - z)) {
+          if (!v.isReserved(M, _ - z)) {
             let W = !1;
-            M < x.length && (W = (x[M] >>> B & 1) === 1), C.set(P, R - z, W), B--, B === -1 && (M++, B = 7);
+            A < b.length && (W = (b[A] >>> B & 1) === 1), v.set(M, _ - z, W), B--, B === -1 && (A++, B = 7);
           }
-        if (P += T, P < 0 || E <= P) {
-          P -= T, T = -T;
+        if (M += T, M < 0 || E <= M) {
+          M -= T, T = -T;
           break;
         }
       }
   }
-  function A(C, x, E) {
+  function I(v, b, E) {
     const T = new a();
     E.forEach(function(z) {
-      T.put(z.mode.bit, 4), T.put(z.getLength(), f.getCharCountIndicator(z.mode, C)), z.write(T);
+      T.put(z.mode.bit, 4), T.put(z.getLength(), p.getCharCountIndicator(z.mode, v)), z.write(T);
     });
-    const P = e.getSymbolTotalCodewords(C), B = d.getTotalCodewordsCount(C, x), M = (P - B) * 8;
-    for (T.getLengthInBits() + 4 <= M && T.put(0, 4); T.getLengthInBits() % 8 !== 0; )
+    const M = e.getSymbolTotalCodewords(v), B = d.getTotalCodewordsCount(v, b), A = (M - B) * 8;
+    for (T.getLengthInBits() + 4 <= A && T.put(0, 4); T.getLengthInBits() % 8 !== 0; )
       T.putBit(0);
-    const R = (M - T.getLengthInBits()) / 8;
-    for (let z = 0; z < R; z++)
+    const _ = (A - T.getLengthInBits()) / 8;
+    for (let z = 0; z < _; z++)
       T.put(z % 2 ? 17 : 236, 8);
-    return w(T, C, x);
+    return g(T, v, b);
   }
-  function w(C, x, E) {
-    const T = e.getSymbolTotalCodewords(x), P = d.getTotalCodewordsCount(x, E), B = T - P, M = d.getBlocksCount(x, E), R = T % M, z = M - R, W = Math.floor(T / M), k = Math.floor(B / M), $ = k + 1, O = W - k, wn = new c(O);
+  function g(v, b, E) {
+    const T = e.getSymbolTotalCodewords(b), M = d.getTotalCodewordsCount(b, E), B = T - M, A = d.getBlocksCount(b, E), _ = T % A, z = A - _, W = Math.floor(T / A), k = Math.floor(B / A), $ = k + 1, O = W - k, vn = new s(O);
     let xe = 0;
-    const ue = new Array(M), at = new Array(M);
+    const ue = new Array(A), at = new Array(A);
     let we = 0;
-    const vn = new Uint8Array(C.buffer);
-    for (let ne = 0; ne < M; ne++) {
+    const kn = new Uint8Array(v.buffer);
+    for (let ne = 0; ne < A; ne++) {
       const ke = ne < z ? k : $;
-      ue[ne] = vn.slice(xe, xe + ke), at[ne] = wn.encode(ue[ne]), xe += ke, we = Math.max(we, ke);
+      ue[ne] = kn.slice(xe, xe + ke), at[ne] = vn.encode(ue[ne]), xe += ke, we = Math.max(we, ke);
     }
     const ve = new Uint8Array(T);
     let lt = 0, H, V;
     for (H = 0; H < we; H++)
-      for (V = 0; V < M; V++)
+      for (V = 0; V < A; V++)
         H < ue[V].length && (ve[lt++] = ue[V][H]);
     for (H = 0; H < O; H++)
-      for (V = 0; V < M; V++)
+      for (V = 0; V < A; V++)
         ve[lt++] = at[V][H];
     return ve;
   }
-  function N(C, x, E, T) {
-    let P;
-    if (Array.isArray(C))
-      P = b.fromArray(C);
-    else if (typeof C == "string") {
-      let W = x;
+  function N(v, b, E, T) {
+    let M;
+    if (Array.isArray(v))
+      M = x.fromArray(v);
+    else if (typeof v == "string") {
+      let W = b;
       if (!W) {
-        const k = b.rawSplit(C);
-        W = u.getBestVersionForData(k, E);
+        const k = x.rawSplit(v);
+        W = h.getBestVersionForData(k, E);
       }
-      P = b.fromString(C, W || 40);
+      M = x.fromString(v, W || 40);
     } else
       throw new Error("Invalid data");
-    const B = u.getBestVersionForData(P, E);
+    const B = h.getBestVersionForData(M, E);
     if (!B)
       throw new Error("The amount of data is too big to be stored in a QR Code");
-    if (!x)
-      x = B;
-    else if (x < B)
+    if (!b)
+      b = B;
+    else if (b < B)
       throw new Error(
         `
 The chosen QR Code version cannot contain this amount of data.
 Minimum version required to store current data is: ` + B + `.
 `
       );
-    const M = A(x, E, P), R = e.getSymbolSize(x), z = new o(R);
-    return v(z, x), S(z), _(z, x), g(z, E, 0), x >= 7 && y(z, x), I(z, M), isNaN(T) && (T = s.getBestMask(
+    const A = I(b, E, M), _ = e.getSymbolSize(b), z = new o(_);
+    return w(z, b), C(z), P(z, b), f(z, E, 0), b >= 7 && m(z, b), R(z, A), isNaN(T) && (T = c.getBestMask(
       z,
-      g.bind(null, z, E)
-    )), s.applyMask(T, z), g(z, E, T), {
+      f.bind(null, z, E)
+    )), c.applyMask(T, z), f(z, E, T), {
       modules: z,
-      version: x,
+      version: b,
       errorCorrectionLevel: E,
       maskPattern: T,
-      segments: P
+      segments: M
     };
   }
-  return Te.create = function(x, E) {
-    if (typeof x > "u" || x === "")
+  return Te.create = function(b, E) {
+    if (typeof b > "u" || b === "")
       throw new Error("No input text");
-    let T = i.M, P, B;
-    return typeof E < "u" && (T = i.from(E.errorCorrectionLevel, i.M), P = u.from(E.version), B = s.from(E.maskPattern), E.toSJISFunc && e.setToSJISFunction(E.toSJISFunc)), N(x, P, T, B);
+    let T = i.M, M, B;
+    return typeof E < "u" && (T = i.from(E.errorCorrectionLevel, i.M), M = h.from(E.version), B = c.from(E.maskPattern), E.toSJISFunc && e.setToSJISFunction(E.toSJISFunc)), N(b, M, T, B);
   }, Te;
 }
 var je = {}, He = {}, Mt;
@@ -1395,10 +1395,10 @@ function on() {
     }
     e.getOptions = function(o) {
       o || (o = {}), o.color || (o.color = {});
-      const r = typeof o.margin > "u" || o.margin === null || o.margin < 0 ? 4 : o.margin, n = o.width && o.width >= 21 ? o.width : void 0, s = o.scale || 4;
+      const r = typeof o.margin > "u" || o.margin === null || o.margin < 0 ? 4 : o.margin, n = o.width && o.width >= 21 ? o.width : void 0, c = o.scale || 4;
       return {
         width: n,
-        scale: n ? 4 : s,
+        scale: n ? 4 : c,
         margin: r,
         color: {
           dark: i(o.color.dark || "#000000ff"),
@@ -1413,25 +1413,25 @@ function on() {
       const n = e.getScale(o, r);
       return Math.floor((o + r.margin * 2) * n);
     }, e.qrToImageData = function(o, r, n) {
-      const s = r.modules.size, d = r.modules.data, c = e.getScale(s, n), u = Math.floor((s + n.margin * 2) * c), h = n.margin * c, f = [n.color.light, n.color.dark];
-      for (let b = 0; b < u; b++)
-        for (let v = 0; v < u; v++) {
-          let S = (b * u + v) * 4, _ = n.color.light;
-          if (b >= h && v >= h && b < u - h && v < u - h) {
-            const y = Math.floor((b - h) / c), g = Math.floor((v - h) / c);
-            _ = f[d[y * s + g] ? 1 : 0];
+      const c = r.modules.size, d = r.modules.data, s = e.getScale(c, n), h = Math.floor((c + n.margin * 2) * s), u = n.margin * s, p = [n.color.light, n.color.dark];
+      for (let x = 0; x < h; x++)
+        for (let w = 0; w < h; w++) {
+          let C = (x * h + w) * 4, P = n.color.light;
+          if (x >= u && w >= u && x < h - u && w < h - u) {
+            const m = Math.floor((x - u) / s), f = Math.floor((w - u) / s);
+            P = p[d[m * c + f] ? 1 : 0];
           }
-          o[S++] = _.r, o[S++] = _.g, o[S++] = _.b, o[S] = _.a;
+          o[C++] = P.r, o[C++] = P.g, o[C++] = P.b, o[C] = P.a;
         }
     };
   })(He)), He;
 }
 var At;
-function On() {
+function jn() {
   return At || (At = 1, (function(e) {
     const i = on();
-    function a(r, n, s) {
-      r.clearRect(0, 0, n.width, n.height), n.style || (n.style = {}), n.height = s, n.width = s, n.style.height = s + "px", n.style.width = s + "px";
+    function a(r, n, c) {
+      r.clearRect(0, 0, n.width, n.height), n.style || (n.style = {}), n.height = c, n.width = c, n.style.height = c + "px", n.style.width = c + "px";
     }
     function o() {
       try {
@@ -1440,84 +1440,84 @@ function On() {
         throw new Error("You need to specify a canvas element");
       }
     }
-    e.render = function(n, s, d) {
-      let c = d, u = s;
-      typeof c > "u" && (!s || !s.getContext) && (c = s, s = void 0), s || (u = o()), c = i.getOptions(c);
-      const h = i.getImageWidth(n.modules.size, c), f = u.getContext("2d"), b = f.createImageData(h, h);
-      return i.qrToImageData(b.data, n, c), a(f, u, h), f.putImageData(b, 0, 0), u;
-    }, e.renderToDataURL = function(n, s, d) {
-      let c = d;
-      typeof c > "u" && (!s || !s.getContext) && (c = s, s = void 0), c || (c = {});
-      const u = e.render(n, s, c), h = c.type || "image/png", f = c.rendererOpts || {};
-      return u.toDataURL(h, f.quality);
+    e.render = function(n, c, d) {
+      let s = d, h = c;
+      typeof s > "u" && (!c || !c.getContext) && (s = c, c = void 0), c || (h = o()), s = i.getOptions(s);
+      const u = i.getImageWidth(n.modules.size, s), p = h.getContext("2d"), x = p.createImageData(u, u);
+      return i.qrToImageData(x.data, n, s), a(p, h, u), p.putImageData(x, 0, 0), h;
+    }, e.renderToDataURL = function(n, c, d) {
+      let s = d;
+      typeof s > "u" && (!c || !c.getContext) && (s = c, c = void 0), s || (s = {});
+      const h = e.render(n, c, s), u = s.type || "image/png", p = s.rendererOpts || {};
+      return h.toDataURL(u, p.quality);
     };
   })(je)), je;
 }
 var Ve = {}, zt;
-function jn() {
+function Hn() {
   if (zt) return Ve;
   zt = 1;
   const e = on();
   function i(r, n) {
-    const s = r.a / 255, d = n + '="' + r.hex + '"';
-    return s < 1 ? d + " " + n + '-opacity="' + s.toFixed(2).slice(1) + '"' : d;
+    const c = r.a / 255, d = n + '="' + r.hex + '"';
+    return c < 1 ? d + " " + n + '-opacity="' + c.toFixed(2).slice(1) + '"' : d;
   }
-  function a(r, n, s) {
+  function a(r, n, c) {
     let d = r + n;
-    return typeof s < "u" && (d += " " + s), d;
+    return typeof c < "u" && (d += " " + c), d;
   }
-  function o(r, n, s) {
-    let d = "", c = 0, u = !1, h = 0;
-    for (let f = 0; f < r.length; f++) {
-      const b = Math.floor(f % n), v = Math.floor(f / n);
-      !b && !u && (u = !0), r[f] ? (h++, f > 0 && b > 0 && r[f - 1] || (d += u ? a("M", b + s, 0.5 + v + s) : a("m", c, 0), c = 0, u = !1), b + 1 < n && r[f + 1] || (d += a("h", h), h = 0)) : c++;
+  function o(r, n, c) {
+    let d = "", s = 0, h = !1, u = 0;
+    for (let p = 0; p < r.length; p++) {
+      const x = Math.floor(p % n), w = Math.floor(p / n);
+      !x && !h && (h = !0), r[p] ? (u++, p > 0 && x > 0 && r[p - 1] || (d += h ? a("M", x + c, 0.5 + w + c) : a("m", s, 0), s = 0, h = !1), x + 1 < n && r[p + 1] || (d += a("h", u), u = 0)) : s++;
     }
     return d;
   }
-  return Ve.render = function(n, s, d) {
-    const c = e.getOptions(s), u = n.modules.size, h = n.modules.data, f = u + c.margin * 2, b = c.color.light.a ? "<path " + i(c.color.light, "fill") + ' d="M0 0h' + f + "v" + f + 'H0z"/>' : "", v = "<path " + i(c.color.dark, "stroke") + ' d="' + o(h, u, c.margin) + '"/>', S = 'viewBox="0 0 ' + f + " " + f + '"', y = '<svg xmlns="http://www.w3.org/2000/svg" ' + (c.width ? 'width="' + c.width + '" height="' + c.width + '" ' : "") + S + ' shape-rendering="crispEdges">' + b + v + `</svg>
+  return Ve.render = function(n, c, d) {
+    const s = e.getOptions(c), h = n.modules.size, u = n.modules.data, p = h + s.margin * 2, x = s.color.light.a ? "<path " + i(s.color.light, "fill") + ' d="M0 0h' + p + "v" + p + 'H0z"/>' : "", w = "<path " + i(s.color.dark, "stroke") + ' d="' + o(u, h, s.margin) + '"/>', C = 'viewBox="0 0 ' + p + " " + p + '"', m = '<svg xmlns="http://www.w3.org/2000/svg" ' + (s.width ? 'width="' + s.width + '" height="' + s.width + '" ' : "") + C + ' shape-rendering="crispEdges">' + x + w + `</svg>
 `;
-    return typeof d == "function" && d(null, y), y;
+    return typeof d == "function" && d(null, m), m;
   }, Ve;
 }
 var Lt;
-function Hn() {
+function Vn() {
   if (Lt) return re;
   Lt = 1;
-  const e = Tn(), i = Wn(), a = On(), o = jn();
-  function r(n, s, d, c, u) {
-    const h = [].slice.call(arguments, 1), f = h.length, b = typeof h[f - 1] == "function";
-    if (!b && !e())
+  const e = En(), i = On(), a = jn(), o = Hn();
+  function r(n, c, d, s, h) {
+    const u = [].slice.call(arguments, 1), p = u.length, x = typeof u[p - 1] == "function";
+    if (!x && !e())
       throw new Error("Callback required as last argument");
-    if (b) {
-      if (f < 2)
+    if (x) {
+      if (p < 2)
         throw new Error("Too few arguments provided");
-      f === 2 ? (u = d, d = s, s = c = void 0) : f === 3 && (s.getContext && typeof u > "u" ? (u = c, c = void 0) : (u = c, c = d, d = s, s = void 0));
+      p === 2 ? (h = d, d = c, c = s = void 0) : p === 3 && (c.getContext && typeof h > "u" ? (h = s, s = void 0) : (h = s, s = d, d = c, c = void 0));
     } else {
-      if (f < 1)
+      if (p < 1)
         throw new Error("Too few arguments provided");
-      return f === 1 ? (d = s, s = c = void 0) : f === 2 && !s.getContext && (c = d, d = s, s = void 0), new Promise(function(v, S) {
+      return p === 1 ? (d = c, c = s = void 0) : p === 2 && !c.getContext && (s = d, d = c, c = void 0), new Promise(function(w, C) {
         try {
-          const _ = i.create(d, c);
-          v(n(_, s, c));
-        } catch (_) {
-          S(_);
+          const P = i.create(d, s);
+          w(n(P, c, s));
+        } catch (P) {
+          C(P);
         }
       });
     }
     try {
-      const v = i.create(d, c);
-      u(null, n(v, s, c));
-    } catch (v) {
-      u(v);
+      const w = i.create(d, s);
+      h(null, n(w, c, s));
+    } catch (w) {
+      h(w);
     }
   }
-  return re.create = i.create, re.toCanvas = r.bind(null, a.render), re.toDataURL = r.bind(null, a.renderToDataURL), re.toString = r.bind(null, function(n, s, d) {
+  return re.create = i.create, re.toCanvas = r.bind(null, a.render), re.toDataURL = r.bind(null, a.renderToDataURL), re.toString = r.bind(null, function(n, c, d) {
     return o.render(n, d);
   }), re;
 }
-var Vn = Hn();
-const an = /* @__PURE__ */ Cn(Vn), ln = {
+var Kn = Vn();
+const an = /* @__PURE__ */ Tn(Kn), ln = {
   primary: "oklch(0.9848 0 0)",
   primaryForeground: "oklch(15% 0.0000 0.00)",
   primaryHover: "color-mix(in oklab, oklch(0.9848 0 0) 88%, oklch(15% 0.0000 0.00) 12%)",
@@ -1570,7 +1570,7 @@ const an = /* @__PURE__ */ Cn(Vn), ln = {
   shadowMd: "0 0 0 0 transparent inset",
   shadowLg: "0 0 1px 0 #ffffff4d inset",
   shadowGlow: "0 0 0 1px color-mix(in oklab, oklch(0.9848 0 0) 18%, transparent)"
-}, Kn = {
+}, Gn = {
   radiusSm: "0.25rem",
   radiusMd: "0.25rem",
   radiusLg: "0.25rem",
@@ -1580,24 +1580,24 @@ const an = /* @__PURE__ */ Cn(Vn), ln = {
   fontMono: "'Geist Mono', 'SF Mono', 'Cascadia Code', monospace",
   transition: "200ms cubic-bezier(0.4, 0, 0.2, 1)",
   transitionSlow: "400ms cubic-bezier(0.4, 0, 0.2, 1)"
-}, Gn = {
+}, Yn = {
   sidebarWidth: "260px",
   sidebarCollapsed: "72px",
   topbarHeight: "64px"
 }, ot = {
-  ...Kn,
-  ...Gn
+  ...Gn,
+  ...Yn
 }, sn = {
   dark: ln
 };
-function Yn(e) {
+function Jn(e) {
   return e.replace(/[A-Z]/g, (i) => "-" + i.toLowerCase());
 }
 function cn(e = "ag") {
   return e.trim() || "ag";
 }
 function Se(e, i) {
-  return `--${e}-${Yn(i)}`;
+  return `--${e}-${Jn(i)}`;
 }
 Object.keys(sn.dark).reduce((e, i) => (e[i] = Se("ag", i), e), {});
 Object.keys(ot).reduce((e, i) => (e[i] = Se("ag", i), e), {});
@@ -1609,9 +1609,9 @@ function un(e = {}) {
   const i = cn(e.prefix);
   return Object.keys(ot).reduce((a, o) => (a[o] = Se(i, o), a), {});
 }
-const Jn = dn(), Qn = un();
+const Qn = dn(), Zn = un();
 function t(e, i = {}) {
-  const a = i.prefix ? dn(i) : Jn, o = i.prefix ? un(i) : Qn;
+  const a = i.prefix ? dn(i) : Qn, o = i.prefix ? un(i) : Zn;
   if (e in a) {
     const n = e;
     return `var(${a[n]}, ${ln[n]})`;
@@ -1619,33 +1619,33 @@ function t(e, i = {}) {
   const r = e;
   return `var(${o[r]}, ${ot[r]})`;
 }
-const Xn = "/api/v1/ext-user/payment-epay", Zn = "/api/v1/ext/payment-epay";
+const Xn = "/api/v1/ext-user/payment-epay", er = "/api/v1/ext/payment-epay";
 async function q(e, i, a, o) {
   const r = {};
   a !== void 0 && (r["Content-Type"] = "application/json");
   const n = localStorage.getItem("token");
   n && (r.Authorization = `Bearer ${n}`);
-  const s = o != null && o.admin ? Zn : Xn, d = await fetch(s + i, {
+  const c = o != null && o.admin ? er : Xn, d = await fetch(c + i, {
     method: e,
     headers: r,
     body: a ? JSON.stringify(a) : void 0
-  }), c = await d.text();
-  let u = null;
+  }), s = await d.text();
+  let h = null;
   try {
-    u = c ? JSON.parse(c) : null;
+    h = s ? JSON.parse(s) : null;
   } catch {
   }
   if (!d.ok) {
-    const f = u, b = (f == null ? void 0 : f.message) || (u == null ? void 0 : u.error) || `HTTP ${d.status}`;
-    throw d.status === 401 && (localStorage.removeItem("token"), window.location.href = "/login"), new Error(b);
+    const p = h, x = (p == null ? void 0 : p.message) || (h == null ? void 0 : h.error) || `HTTP ${d.status}`;
+    throw d.status === 401 && (localStorage.removeItem("token"), window.location.href = "/login"), new Error(x);
   }
-  const h = u;
-  if (h && typeof h == "object" && "code" in h && "data" in h) {
-    if (h.code !== 0)
-      throw new Error(h.message || "请求失败");
-    return h.data;
+  const u = h;
+  if (u && typeof u == "object" && "code" in u && "data" in u) {
+    if (u.code !== 0)
+      throw new Error(u.message || "请求失败");
+    return u.data;
   }
-  return u;
+  return h;
 }
 const F = {
   // ============ User ============
@@ -1674,7 +1674,7 @@ const F = {
   adminDeletePackage: (e) => q("DELETE", `/admin/packages/${e}`, void 0, { admin: !0 })
 };
 let he = null;
-function er() {
+function tr() {
   return he || (he = (async () => {
     var r;
     const i = await (await fetch("/api/v1/settings/public")).json(), a = (i == null ? void 0 : i.data) || {};
@@ -1682,23 +1682,51 @@ function er() {
     try {
       const n = window.localStorage.getItem("ag_origin_site") || "";
       if (n && a.sites_branding) {
-        const s = JSON.parse(a.sites_branding);
-        o = ((r = s == null ? void 0 : s[n]) == null ? void 0 : r.name) || "";
+        const c = JSON.parse(a.sites_branding);
+        o = ((r = c == null ? void 0 : c[n]) == null ? void 0 : r.name) || "";
       }
     } catch {
     }
     return o || a.site_name || "";
   })().catch(() => (he = null, ""))), he;
 }
+async function nr(e, i) {
+  const a = new URLSearchParams();
+  a.set("start_time", new Date(e.paid_at).toISOString()), i && a.set("end_time", new Date(i).toISOString()), a.set("order_no", e.out_trade_no);
+  try {
+    a.set("tz", Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+  } catch {
+  }
+  const o = {}, r = localStorage.getItem("token");
+  r && (o.Authorization = `Bearer ${r}`);
+  const n = await fetch(`/api/v1/usage/export?${a.toString()}`, { headers: o });
+  if (!n.ok) {
+    if (n.status === 401) {
+      localStorage.removeItem("token"), window.location.href = "/login";
+      return;
+    }
+    let u = `HTTP ${n.status}`;
+    try {
+      const p = await n.json();
+      u = (p == null ? void 0 : p.message) || u;
+    } catch {
+    }
+    throw new Error(u);
+  }
+  if (!(n.headers.get("content-type") || "").includes("text/csv"))
+    throw new Error("导出功能暂不可用，请稍后再试（服务端版本过旧）");
+  const d = await n.blob(), s = URL.createObjectURL(d), h = document.createElement("a");
+  h.href = s, h.download = `usage-${e.out_trade_no}.csv`, document.body.appendChild(h), h.click(), h.remove(), setTimeout(() => URL.revokeObjectURL(s), 6e4);
+}
 function D(e, i = {}) {
   const a = e.toFixed(2);
   return i.compact ? `$${e}` : `$${a}`;
 }
-const tr = /* @__PURE__ */ new Set(["zh", "zh-HK", "en", "ja"]);
+const rr = /* @__PURE__ */ new Set(["zh", "zh-HK", "en", "ja"]);
 function Nt(e) {
-  return e && tr.has(e) ? e : null;
+  return e && rr.has(e) ? e : null;
 }
-function nr() {
+function or() {
   if (typeof navigator > "u") return "en";
   const e = Array.isArray(navigator.languages) && navigator.languages.length ? navigator.languages : [navigator.language];
   for (const i of e) {
@@ -1712,7 +1740,7 @@ function nr() {
   }
   return "en";
 }
-function rr() {
+function ir() {
   if (typeof document < "u") {
     const e = document.cookie.match(/(?:^|;\s*)lang=([^;]+)/), i = e ? Nt(decodeURIComponent(e[1] ?? "")) : null;
     if (i) return i;
@@ -1722,9 +1750,9 @@ function rr() {
     if (e) return e;
   } catch {
   }
-  return nr();
+  return or();
 }
-const or = {
+const ar = {
   "加载中...": "載入中...",
   "加载失败: ": "載入失敗: ",
   "加载支付方式失败: ": "載入支付方式失敗: ",
@@ -1784,13 +1812,16 @@ const or = {
   支付时间: "支付時間",
   操作: "操作",
   继续支付: "繼續支付",
+  导出明细: "匯出明細",
+  "导出中...": "匯出中...",
+  "导出失败: ": "匯出失敗: ",
   待支付: "待支付",
   已支付: "已支付",
   已过期: "已過期",
   失败: "失敗",
   已取消: "已取消",
   已退款: "已退款"
-}, ir = {
+}, lr = {
   "加载中...": "Loading...",
   "加载失败: ": "Failed to load: ",
   "加载支付方式失败: ": "Failed to load payment methods: ",
@@ -1850,13 +1881,16 @@ const or = {
   支付时间: "Paid At",
   操作: "Actions",
   继续支付: "Continue Payment",
+  导出明细: "Export Usage",
+  "导出中...": "Exporting...",
+  "导出失败: ": "Export failed: ",
   待支付: "Pending",
   已支付: "Paid",
   已过期: "Expired",
   失败: "Failed",
   已取消: "Cancelled",
   已退款: "Refunded"
-}, ar = {
+}, sr = {
   "加载中...": "読み込み中...",
   "加载失败: ": "読み込みに失敗しました: ",
   "加载支付方式失败: ": "支払い方法の読み込みに失敗しました: ",
@@ -1916,21 +1950,24 @@ const or = {
   支付时间: "支払日時",
   操作: "操作",
   继续支付: "支払いを続ける",
+  导出明细: "明細をエクスポート",
+  "导出中...": "エクスポート中...",
+  "导出失败: ": "エクスポート失敗: ",
   待支付: "未払い",
   已支付: "支払済み",
   已过期: "期限切れ",
   失败: "失敗",
   已取消: "キャンセル済み",
   已退款: "返金済み"
-}, lr = {
-  "zh-HK": or,
-  en: ir,
-  ja: ar
+}, cr = {
+  "zh-HK": ar,
+  en: lr,
+  ja: sr
 };
-function m(e) {
-  const i = rr();
+function S(e) {
+  const i = ir();
   if (i === "zh") return e;
-  const a = lr[i];
+  const a = cr[i];
   return a && a[e] || e;
 }
 const fe = "epay_last_order", $t = [10, 30, 50, 100, 200, 500];
@@ -1938,8 +1975,8 @@ function Dt(e, i) {
   const a = $t.filter((o) => o >= e && o <= i);
   return e > $t[0] && e <= i && !a.includes(e) && a.unshift(e), !a.length && e <= i && a.push(e), a;
 }
-function sr() {
-  const [e, i] = L([]), [a, o] = L(!0), [r, n] = L(null), [s, d] = L(1), [c, u] = L(1e4), [h, f] = L(30), [b, v] = L(""), [S, _] = L(!1), [y, g] = L(null), [I, A] = L([]), [w, N] = L(null), C = de(!1), [x, E] = L(null), [T, P] = L(null), B = de(null);
+function dr() {
+  const [e, i] = L([]), [a, o] = L(!0), [r, n] = L(null), [c, d] = L(1), [s, h] = L(1e4), [u, p] = L(30), [x, w] = L(""), [C, P] = L(!1), [m, f] = L(null), [R, I] = L([]), [g, N] = L(null), v = de(!1), [b, E] = L(null), [T, M] = L(null), B = de(null);
   U(() => {
     let k;
     try {
@@ -1968,28 +2005,28 @@ function sr() {
   }, []), U(() => {
     F.methods().then((k) => {
       var $;
-      i(k.methods || []), d(k.min_amount > 0 ? k.min_amount : 1), u(k.max_amount > 0 ? k.max_amount : 1e4), ($ = k.methods) != null && $.length && v(k.methods[0].key);
+      i(k.methods || []), d(k.min_amount > 0 ? k.min_amount : 1), h(k.max_amount > 0 ? k.max_amount : 1e4), ($ = k.methods) != null && $.length && w(k.methods[0].key);
     }).catch((k) => n(String((k == null ? void 0 : k.message) || k))).finally(() => o(!1)), F.packages().then((k) => {
-      A(k.list || []);
-    }).catch(() => A([]));
+      I(k.list || []);
+    }).catch(() => I([]));
   }, []), U(() => {
-    if (C.current) return;
-    const k = I.find((O) => O.amount >= s && O.amount <= c);
+    if (v.current) return;
+    const k = R.find((O) => O.amount >= c && O.amount <= s);
     if (k) {
-      N(k.id), f(k.amount);
+      N(k.id), p(k.amount);
       return;
     }
     N(null);
-    const [$] = Dt(s, c);
-    $ !== void 0 && f($);
-  }, [I, s, c]), U(() => {
-    if (!x || x.status !== "pending") {
+    const [$] = Dt(c, s);
+    $ !== void 0 && p($);
+  }, [R, c, s]), U(() => {
+    if (!b || b.status !== "pending") {
       B.current && (window.clearInterval(B.current), B.current = null);
       return;
     }
     const k = async () => {
       try {
-        const $ = await F.getOrder(x.out_trade_no);
+        const $ = await F.getOrder(b.out_trade_no);
         E($);
       } catch {
       }
@@ -1997,49 +2034,49 @@ function sr() {
     return B.current = window.setInterval(k, 3e3), () => {
       B.current && (window.clearInterval(B.current), B.current = null);
     };
-  }, [x == null ? void 0 : x.out_trade_no, x == null ? void 0 : x.status]), U(() => {
-    if (!x) {
-      P(null);
+  }, [b == null ? void 0 : b.out_trade_no, b == null ? void 0 : b.status]), U(() => {
+    if (!b) {
+      M(null);
       return;
     }
-    const k = x.qr_code_content || x.payment_url;
+    const k = b.qr_code_content || b.payment_url;
     if (!k) {
-      P(null);
+      M(null);
       return;
     }
     let $ = !1;
     return an.toDataURL(k, { width: 240, margin: 2, errorCorrectionLevel: "M" }).then((O) => {
-      $ || P(O);
+      $ || M(O);
     }).catch(() => {
-      $ || P(null);
+      $ || M(null);
     }), () => {
       $ = !0;
     };
-  }, [x == null ? void 0 : x.payment_url, x == null ? void 0 : x.qr_code_content]);
-  const M = async () => {
-    if (g(null), !b) {
-      g(m("请选择支付方式"));
+  }, [b == null ? void 0 : b.payment_url, b == null ? void 0 : b.qr_code_content]);
+  const A = async () => {
+    if (f(null), !x) {
+      f(S("请选择支付方式"));
       return;
     }
-    if (!Number.isFinite(h)) {
-      g(m("请输入有效金额"));
+    if (!Number.isFinite(u)) {
+      f(S("请输入有效金额"));
       return;
     }
-    if (!h || h < s) {
-      g(`${m("最低充值金额为")} ${D(s)}`);
+    if (!u || u < c) {
+      f(`${S("最低充值金额为")} ${D(c)}`);
       return;
     }
-    if (h > c) {
-      g(`${m("单笔充值金额不能超过")} ${D(c)}`);
+    if (u > s) {
+      f(`${S("单笔充值金额不能超过")} ${D(s)}`);
       return;
     }
-    _(!0);
+    P(!0);
     try {
-      const k = await er(), $ = await F.createOrder({
-        amount: h,
-        method: b,
+      const k = await tr(), $ = await F.createOrder({
+        amount: u,
+        method: x,
         subject: k ? `${k} 余额充值` : "余额充值",
-        ...w !== null ? { package_id: w } : {}
+        ...g !== null ? { package_id: g } : {}
       });
       E($);
       try {
@@ -2047,114 +2084,114 @@ function sr() {
       } catch {
       }
     } catch (k) {
-      g(String(k.message || k));
+      f(String(k.message || k));
     } finally {
-      _(!1);
+      P(!1);
     }
-  }, R = () => {
-    E(null), g(null);
+  }, _ = () => {
+    E(null), f(null);
     try {
       localStorage.removeItem(fe);
     } catch {
     }
   };
   if (a)
-    return /* @__PURE__ */ l("div", { style: Q, children: /* @__PURE__ */ l("div", { style: Ft, children: m("加载中...") }) });
+    return /* @__PURE__ */ l("div", { style: Q, children: /* @__PURE__ */ l("div", { style: Ft, children: S("加载中...") }) });
   if (r)
-    return /* @__PURE__ */ l("div", { style: Q, children: /* @__PURE__ */ p("div", { style: { ...Ft, color: t("danger") }, children: [
-      m("加载支付方式失败: "),
+    return /* @__PURE__ */ l("div", { style: Q, children: /* @__PURE__ */ y("div", { style: { ...Ft, color: t("danger") }, children: [
+      S("加载支付方式失败: "),
       r
     ] }) });
   if (e.length === 0)
-    return /* @__PURE__ */ l("div", { style: Q, children: /* @__PURE__ */ l("div", { style: ye, children: /* @__PURE__ */ l("p", { style: { color: t("textSecondary"), margin: 0, textAlign: "center" }, children: m("充值功能暂未开放，请联系管理员。") }) }) });
-  if (x)
-    return x.status === "paid" ? /* @__PURE__ */ p("div", { style: Q, children: [
-      /* @__PURE__ */ l("h2", { style: pe, children: m("充值成功") }),
-      /* @__PURE__ */ p("div", { style: ye, children: [
-        /* @__PURE__ */ p("p", { style: { margin: 0, color: t("text") }, children: [
-          m("订单"),
+    return /* @__PURE__ */ l("div", { style: Q, children: /* @__PURE__ */ l("div", { style: ye, children: /* @__PURE__ */ l("p", { style: { color: t("textSecondary"), margin: 0, textAlign: "center" }, children: S("充值功能暂未开放，请联系管理员。") }) }) });
+  if (b)
+    return b.status === "paid" ? /* @__PURE__ */ y("div", { style: Q, children: [
+      /* @__PURE__ */ l("h2", { style: pe, children: S("充值成功") }),
+      /* @__PURE__ */ y("div", { style: ye, children: [
+        /* @__PURE__ */ y("p", { style: { margin: 0, color: t("text") }, children: [
+          S("订单"),
           " ",
-          /* @__PURE__ */ l("code", { style: Ge, children: x.out_trade_no }),
+          /* @__PURE__ */ l("code", { style: Ge, children: b.out_trade_no }),
           " ",
-          m("已支付，金额"),
+          S("已支付，金额"),
           " ",
-          /* @__PURE__ */ l("strong", { style: { color: t("success") }, children: D(x.amount) }),
+          /* @__PURE__ */ l("strong", { style: { color: t("success") }, children: D(b.amount) }),
           " ",
-          m("已入账"),
-          (x.bonus_amount ?? 0) > 0 && /* @__PURE__ */ p(ce, { children: [
-            m("，套餐赠送"),
+          S("已入账"),
+          (b.bonus_amount ?? 0) > 0 && /* @__PURE__ */ y(ce, { children: [
+            S("，套餐赠送"),
             " ",
-            /* @__PURE__ */ l("strong", { style: { color: t("success") }, children: D(x.bonus_amount) }),
+            /* @__PURE__ */ l("strong", { style: { color: t("success") }, children: D(b.bonus_amount) }),
             " ",
-            m("已同步到账")
+            S("已同步到账")
           ] }),
-          m("。")
+          S("。")
         ] }),
-        /* @__PURE__ */ l("button", { style: { ...Ke, marginTop: 20 }, onClick: R, children: m("再次充值") })
+        /* @__PURE__ */ l("button", { style: { ...Ke, marginTop: 20 }, onClick: _, children: S("再次充值") })
       ] })
-    ] }) : x.status === "pending" ? /* @__PURE__ */ p("div", { style: Q, children: [
-      /* @__PURE__ */ l("h2", { style: pe, children: m("扫码付款") }),
-      /* @__PURE__ */ p("div", { style: Sr, children: [
-        T ? /* @__PURE__ */ l("img", { src: T, alt: m("付款二维码"), style: qt }) : /* @__PURE__ */ l("div", { style: { ...qt, display: "flex", alignItems: "center", justifyContent: "center", color: t("textTertiary") }, children: m("生成二维码中...") }),
-        /* @__PURE__ */ l("div", { style: xr, children: D(x.amount) }),
-        (x.bonus_amount ?? 0) > 0 && /* @__PURE__ */ p("div", { style: { color: t("success"), fontSize: 13, marginTop: 2 }, children: [
-          m("支付成功后另赠"),
+    ] }) : b.status === "pending" ? /* @__PURE__ */ y("div", { style: Q, children: [
+      /* @__PURE__ */ l("h2", { style: pe, children: S("扫码付款") }),
+      /* @__PURE__ */ y("div", { style: wr, children: [
+        T ? /* @__PURE__ */ l("img", { src: T, alt: S("付款二维码"), style: qt }) : /* @__PURE__ */ l("div", { style: { ...qt, display: "flex", alignItems: "center", justifyContent: "center", color: t("textTertiary") }, children: S("生成二维码中...") }),
+        /* @__PURE__ */ l("div", { style: vr, children: D(b.amount) }),
+        (b.bonus_amount ?? 0) > 0 && /* @__PURE__ */ y("div", { style: { color: t("success"), fontSize: 13, marginTop: 2 }, children: [
+          S("支付成功后另赠"),
           " ",
-          D(x.bonus_amount)
+          D(b.bonus_amount)
         ] }),
-        /* @__PURE__ */ p("div", { style: { color: t("textSecondary"), fontSize: 13 }, children: [
-          m("请使用"),
+        /* @__PURE__ */ y("div", { style: { color: t("textSecondary"), fontSize: 13 }, children: [
+          S("请使用"),
           " ",
-          cr(x.method),
+          ur(b.method),
           " ",
-          m("扫码完成付款")
+          S("扫码完成付款")
         ] }),
-        /* @__PURE__ */ p("div", { style: { marginTop: 8, color: t("textTertiary"), fontSize: 12 }, children: [
-          m("订单号："),
-          /* @__PURE__ */ l("code", { style: Ge, children: x.out_trade_no })
+        /* @__PURE__ */ y("div", { style: { marginTop: 8, color: t("textTertiary"), fontSize: 12 }, children: [
+          S("订单号："),
+          /* @__PURE__ */ l("code", { style: Ge, children: b.out_trade_no })
         ] }),
-        /* @__PURE__ */ l("p", { style: { textAlign: "center", color: t("textTertiary"), fontSize: 13, marginTop: 20, marginBottom: 0 }, children: m("支付完成后本页将自动跳转到结果页（每 3 秒检查一次）") }),
-        /* @__PURE__ */ l("p", { style: { textAlign: "center", color: t("textTertiary"), fontSize: 12, marginTop: 6, marginBottom: 0 }, children: m("离开或刷新本页也没关系，支付结果会在你回来时自动恢复。") }),
-        x.payment_url && /* @__PURE__ */ p("p", { style: { textAlign: "center", fontSize: 12, marginTop: 8, marginBottom: 0 }, children: [
-          m("扫码不便？"),
+        /* @__PURE__ */ l("p", { style: { textAlign: "center", color: t("textTertiary"), fontSize: 13, marginTop: 20, marginBottom: 0 }, children: S("支付完成后本页将自动跳转到结果页（每 3 秒检查一次）") }),
+        /* @__PURE__ */ l("p", { style: { textAlign: "center", color: t("textTertiary"), fontSize: 12, marginTop: 6, marginBottom: 0 }, children: S("离开或刷新本页也没关系，支付结果会在你回来时自动恢复。") }),
+        b.payment_url && /* @__PURE__ */ y("p", { style: { textAlign: "center", fontSize: 12, marginTop: 8, marginBottom: 0 }, children: [
+          S("扫码不便？"),
           " ",
-          /* @__PURE__ */ l("a", { href: x.payment_url, target: "_blank", rel: "noreferrer", style: { color: t("primary"), textDecoration: "none" }, children: m("点此在新窗口打开付款页 →") })
+          /* @__PURE__ */ l("a", { href: b.payment_url, target: "_blank", rel: "noreferrer", style: { color: t("primary"), textDecoration: "none" }, children: S("点此在新窗口打开付款页 →") })
         ] }),
-        /* @__PURE__ */ l("button", { style: { ...br, marginTop: 20 }, onClick: R, children: m("取消") })
+        /* @__PURE__ */ l("button", { style: { ...xr, marginTop: 20 }, onClick: _, children: S("取消") })
       ] })
-    ] }) : /* @__PURE__ */ p("div", { style: Q, children: [
-      /* @__PURE__ */ l("h2", { style: pe, children: dr(x.status) }),
-      /* @__PURE__ */ p("div", { style: ye, children: [
-        /* @__PURE__ */ p("p", { style: { margin: 0, color: t("textSecondary") }, children: [
-          m("订单号："),
-          /* @__PURE__ */ l("code", { style: Ge, children: x.out_trade_no })
+    ] }) : /* @__PURE__ */ y("div", { style: Q, children: [
+      /* @__PURE__ */ l("h2", { style: pe, children: gr(b.status) }),
+      /* @__PURE__ */ y("div", { style: ye, children: [
+        /* @__PURE__ */ y("p", { style: { margin: 0, color: t("textSecondary") }, children: [
+          S("订单号："),
+          /* @__PURE__ */ l("code", { style: Ge, children: b.out_trade_no })
         ] }),
-        /* @__PURE__ */ l("button", { style: { ...Ke, marginTop: 20 }, onClick: R, children: m("重新发起") })
+        /* @__PURE__ */ l("button", { style: { ...Ke, marginTop: 20 }, onClick: _, children: S("重新发起") })
       ] })
     ] });
-  const z = I.filter((k) => k.amount >= s && k.amount <= c), W = Dt(s, c);
-  return /* @__PURE__ */ p("div", { style: Q, children: [
-    /* @__PURE__ */ l("h2", { style: pe, children: m("账户充值") }),
-    /* @__PURE__ */ p("div", { style: ye, children: [
-      /* @__PURE__ */ p("p", { style: gr, children: [
-        m("充值比例："),
+  const z = R.filter((k) => k.amount >= c && k.amount <= s), W = Dt(c, s);
+  return /* @__PURE__ */ y("div", { style: Q, children: [
+    /* @__PURE__ */ l("h2", { style: pe, children: S("账户充值") }),
+    /* @__PURE__ */ y("div", { style: ye, children: [
+      /* @__PURE__ */ y("p", { style: fr, children: [
+        S("充值比例："),
         /* @__PURE__ */ l("strong", { style: { color: t("text") }, children: "1 CNY = $1" })
       ] }),
-      /* @__PURE__ */ p("section", { children: [
-        /* @__PURE__ */ l("h3", { style: Ut, children: z.length ? m("选择套餐") : m("选择金额") }),
-        /* @__PURE__ */ l("div", { style: { display: "flex", flexWrap: "wrap", gap: 10 }, children: z.length ? z.map((k) => /* @__PURE__ */ p(
+      /* @__PURE__ */ y("section", { children: [
+        /* @__PURE__ */ l("h3", { style: Ut, children: z.length ? S("选择套餐") : S("选择金额") }),
+        /* @__PURE__ */ l("div", { style: { display: "flex", flexWrap: "wrap", gap: 10 }, children: z.length ? z.map((k) => /* @__PURE__ */ y(
           "button",
           {
             type: "button",
             onClick: () => {
-              C.current = !0, N(k.id), f(k.amount);
+              v.current = !0, N(k.id), p(k.amount);
             },
-            style: w === k.id ? fr : gn,
+            style: g === k.id ? yr : gn,
             title: k.title || void 0,
             children: [
               /* @__PURE__ */ l("span", { style: { fontSize: 16, fontWeight: 600 }, children: D(k.amount, { compact: !0 }) }),
-              k.bonus_amount > 0 && /* @__PURE__ */ p("span", { style: w === k.id ? pr : hn, children: [
-                m("送"),
+              k.bonus_amount > 0 && /* @__PURE__ */ y("span", { style: g === k.id ? mr : hn, children: [
+                S("送"),
                 " ",
                 D(k.bonus_amount, { compact: !0 })
               ] })
@@ -2166,85 +2203,85 @@ function sr() {
           {
             type: "button",
             onClick: () => {
-              C.current = !0, N(null), f(k);
+              v.current = !0, N(null), p(k);
             },
-            style: h === k ? hr : it,
+            style: u === k ? pr : it,
             children: D(k, { compact: !0 })
           },
           k
         )) }),
-        /* @__PURE__ */ p("div", { style: { marginTop: 16, display: "flex", alignItems: "center", gap: 8, color: t("textSecondary"), fontSize: 13 }, children: [
-          /* @__PURE__ */ p("span", { children: [
-            m("自定义金额"),
-            z.length ? m("（不参与套餐赠送）") : ""
+        /* @__PURE__ */ y("div", { style: { marginTop: 16, display: "flex", alignItems: "center", gap: 8, color: t("textSecondary"), fontSize: 13 }, children: [
+          /* @__PURE__ */ y("span", { children: [
+            S("自定义金额"),
+            z.length ? S("（不参与套餐赠送）") : ""
           ] }),
           /* @__PURE__ */ l(
             "input",
             {
               type: "number",
-              min: s,
-              max: c,
+              min: c,
+              max: s,
               step: 1,
-              value: h,
+              value: u,
               onChange: (k) => {
-                C.current = !0, N(null), f(Number(k.target.value));
+                v.current = !0, N(null), p(Number(k.target.value));
               },
-              style: mr
+              style: Sr
             }
           ),
           /* @__PURE__ */ l("span", { children: "$" })
         ] })
       ] }),
-      /* @__PURE__ */ p("section", { style: ur, children: [
-        /* @__PURE__ */ l("h3", { style: Ut, children: m("选择支付方式") }),
+      /* @__PURE__ */ y("section", { style: hr, children: [
+        /* @__PURE__ */ l("h3", { style: Ut, children: S("选择支付方式") }),
         /* @__PURE__ */ l("div", { style: { display: "flex", gap: 12, flexWrap: "wrap" }, children: e.map((k) => /* @__PURE__ */ l(
           "button",
           {
             type: "button",
-            onClick: () => v(k.key),
-            style: b === k.key ? yr : fn,
+            onClick: () => w(k.key),
+            style: x === k.key ? br : fn,
             title: k.description,
-            children: m(k.label)
+            children: S(k.label)
           },
           k.key
         )) })
       ] }),
-      y && /* @__PURE__ */ l("p", { style: { color: t("danger"), marginTop: 16, fontSize: 13 }, children: y }),
+      m && /* @__PURE__ */ l("p", { style: { color: t("danger"), marginTop: 16, fontSize: 13 }, children: m }),
       /* @__PURE__ */ l(
         "button",
         {
           type: "button",
-          onClick: M,
-          disabled: S,
-          style: { ...Ke, marginTop: 24, width: "100%", opacity: S ? 0.6 : 1 },
-          children: m(S ? "处理中..." : "立即支付")
+          onClick: A,
+          disabled: C,
+          style: { ...Ke, marginTop: 24, width: "100%", opacity: C ? 0.6 : 1 },
+          children: S(C ? "处理中..." : "立即支付")
         }
       )
     ] })
   ] });
 }
-function cr(e) {
+function ur(e) {
   switch (e) {
     case "alipay":
-      return m("支付宝");
+      return S("支付宝");
     case "wxpay":
-      return m("微信支付");
+      return S("微信支付");
     default:
       return e;
   }
 }
-function dr(e) {
+function gr(e) {
   switch (e) {
     case "expired":
-      return m("订单已过期");
+      return S("订单已过期");
     case "failed":
-      return m("订单已失败");
+      return S("订单已失败");
     case "cancelled":
-      return m("订单已取消");
+      return S("订单已取消");
     case "refunded":
-      return m("订单已退款");
+      return S("订单已退款");
     default:
-      return m("订单已") + e;
+      return S("订单已") + e;
   }
 }
 const Q = {
@@ -2267,9 +2304,9 @@ const Q = {
   borderRadius: t("radiusLg"),
   background: t("bgSurface"),
   padding: "24px"
-}, ur = {
+}, hr = {
   marginTop: 28
-}, gr = {
+}, fr = {
   margin: "0 0 20px",
   padding: "10px 12px",
   border: `1px solid ${t("glassBorder")}`,
@@ -2296,7 +2333,7 @@ const Q = {
   fontSize: 15,
   fontWeight: 500,
   transition: t("transition")
-}, hr = {
+}, pr = {
   ...it,
   borderColor: t("primary"),
   background: t("primarySubtle"),
@@ -2309,7 +2346,7 @@ const Q = {
   flexDirection: "column",
   alignItems: "center",
   gap: 4
-}, fr = {
+}, yr = {
   ...gn,
   borderColor: t("primary"),
   background: t("primarySubtle"),
@@ -2322,7 +2359,7 @@ const Q = {
   background: t("bgElevated"),
   color: t("success"),
   border: `1px solid ${t("glassBorder")}`
-}, pr = {
+}, mr = {
   ...hn,
   background: t("primary"),
   color: t("textInverse"),
@@ -2338,13 +2375,13 @@ const Q = {
   fontSize: 14,
   fontWeight: 500,
   transition: t("transition")
-}, yr = {
+}, br = {
   ...fn,
   borderColor: t("primary"),
   background: t("primarySubtle"),
   color: t("primary"),
   fontWeight: 600
-}, mr = {
+}, Sr = {
   padding: "8px 12px",
   width: 140,
   border: `1px solid ${t("glassBorder")}`,
@@ -2363,7 +2400,7 @@ const Q = {
   fontWeight: 600,
   cursor: "pointer",
   transition: t("transition")
-}, br = {
+}, xr = {
   padding: "10px 24px",
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusMd"),
@@ -2373,7 +2410,7 @@ const Q = {
   fontWeight: 500,
   cursor: "pointer",
   transition: t("transition")
-}, Sr = {
+}, wr = {
   padding: "28px 24px",
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
@@ -2387,7 +2424,7 @@ const Q = {
   background: t("bgElevated"),
   padding: 8,
   borderRadius: t("radiusMd")
-}, xr = {
+}, vr = {
   marginTop: 20,
   fontSize: 32,
   fontWeight: 700,
@@ -2402,130 +2439,164 @@ const Q = {
   background: t("bg"),
   color: t("textSecondary")
 };
-function wr() {
-  const [e, i] = L([]), [a, o] = L(!0), [r, n] = L(null), [s, d] = L(null), [c, u] = L(null), h = de(null), f = () => {
-    o(!0), F.listOrders(100).then((S) => i(S.list || [])).catch((S) => n(String((S == null ? void 0 : S.message) || S))).finally(() => o(!1));
+function kr() {
+  const [e, i] = L([]), [a, o] = L(!0), [r, n] = L(null), [c, d] = L(null), [s, h] = L(null), [u, p] = L(null), [x, w] = L(null), C = de(null), P = () => {
+    o(!0), F.listOrders(100).then((g) => i(g.list || [])).catch((g) => n(String((g == null ? void 0 : g.message) || g))).finally(() => o(!1));
   };
-  U(f, []), U(() => {
-    if (!s) {
-      u(null);
+  U(P, []), U(() => {
+    if (!u) {
+      w(null);
       return;
     }
-    const S = s.qr_code_content || s.payment_url;
-    if (!S) {
-      u(null);
+    const g = u.qr_code_content || u.payment_url;
+    if (!g) {
+      w(null);
       return;
     }
-    let _ = !1;
-    return an.toDataURL(S, { width: 240, margin: 2, errorCorrectionLevel: "M" }).then((y) => {
-      _ || u(y);
+    let N = !1;
+    return an.toDataURL(g, { width: 240, margin: 2, errorCorrectionLevel: "M" }).then((v) => {
+      N || w(v);
     }).catch(() => {
-      _ || u(null);
+      N || w(null);
     }), () => {
-      _ = !0;
+      N = !0;
     };
-  }, [s == null ? void 0 : s.payment_url, s == null ? void 0 : s.qr_code_content]), U(() => {
-    if (!s || s.status !== "pending") {
-      h.current && (window.clearInterval(h.current), h.current = null);
+  }, [u == null ? void 0 : u.payment_url, u == null ? void 0 : u.qr_code_content]), U(() => {
+    if (!u || u.status !== "pending") {
+      C.current && (window.clearInterval(C.current), C.current = null);
       return;
     }
-    return h.current = window.setInterval(async () => {
+    return C.current = window.setInterval(async () => {
       try {
-        const S = await F.getOrder(s.out_trade_no);
-        d(S), S.status !== "pending" && f();
+        const g = await F.getOrder(u.out_trade_no);
+        p(g), g.status !== "pending" && P();
       } catch {
       }
     }, 3e3), () => {
-      h.current && (window.clearInterval(h.current), h.current = null);
+      C.current && (window.clearInterval(C.current), C.current = null);
     };
-  }, [s == null ? void 0 : s.out_trade_no, s == null ? void 0 : s.status]);
-  const b = (S) => {
-    d(S);
-  }, v = () => {
-    d(null), u(null);
+  }, [u == null ? void 0 : u.out_trade_no, u == null ? void 0 : u.status]);
+  const m = (g) => {
+    p(g);
+  }, f = (g) => {
+    if (!g.paid_at) return;
+    const N = new Date(g.paid_at).getTime();
+    let v;
+    for (const b of e) {
+      if (b.status !== "paid" || !b.paid_at || b.id === g.id) continue;
+      const E = new Date(b.paid_at).getTime();
+      E > N && (v === void 0 || E < v) && (v = E);
+    }
+    return v === void 0 ? void 0 : new Date(v).toISOString();
+  }, R = async (g) => {
+    d(g.id), h(null);
+    try {
+      await nr(g, f(g));
+    } catch (N) {
+      h(`${g.out_trade_no}: ${String((N == null ? void 0 : N.message) || N)}`);
+    } finally {
+      d((N) => N === g.id ? null : N);
+    }
+  }, I = () => {
+    p(null), w(null);
   };
-  return a ? /* @__PURE__ */ l("div", { style: Ye, children: /* @__PURE__ */ l("div", { style: Ht, children: m("加载中...") }) }) : r ? /* @__PURE__ */ l("div", { style: Ye, children: /* @__PURE__ */ p("div", { style: { ...Ht, color: t("danger") }, children: [
-    m("加载失败: "),
+  return a ? /* @__PURE__ */ l("div", { style: Ye, children: /* @__PURE__ */ l("div", { style: Ht, children: S("加载中...") }) }) : r ? /* @__PURE__ */ l("div", { style: Ye, children: /* @__PURE__ */ y("div", { style: { ...Ht, color: t("danger") }, children: [
+    S("加载失败: "),
     r
-  ] }) }) : /* @__PURE__ */ p("div", { style: Ye, children: [
-    s && /* @__PURE__ */ l("div", { style: Er, onClick: v, children: /* @__PURE__ */ l("div", { style: Rr, onClick: (S) => S.stopPropagation(), children: s.status === "paid" ? /* @__PURE__ */ p(ce, { children: [
-      /* @__PURE__ */ l("h3", { style: { margin: "0 0 12px", color: t("success") }, children: m("支付成功") }),
-      /* @__PURE__ */ p("p", { style: { margin: 0, color: t("text"), fontSize: 14 }, children: [
-        m("订单"),
+  ] }) }) : /* @__PURE__ */ y("div", { style: Ye, children: [
+    u && /* @__PURE__ */ l("div", { style: Rr, onClick: I, children: /* @__PURE__ */ l("div", { style: Ir, onClick: (g) => g.stopPropagation(), children: u.status === "paid" ? /* @__PURE__ */ y(ce, { children: [
+      /* @__PURE__ */ l("h3", { style: { margin: "0 0 12px", color: t("success") }, children: S("支付成功") }),
+      /* @__PURE__ */ y("p", { style: { margin: 0, color: t("text"), fontSize: 14 }, children: [
+        S("订单"),
         " ",
-        /* @__PURE__ */ l("code", { style: Je, children: s.out_trade_no }),
+        /* @__PURE__ */ l("code", { style: Je, children: u.out_trade_no }),
         " ",
-        m("已支付"),
+        S("已支付"),
         " ",
-        /* @__PURE__ */ l("strong", { children: D(s.amount) })
+        /* @__PURE__ */ l("strong", { children: D(u.amount) })
       ] }),
-      /* @__PURE__ */ l("button", { style: { ...Vt, marginTop: 16 }, onClick: v, children: m("关闭") })
-    ] }) : s.status === "pending" ? /* @__PURE__ */ p(ce, { children: [
-      /* @__PURE__ */ l("h3", { style: { margin: "0 0 12px", color: t("text") }, children: m("扫码付款") }),
-      c ? /* @__PURE__ */ l("img", { src: c, alt: m("付款二维码"), style: { width: 240, height: 240, borderRadius: 8 } }) : /* @__PURE__ */ l("div", { style: { width: 240, height: 240, display: "flex", alignItems: "center", justifyContent: "center", color: t("textTertiary"), border: `1px solid ${t("glassBorder")}`, borderRadius: 8 }, children: m("生成二维码中...") }),
-      /* @__PURE__ */ l("div", { style: { marginTop: 12, fontWeight: 600, fontSize: 20, color: t("text") }, children: D(s.amount) }),
-      /* @__PURE__ */ p("div", { style: { color: t("textSecondary"), fontSize: 13, marginTop: 4 }, children: [
-        m("请使用"),
+      /* @__PURE__ */ l("button", { style: { ...Vt, marginTop: 16 }, onClick: I, children: S("关闭") })
+    ] }) : u.status === "pending" ? /* @__PURE__ */ y(ce, { children: [
+      /* @__PURE__ */ l("h3", { style: { margin: "0 0 12px", color: t("text") }, children: S("扫码付款") }),
+      x ? /* @__PURE__ */ l("img", { src: x, alt: S("付款二维码"), style: { width: 240, height: 240, borderRadius: 8 } }) : /* @__PURE__ */ l("div", { style: { width: 240, height: 240, display: "flex", alignItems: "center", justifyContent: "center", color: t("textTertiary"), border: `1px solid ${t("glassBorder")}`, borderRadius: 8 }, children: S("生成二维码中...") }),
+      /* @__PURE__ */ l("div", { style: { marginTop: 12, fontWeight: 600, fontSize: 20, color: t("text") }, children: D(u.amount) }),
+      /* @__PURE__ */ y("div", { style: { color: t("textSecondary"), fontSize: 13, marginTop: 4 }, children: [
+        S("请使用"),
         " ",
-        Wt(s.method),
+        Wt(u.method),
         " ",
-        m("扫码完成付款")
+        S("扫码完成付款")
       ] }),
-      /* @__PURE__ */ p("div", { style: { marginTop: 6, color: t("textTertiary"), fontSize: 12 }, children: [
-        m("订单号："),
-        /* @__PURE__ */ l("code", { style: Je, children: s.out_trade_no })
+      /* @__PURE__ */ y("div", { style: { marginTop: 6, color: t("textTertiary"), fontSize: 12 }, children: [
+        S("订单号："),
+        /* @__PURE__ */ l("code", { style: Je, children: u.out_trade_no })
       ] }),
-      /* @__PURE__ */ l("p", { style: { color: t("textTertiary"), fontSize: 12, marginTop: 12, marginBottom: 0 }, children: m("支付完成后将自动刷新（每 3 秒检查一次）") }),
-      s.payment_url && /* @__PURE__ */ p("p", { style: { fontSize: 12, marginTop: 6, marginBottom: 0 }, children: [
-        m("扫码不便？"),
+      /* @__PURE__ */ l("p", { style: { color: t("textTertiary"), fontSize: 12, marginTop: 12, marginBottom: 0 }, children: S("支付完成后将自动刷新（每 3 秒检查一次）") }),
+      u.payment_url && /* @__PURE__ */ y("p", { style: { fontSize: 12, marginTop: 6, marginBottom: 0 }, children: [
+        S("扫码不便？"),
         " ",
-        /* @__PURE__ */ l("a", { href: s.payment_url, target: "_blank", rel: "noreferrer", style: { color: t("primary"), textDecoration: "none" }, children: m("点此在新窗口打开付款页 →") })
+        /* @__PURE__ */ l("a", { href: u.payment_url, target: "_blank", rel: "noreferrer", style: { color: t("primary"), textDecoration: "none" }, children: S("点此在新窗口打开付款页 →") })
       ] }),
-      /* @__PURE__ */ l("button", { style: { ..._r, marginTop: 16 }, onClick: v, children: m("取消") })
-    ] }) : /* @__PURE__ */ p(ce, { children: [
-      /* @__PURE__ */ p("h3", { style: { margin: "0 0 12px", color: t("textSecondary") }, children: [
-        m("订单已"),
-        Ot(s.status)
+      /* @__PURE__ */ l("button", { style: { ...Pr, marginTop: 16 }, onClick: I, children: S("取消") })
+    ] }) : /* @__PURE__ */ y(ce, { children: [
+      /* @__PURE__ */ y("h3", { style: { margin: "0 0 12px", color: t("textSecondary") }, children: [
+        S("订单已"),
+        Ot(u.status)
       ] }),
-      /* @__PURE__ */ l("p", { style: { margin: 0, color: t("textSecondary"), fontSize: 14 }, children: m("该订单无法继续支付，请重新发起充值。") }),
-      /* @__PURE__ */ l("button", { style: { ...Vt, marginTop: 16 }, onClick: v, children: m("关闭") })
+      /* @__PURE__ */ l("p", { style: { margin: 0, color: t("textSecondary"), fontSize: 14 }, children: S("该订单无法继续支付，请重新发起充值。") }),
+      /* @__PURE__ */ l("button", { style: { ...Vt, marginTop: 16 }, onClick: I, children: S("关闭") })
     ] }) }) }),
-    /* @__PURE__ */ l("div", { style: kr, children: e.length === 0 ? /* @__PURE__ */ l("p", { style: Cr, children: m("暂无充值记录") }) : /* @__PURE__ */ l("div", { style: Tr, children: /* @__PURE__ */ p("table", { style: Br, children: [
-      /* @__PURE__ */ l("thead", { children: /* @__PURE__ */ p("tr", { children: [
-        /* @__PURE__ */ l("th", { style: X, children: m("订单号") }),
-        /* @__PURE__ */ l("th", { style: X, children: m("金额") }),
-        /* @__PURE__ */ l("th", { style: X, children: m("支付方式") }),
-        /* @__PURE__ */ l("th", { style: X, children: m("状态") }),
-        /* @__PURE__ */ l("th", { style: X, children: m("创建时间") }),
-        /* @__PURE__ */ l("th", { style: X, children: m("支付时间") }),
-        /* @__PURE__ */ l("th", { style: X, children: m("操作") })
+    s && /* @__PURE__ */ y("div", { style: Mr, children: [
+      S("导出失败: "),
+      s
+    ] }),
+    /* @__PURE__ */ l("div", { style: Tr, children: e.length === 0 ? /* @__PURE__ */ l("p", { style: Er, children: S("暂无充值记录") }) : /* @__PURE__ */ l("div", { style: Br, children: /* @__PURE__ */ y("table", { style: _r, children: [
+      /* @__PURE__ */ l("thead", { children: /* @__PURE__ */ y("tr", { children: [
+        /* @__PURE__ */ l("th", { style: Z, children: S("订单号") }),
+        /* @__PURE__ */ l("th", { style: Z, children: S("金额") }),
+        /* @__PURE__ */ l("th", { style: Z, children: S("支付方式") }),
+        /* @__PURE__ */ l("th", { style: Z, children: S("状态") }),
+        /* @__PURE__ */ l("th", { style: Z, children: S("创建时间") }),
+        /* @__PURE__ */ l("th", { style: Z, children: S("支付时间") }),
+        /* @__PURE__ */ l("th", { style: Z, children: S("操作") })
       ] }) }),
-      /* @__PURE__ */ l("tbody", { children: e.map((S) => /* @__PURE__ */ p("tr", { children: [
-        /* @__PURE__ */ l("td", { style: Z, children: /* @__PURE__ */ l("code", { style: Je, children: S.out_trade_no }) }),
-        /* @__PURE__ */ l("td", { style: { ...Z, fontWeight: 600 }, children: D(S.amount) }),
-        /* @__PURE__ */ l("td", { style: Z, children: Wt(S.method) }),
-        /* @__PURE__ */ l("td", { style: { ...Z, color: vr(S.status), fontWeight: 600 }, children: Ot(S.status) }),
-        /* @__PURE__ */ l("td", { style: { ...Z, color: t("textSecondary") }, children: jt(S.created_at) }),
-        /* @__PURE__ */ l("td", { style: { ...Z, color: t("textSecondary") }, children: S.paid_at ? jt(S.paid_at) : "-" }),
-        /* @__PURE__ */ l("td", { style: Z, children: S.status === "pending" && (S.qr_code_content || S.payment_url) ? /* @__PURE__ */ l("button", { style: Ir, onClick: () => b(S), children: m("继续支付") }) : null })
-      ] }, S.id)) })
+      /* @__PURE__ */ l("tbody", { children: e.map((g) => /* @__PURE__ */ y("tr", { children: [
+        /* @__PURE__ */ l("td", { style: X, children: /* @__PURE__ */ l("code", { style: Je, children: g.out_trade_no }) }),
+        /* @__PURE__ */ l("td", { style: { ...X, fontWeight: 600 }, children: D(g.amount) }),
+        /* @__PURE__ */ l("td", { style: X, children: Wt(g.method) }),
+        /* @__PURE__ */ l("td", { style: { ...X, color: Cr(g.status), fontWeight: 600 }, children: Ot(g.status) }),
+        /* @__PURE__ */ l("td", { style: { ...X, color: t("textSecondary") }, children: jt(g.created_at) }),
+        /* @__PURE__ */ l("td", { style: { ...X, color: t("textSecondary") }, children: g.paid_at ? jt(g.paid_at) : "-" }),
+        /* @__PURE__ */ l("td", { style: X, children: g.status === "pending" && (g.qr_code_content || g.payment_url) ? /* @__PURE__ */ l("button", { style: zr, onClick: () => m(g), children: S("继续支付") }) : g.status === "paid" && g.paid_at ? (
+          // 单槽位状态：任一导出进行中时全部按钮禁用，避免并发触发互相干扰
+          /* @__PURE__ */ l(
+            "button",
+            {
+              style: c !== null ? Ar : pn,
+              disabled: c !== null,
+              onClick: () => R(g),
+              children: c === g.id ? S("导出中...") : S("导出明细")
+            }
+          )
+        ) : null })
+      ] }, g.id)) })
     ] }) }) })
   ] });
 }
 function Wt(e) {
-  return { alipay: m("支付宝"), wxpay: m("微信支付") }[e] || e || "-";
+  return { alipay: S("支付宝"), wxpay: S("微信支付") }[e] || e || "-";
 }
 function Ot(e) {
   return {
-    pending: m("待支付"),
-    paid: m("已支付"),
-    expired: m("已过期"),
-    failed: m("失败"),
-    cancelled: m("已取消"),
-    refunded: m("已退款")
+    pending: S("待支付"),
+    paid: S("已支付"),
+    expired: S("已过期"),
+    failed: S("失败"),
+    cancelled: S("已取消"),
+    refunded: S("已退款")
   }[e] || e;
 }
-function vr(e) {
+function Cr(e) {
   return {
     pending: t("warning"),
     paid: t("success"),
@@ -2551,23 +2622,23 @@ const Ye = {
   padding: "40px 0",
   textAlign: "center",
   color: t("textSecondary")
-}, kr = {
+}, Tr = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
   background: t("bgElevated"),
   padding: "8px 0",
   overflow: "hidden"
-}, Cr = {
+}, Er = {
   color: t("textTertiary"),
   textAlign: "center",
   padding: "40px 0",
   fontSize: 14
-}, Tr = {
-  overflowX: "auto"
 }, Br = {
+  overflowX: "auto"
+}, _r = {
   width: "100%",
   borderCollapse: "collapse"
-}, X = {
+}, Z = {
   textAlign: "left",
   padding: "10px 16px",
   borderBottom: `1px solid ${t("glassBorder")}`,
@@ -2578,7 +2649,7 @@ const Ye = {
   textTransform: "uppercase",
   letterSpacing: "0.04em",
   whiteSpace: "nowrap"
-}, Z = {
+}, X = {
   padding: "12px 16px",
   borderBottom: `1px solid ${t("glassBorder")}`,
   fontSize: 13,
@@ -2588,7 +2659,7 @@ const Ye = {
   fontSize: 12,
   fontFamily: t("fontMono"),
   color: t("textSecondary")
-}, Er = {
+}, Rr = {
   position: "fixed",
   top: 0,
   left: 0,
@@ -2599,7 +2670,7 @@ const Ye = {
   alignItems: "center",
   justifyContent: "center",
   zIndex: 1e3
-}, Rr = {
+}, Ir = {
   background: t("bgElevated"),
   borderRadius: t("radiusLg"),
   padding: "32px",
@@ -2615,7 +2686,7 @@ const Ye = {
   color: "#fff",
   fontSize: 14,
   cursor: "pointer"
-}, _r = {
+}, Pr = {
   padding: "8px 24px",
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusMd"),
@@ -2623,7 +2694,28 @@ const Ye = {
   color: t("textSecondary"),
   fontSize: 14,
   cursor: "pointer"
-}, Ir = {
+}, Mr = {
+  marginBottom: 12,
+  padding: "10px 14px",
+  borderRadius: t("radiusMd"),
+  border: `1px solid ${t("glassBorder")}`,
+  background: t("bgElevated"),
+  color: t("danger"),
+  fontSize: 13
+}, pn = {
+  padding: "4px 12px",
+  border: `1px solid ${t("glassBorder")}`,
+  borderRadius: t("radiusMd"),
+  background: "transparent",
+  color: t("textSecondary"),
+  fontSize: 12,
+  cursor: "pointer",
+  whiteSpace: "nowrap"
+}, Ar = {
+  ...pn,
+  cursor: "default",
+  color: t("textTertiary")
+}, zr = {
   padding: "4px 12px",
   border: `1px solid ${t("primary")}`,
   borderRadius: t("radiusMd"),
@@ -2642,7 +2734,7 @@ const Ye = {
   refunded: 0,
   total_amount_paid: 0,
   today_amount_paid: 0
-}, Pr = [10, 20, 50, 100], Mr = [
+}, Lr = [10, 20, 50, 100], Nr = [
   { value: "all", label: "全部状态" },
   { value: "pending", label: "待支付" },
   { value: "paid", label: "已支付" },
@@ -2651,21 +2743,21 @@ const Ye = {
   { value: "cancelled", label: "已取消" },
   { value: "refunded", label: "已退款" }
 ];
-function Ar() {
-  const [e, i] = L([]), [a, o] = L(0), [r, n] = L(Kt), [s, d] = L(!0), [c, u] = L(null), [h, f] = L("all"), [b, v] = L(""), [S, _] = L(1), [y, g] = L(20), I = ie(() => {
-    d(!0), u(null), F.adminListOrders({ page: S, pageSize: y, email: b, status: h }).then((w) => {
-      i(w.list || []), o(w.total || 0), n(w.stats || Kt);
-    }).catch((w) => u(String((w == null ? void 0 : w.message) || w))).finally(() => d(!1));
-  }, [S, y, b, h]);
+function $r() {
+  const [e, i] = L([]), [a, o] = L(0), [r, n] = L(Kt), [c, d] = L(!0), [s, h] = L(null), [u, p] = L("all"), [x, w] = L(""), [C, P] = L(1), [m, f] = L(20), R = ie(() => {
+    d(!0), h(null), F.adminListOrders({ page: C, pageSize: m, email: x, status: u }).then((g) => {
+      i(g.list || []), o(g.total || 0), n(g.stats || Kt);
+    }).catch((g) => h(String((g == null ? void 0 : g.message) || g))).finally(() => d(!1));
+  }, [C, m, x, u]);
   U(() => {
-    const N = setTimeout(I, b ? 300 : 0);
+    const N = setTimeout(R, x ? 300 : 0);
     return () => clearTimeout(N);
-  }, [I, b]), U(() => {
-    _(1);
-  }, [h, b, y]);
-  const A = Math.max(1, Math.ceil(a / y));
-  return /* @__PURE__ */ p("div", { style: Ur, children: [
-    /* @__PURE__ */ p("div", { style: qr, children: [
+  }, [R, x]), U(() => {
+    P(1);
+  }, [u, x, m]);
+  const I = Math.max(1, Math.ceil(a / m));
+  return /* @__PURE__ */ y("div", { style: jr, children: [
+    /* @__PURE__ */ y("div", { style: Hr, children: [
       /* @__PURE__ */ l(oe, { label: "总订单数", value: r.total }),
       /* @__PURE__ */ l(oe, { label: "已支付", value: r.paid, accent: t("success") }),
       /* @__PURE__ */ l(oe, { label: "待支付", value: r.pending, accent: t("warning") }),
@@ -2673,34 +2765,34 @@ function Ar() {
       /* @__PURE__ */ l(oe, { label: "累计收款", value: D(r.total_amount_paid), accent: t("success") }),
       /* @__PURE__ */ l(oe, { label: "今日收款", value: D(r.today_amount_paid), accent: t("success") })
     ] }),
-    /* @__PURE__ */ p("div", { style: Hr, children: [
-      /* @__PURE__ */ p("div", { style: Vr, children: [
+    /* @__PURE__ */ y("div", { style: Yr, children: [
+      /* @__PURE__ */ y("div", { style: Jr, children: [
         /* @__PURE__ */ l(
-          pn,
+          yn,
           {
-            value: h,
-            onChange: f,
-            options: Mr,
-            style: Kr
+            value: u,
+            onChange: p,
+            options: Nr,
+            style: Qr
           }
         ),
         /* @__PURE__ */ l(
           "input",
           {
             type: "text",
-            value: b,
-            onChange: (w) => v(w.target.value),
+            value: x,
+            onChange: (g) => w(g.target.value),
             placeholder: "搜索用户邮箱",
-            style: { ...no, width: 240 }
+            style: { ...ao, width: 240 }
           }
         ),
-        /* @__PURE__ */ l($r, { onClick: I, loading: s })
+        /* @__PURE__ */ l(qr, { onClick: R, loading: c })
       ] }),
-      c ? /* @__PURE__ */ p("p", { style: { ...Qe, color: t("danger") }, children: [
+      s ? /* @__PURE__ */ y("p", { style: { ...Qe, color: t("danger") }, children: [
         "加载失败: ",
-        c
-      ] }) : s && e.length === 0 ? /* @__PURE__ */ l("p", { style: Qe, children: "加载中..." }) : e.length === 0 ? /* @__PURE__ */ l("p", { style: Qe, children: "暂无订单" }) : /* @__PURE__ */ l("div", { style: ro, children: /* @__PURE__ */ p("table", { style: oo, children: [
-        /* @__PURE__ */ l("thead", { children: /* @__PURE__ */ p("tr", { children: [
+        s
+      ] }) : c && e.length === 0 ? /* @__PURE__ */ l("p", { style: Qe, children: "加载中..." }) : e.length === 0 ? /* @__PURE__ */ l("p", { style: Qe, children: "暂无订单" }) : /* @__PURE__ */ l("div", { style: lo, children: /* @__PURE__ */ y("table", { style: so, children: [
+        /* @__PURE__ */ l("thead", { children: /* @__PURE__ */ y("tr", { children: [
           /* @__PURE__ */ l("th", { style: G, children: "订单号" }),
           /* @__PURE__ */ l("th", { style: G, children: "用户邮箱" }),
           /* @__PURE__ */ l("th", { style: G, children: "金额" }),
@@ -2710,44 +2802,44 @@ function Ar() {
           /* @__PURE__ */ l("th", { style: G, children: "创建时间" }),
           /* @__PURE__ */ l("th", { style: G, children: "支付时间" })
         ] }) }),
-        /* @__PURE__ */ l("tbody", { children: e.map((w) => /* @__PURE__ */ p("tr", { children: [
-          /* @__PURE__ */ l("td", { style: Y, children: /* @__PURE__ */ l("code", { style: io, children: w.out_trade_no }) }),
-          /* @__PURE__ */ l("td", { style: Y, children: w.user_email ? /* @__PURE__ */ l("span", { style: { color: t("text") }, children: w.user_email }) : /* @__PURE__ */ p("span", { style: { color: t("textTertiary") }, children: [
+        /* @__PURE__ */ l("tbody", { children: e.map((g) => /* @__PURE__ */ y("tr", { children: [
+          /* @__PURE__ */ l("td", { style: Y, children: /* @__PURE__ */ l("code", { style: co, children: g.out_trade_no }) }),
+          /* @__PURE__ */ l("td", { style: Y, children: g.user_email ? /* @__PURE__ */ l("span", { style: { color: t("text") }, children: g.user_email }) : /* @__PURE__ */ y("span", { style: { color: t("textTertiary") }, children: [
             "#",
-            w.user_id
+            g.user_id
           ] }) }),
-          /* @__PURE__ */ l("td", { style: { ...Y, fontWeight: 600 }, children: D(w.amount) }),
-          /* @__PURE__ */ l("td", { style: Y, children: zr(w.method) }),
-          /* @__PURE__ */ l("td", { style: { ...Y, color: t("textSecondary") }, children: w.provider_id || "-" }),
-          /* @__PURE__ */ l("td", { style: { ...Y, color: Nr(w.status), fontWeight: 600 }, children: Lr(w.status) }),
-          /* @__PURE__ */ l("td", { style: { ...Y, color: t("textSecondary") }, children: Gt(w.created_at) }),
-          /* @__PURE__ */ l("td", { style: { ...Y, color: t("textSecondary") }, children: w.paid_at ? Gt(w.paid_at) : "-" })
-        ] }, w.id)) })
+          /* @__PURE__ */ l("td", { style: { ...Y, fontWeight: 600 }, children: D(g.amount) }),
+          /* @__PURE__ */ l("td", { style: Y, children: Dr(g.method) }),
+          /* @__PURE__ */ l("td", { style: { ...Y, color: t("textSecondary") }, children: g.provider_id || "-" }),
+          /* @__PURE__ */ l("td", { style: { ...Y, color: Ur(g.status), fontWeight: 600 }, children: Fr(g.status) }),
+          /* @__PURE__ */ l("td", { style: { ...Y, color: t("textSecondary") }, children: Gt(g.created_at) }),
+          /* @__PURE__ */ l("td", { style: { ...Y, color: t("textSecondary") }, children: g.paid_at ? Gt(g.paid_at) : "-" })
+        ] }, g.id)) })
       ] }) }),
       /* @__PURE__ */ l(
-        Dr,
+        Wr,
         {
-          page: S,
-          pageSize: y,
+          page: C,
+          pageSize: m,
           total: a,
-          totalPages: A,
-          onPageChange: _,
-          onPageSizeChange: g
+          totalPages: I,
+          onPageChange: P,
+          onPageSizeChange: f
         }
       )
     ] })
   ] });
 }
 function oe({ label: e, value: i, accent: a }) {
-  return /* @__PURE__ */ p("div", { style: Wr, children: [
-    /* @__PURE__ */ l("div", { style: Or, children: e }),
-    /* @__PURE__ */ l("div", { style: { ...jr, color: a || t("text") }, children: i })
+  return /* @__PURE__ */ y("div", { style: Vr, children: [
+    /* @__PURE__ */ l("div", { style: Kr, children: e }),
+    /* @__PURE__ */ l("div", { style: { ...Gr, color: a || t("text") }, children: i })
   ] });
 }
-function zr(e) {
+function Dr(e) {
   return { alipay: "支付宝", wxpay: "微信支付" }[e] || e || "-";
 }
-function Lr(e) {
+function Fr(e) {
   return {
     pending: "待支付",
     paid: "已支付",
@@ -2757,7 +2849,7 @@ function Lr(e) {
     refunded: "已退款"
   }[e] || e;
 }
-function Nr(e) {
+function Ur(e) {
   return {
     pending: t("warning"),
     paid: t("success"),
@@ -2774,9 +2866,9 @@ function Gt(e) {
     return e;
   }
 }
-function $r({ onClick: e, loading: i }) {
+function qr({ onClick: e, loading: i }) {
   const [a, o] = L(!1);
-  return /* @__PURE__ */ p(ce, { children: [
+  return /* @__PURE__ */ y(ce, { children: [
     /* @__PURE__ */ l("style", { children: "@keyframes ag-epay-spin { to { transform: rotate(360deg); } }" }),
     /* @__PURE__ */ l(
       "button",
@@ -2803,7 +2895,7 @@ function $r({ onClick: e, loading: i }) {
           transition: t("transition"),
           padding: 0
         },
-        children: /* @__PURE__ */ p(
+        children: /* @__PURE__ */ y(
           "svg",
           {
             width: "16",
@@ -2829,58 +2921,58 @@ function $r({ onClick: e, loading: i }) {
     )
   ] });
 }
-function pn({
+function yn({
   value: e,
   options: i,
   onChange: a,
   style: o
 }) {
-  const [r, n] = L(!1), s = de(null), d = i.find((c) => c.value === e);
+  const [r, n] = L(!1), c = de(null), d = i.find((s) => s.value === e);
   return U(() => {
     if (!r) return;
-    const c = (u) => {
-      s.current && !s.current.contains(u.target) && n(!1);
+    const s = (h) => {
+      c.current && !c.current.contains(h.target) && n(!1);
     };
-    return document.addEventListener("mousedown", c), () => document.removeEventListener("mousedown", c);
-  }, [r]), /* @__PURE__ */ p("div", { ref: s, style: Gr, children: [
-    /* @__PURE__ */ p(
+    return document.addEventListener("mousedown", s), () => document.removeEventListener("mousedown", s);
+  }, [r]), /* @__PURE__ */ y("div", { ref: c, style: Zr, children: [
+    /* @__PURE__ */ y(
       "button",
       {
         type: "button",
-        style: { ...o, ...Yr, ...r ? Jr : null },
+        style: { ...o, ...Xr, ...r ? eo : null },
         "aria-haspopup": "listbox",
         "aria-expanded": r,
-        onClick: () => n((c) => !c),
+        onClick: () => n((s) => !s),
         children: [
-          /* @__PURE__ */ l("span", { style: Qr, children: (d == null ? void 0 : d.label) ?? "" }),
-          /* @__PURE__ */ l("span", { "aria-hidden": "true", style: Xr, children: "v" })
+          /* @__PURE__ */ l("span", { style: to, children: (d == null ? void 0 : d.label) ?? "" }),
+          /* @__PURE__ */ l("span", { "aria-hidden": "true", style: no, children: "v" })
         ]
       }
     ),
-    r && /* @__PURE__ */ l("div", { role: "listbox", style: Zr, children: i.map((c) => {
-      const u = c.value === e;
+    r && /* @__PURE__ */ l("div", { role: "listbox", style: ro, children: i.map((s) => {
+      const h = s.value === e;
       return /* @__PURE__ */ l(
         "button",
         {
           type: "button",
           role: "option",
-          "aria-selected": u,
-          style: { ...eo, ...u ? to : null },
+          "aria-selected": h,
+          style: { ...oo, ...h ? io : null },
           onClick: () => {
-            a(c.value), n(!1);
+            a(s.value), n(!1);
           },
-          children: c.label
+          children: s.label
         },
-        c.value
+        s.value
       );
     }) })
   ] });
 }
-function Dr({ page: e, pageSize: i, total: a, totalPages: o, onPageChange: r, onPageSizeChange: n }) {
-  const s = Fr(e, o);
-  return /* @__PURE__ */ p("div", { style: ao, children: [
-    /* @__PURE__ */ p("div", { style: { display: "flex", alignItems: "center", gap: 10 }, children: [
-      /* @__PURE__ */ p("span", { style: lo, children: [
+function Wr({ page: e, pageSize: i, total: a, totalPages: o, onPageChange: r, onPageSizeChange: n }) {
+  const c = Or(e, o);
+  return /* @__PURE__ */ y("div", { style: uo, children: [
+    /* @__PURE__ */ y("div", { style: { display: "flex", alignItems: "center", gap: 10 }, children: [
+      /* @__PURE__ */ y("span", { style: go, children: [
         "共 ",
         a,
         " 条 · 第 ",
@@ -2890,16 +2982,16 @@ function Dr({ page: e, pageSize: i, total: a, totalPages: o, onPageChange: r, on
         " 页"
       ] }),
       /* @__PURE__ */ l(
-        pn,
+        yn,
         {
           value: String(i),
           onChange: (d) => n(Number(d)),
-          options: Pr.map((d) => ({ value: String(d), label: `${d} 条/页` })),
-          style: so
+          options: Lr.map((d) => ({ value: String(d), label: `${d} 条/页` })),
+          style: ho
         }
       )
     ] }),
-    /* @__PURE__ */ p("div", { style: { display: "flex", alignItems: "center", gap: 4 }, children: [
+    /* @__PURE__ */ y("div", { style: { display: "flex", alignItems: "center", gap: 4 }, children: [
       /* @__PURE__ */ l(
         "button",
         {
@@ -2911,12 +3003,12 @@ function Dr({ page: e, pageSize: i, total: a, totalPages: o, onPageChange: r, on
           children: "‹"
         }
       ),
-      s.map(
-        (d, c) => d === "..." ? /* @__PURE__ */ l("span", { style: uo, children: "···" }, `e-${c}`) : /* @__PURE__ */ l(
+      c.map(
+        (d, s) => d === "..." ? /* @__PURE__ */ l("span", { style: po, children: "···" }, `e-${s}`) : /* @__PURE__ */ l(
           "button",
           {
             type: "button",
-            style: d === e ? co : yn,
+            style: d === e ? fo : mn,
             onClick: () => r(d),
             children: d
           },
@@ -2937,7 +3029,7 @@ function Dr({ page: e, pageSize: i, total: a, totalPages: o, onPageChange: r, on
     ] })
   ] });
 }
-function Fr(e, i) {
+function Or(e, i) {
   if (i <= 7) return Array.from({ length: i }, (o, r) => r + 1);
   const a = [1];
   e > 3 && a.push("...");
@@ -2945,43 +3037,43 @@ function Fr(e, i) {
     a.push(o);
   return e < i - 2 && a.push("..."), a.push(i), a;
 }
-const Ur = {
+const jr = {
   maxWidth: 1280,
   margin: "0 auto",
   padding: "24px 24px 48px",
   color: t("text")
-}, qr = {
+}, Hr = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
   gap: 12,
   marginBottom: 20
-}, Wr = {
+}, Vr = {
   padding: "18px 20px",
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
   background: t("bgSurface")
-}, Or = {
+}, Kr = {
   fontSize: 12,
   color: t("textSecondary"),
   fontWeight: 500,
   letterSpacing: "0.02em"
-}, jr = {
+}, Gr = {
   fontSize: 26,
   fontWeight: 700,
   marginTop: 8,
   letterSpacing: "-0.02em"
-}, Hr = {
+}, Yr = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
   background: t("bgSurface"),
   padding: "20px 20px 8px"
-}, Vr = {
+}, Jr = {
   display: "flex",
   alignItems: "center",
   gap: 12,
   marginBottom: 16,
   flexWrap: "wrap"
-}, Kr = {
+}, Qr = {
   padding: "8px 12px",
   minWidth: 140,
   border: `1px solid ${t("glassBorder")}`,
@@ -2989,10 +3081,10 @@ const Ur = {
   background: t("bgElevated"),
   color: t("text"),
   fontSize: 13
-}, Gr = {
+}, Zr = {
   position: "relative",
   display: "inline-block"
-}, Yr = {
+}, Xr = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -3001,20 +3093,20 @@ const Ur = {
   fontFamily: "inherit",
   cursor: "pointer",
   outline: "none"
-}, Jr = {
+}, eo = {
   borderColor: t("primary"),
   boxShadow: `0 0 0 3px ${t("primarySubtle")}`
-}, Qr = {
+}, to = {
   minWidth: 0,
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap"
-}, Xr = {
+}, no = {
   flexShrink: 0,
   color: t("textTertiary"),
   fontSize: 10,
   lineHeight: 1
-}, Zr = {
+}, ro = {
   position: "absolute",
   left: 0,
   top: "calc(100% + 6px)",
@@ -3030,7 +3122,7 @@ const Ur = {
   background: t("bgSurface"),
   boxShadow: "0 18px 48px rgba(0, 0, 0, 0.28)",
   overflowY: "auto"
-}, eo = {
+}, oo = {
   display: "block",
   width: "100%",
   padding: "8px 10px",
@@ -3044,11 +3136,11 @@ const Ur = {
   textAlign: "left",
   whiteSpace: "nowrap",
   cursor: "pointer"
-}, to = {
+}, io = {
   background: t("primarySubtle"),
   color: t("primary"),
   fontWeight: 600
-}, no = {
+}, ao = {
   padding: "8px 12px",
   width: 200,
   border: `1px solid ${t("glassBorder")}`,
@@ -3062,10 +3154,10 @@ const Ur = {
   textAlign: "center",
   padding: "40px 0",
   fontSize: 14
-}, ro = {
+}, lo = {
   overflowX: "auto",
   margin: "0 -20px"
-}, oo = {
+}, so = {
   width: "100%",
   borderCollapse: "collapse"
 }, G = {
@@ -3086,22 +3178,22 @@ const Ur = {
   fontSize: 13,
   color: t("text"),
   whiteSpace: "nowrap"
-}, io = {
+}, co = {
   fontSize: 12,
   fontFamily: t("fontMono"),
   color: t("textSecondary")
-}, ao = {
+}, uo = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   padding: "14px 4px 6px",
   flexWrap: "wrap",
   gap: 12
-}, lo = {
+}, go = {
   fontSize: 12,
   color: t("textTertiary"),
   fontFamily: t("fontMono")
-}, so = {
+}, ho = {
   fontSize: 12,
   color: t("textSecondary"),
   background: "transparent",
@@ -3110,7 +3202,7 @@ const Ur = {
   padding: "2px 8px",
   cursor: "pointer",
   outline: "none"
-}, yn = {
+}, mn = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
@@ -3124,8 +3216,8 @@ const Ur = {
   fontWeight: 500,
   cursor: "pointer",
   transition: t("transition")
-}, co = {
-  ...yn,
+}, fo = {
+  ...mn,
   background: t("primary"),
   color: t("textInverse"),
   fontWeight: 600
@@ -3148,7 +3240,7 @@ function Yt(e) {
     transition: t("transition")
   };
 }
-const uo = {
+const po = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
@@ -3156,22 +3248,22 @@ const uo = {
   color: t("textTertiary"),
   fontSize: 12
 };
-let go = 0;
-function mn() {
+let yo = 0;
+function bn() {
   const [e, i] = L([]), a = de(i);
   a.current = i;
   const o = ie((d) => {
-    a.current((c) => c.filter((u) => u.id !== d));
-  }, []), r = ie((d, c) => {
-    const u = go++;
-    a.current((h) => [...h, { id: u, type: d, text: c }]), setTimeout(() => o(u), 4e3);
-  }, [o]), n = ie((d) => r("success", d), [r]), s = ie((d) => r("error", d), [r]);
+    a.current((s) => s.filter((h) => h.id !== d));
+  }, []), r = ie((d, s) => {
+    const h = yo++;
+    a.current((u) => [...u, { id: h, type: d, text: s }]), setTimeout(() => o(h), 4e3);
+  }, [o]), n = ie((d) => r("success", d), [r]), c = ie((d) => r("error", d), [r]);
   return {
-    toast: { success: n, error: s },
-    Toaster: /* @__PURE__ */ l(ho, { messages: e, onClose: o })
+    toast: { success: n, error: c },
+    Toaster: /* @__PURE__ */ l(mo, { messages: e, onClose: o })
   };
 }
-function ho({
+function mo({
   messages: e,
   onClose: i
 }) {
@@ -3184,29 +3276,29 @@ function ho({
   from { opacity: 0; transform: translateY(-8px); }
   to   { opacity: 1; transform: translateY(0); }
 }`, document.head.appendChild(o);
-  }, []), e.length === 0 ? null : /* @__PURE__ */ l("div", { style: po, children: e.map((a) => /* @__PURE__ */ l(fo, { message: a, onClose: () => i(a.id) }, a.id)) });
+  }, []), e.length === 0 ? null : /* @__PURE__ */ l("div", { style: So, children: e.map((a) => /* @__PURE__ */ l(bo, { message: a, onClose: () => i(a.id) }, a.id)) });
 }
-function fo({
+function bo({
   message: e,
   onClose: i
 }) {
   const a = e.type === "success", o = t(a ? "success" : "danger"), r = t(a ? "success" : "danger");
-  return /* @__PURE__ */ p(
+  return /* @__PURE__ */ y(
     "div",
     {
       style: {
-        ...yo,
+        ...xo,
         borderColor: r
       },
       children: [
-        /* @__PURE__ */ l("span", { style: { ...mo, color: o }, children: a ? "✓" : "✕" }),
-        /* @__PURE__ */ l("span", { style: { ...bo, color: t("text") }, children: e.text }),
-        /* @__PURE__ */ l("button", { onClick: i, style: So, "aria-label": m("关闭"), children: "×" })
+        /* @__PURE__ */ l("span", { style: { ...wo, color: o }, children: a ? "✓" : "✕" }),
+        /* @__PURE__ */ l("span", { style: { ...vo, color: t("text") }, children: e.text }),
+        /* @__PURE__ */ l("button", { onClick: i, style: ko, "aria-label": S("关闭"), children: "×" })
       ]
     }
   );
 }
-const po = {
+const So = {
   position: "fixed",
   top: 20,
   right: 20,
@@ -3215,7 +3307,7 @@ const po = {
   flexDirection: "column",
   gap: 10,
   pointerEvents: "none"
-}, yo = {
+}, xo = {
   pointerEvents: "auto",
   display: "flex",
   alignItems: "center",
@@ -3228,17 +3320,17 @@ const po = {
   background: t("bgElevated"),
   boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
   animation: "airgate-epay-toast-in 0.25s cubic-bezier(0.16, 1, 0.3, 1)"
-}, mo = {
+}, wo = {
   fontSize: 16,
   fontWeight: 700,
   width: 18,
   textAlign: "center",
   flexShrink: 0
-}, bo = {
+}, vo = {
   flex: 1,
   fontSize: 13,
   lineHeight: 1.4
-}, So = {
+}, ko = {
   flexShrink: 0,
   background: "transparent",
   border: "none",
@@ -3250,164 +3342,164 @@ const po = {
   width: 18,
   height: 18
 };
-function bn(e, i) {
+function Sn(e, i) {
   var o;
   const a = window;
   return (o = a.airgate) != null && o.confirm ? a.airgate.confirm(e, i) : Promise.resolve(window.confirm(e));
 }
-function xo() {
-  const [e, i] = L([]), [a, o] = L([]), [r, n] = L(!0), [s, d] = L(null), [c, u] = L(null), { toast: h, Toaster: f } = mn(), b = ie(() => {
-    n(!0), d(null), F.adminListProviders().then((g) => {
-      i(g.providers || []), o(g.kinds || []);
-    }).catch((g) => d(String((g == null ? void 0 : g.message) || g))).finally(() => n(!1));
+function Co() {
+  const [e, i] = L([]), [a, o] = L([]), [r, n] = L(!0), [c, d] = L(null), [s, h] = L(null), { toast: u, Toaster: p } = bn(), x = ie(() => {
+    n(!0), d(null), F.adminListProviders().then((f) => {
+      i(f.providers || []), o(f.kinds || []);
+    }).catch((f) => d(String((f == null ? void 0 : f.message) || f))).finally(() => n(!1));
   }, []);
-  U(b, [b]);
-  const v = (g) => {
-    u({
+  U(x, [x]);
+  const w = (f) => {
+    h({
       mode: "create",
       id: "",
-      kind: g.kind,
+      kind: f.kind,
       enabled: !0,
-      config: ko(g)
+      config: Bo(f)
     });
-  }, S = (g) => {
-    u({
+  }, C = (f) => {
+    h({
       mode: "edit",
-      id: g.id,
-      originalId: g.id,
-      kind: g.kind,
-      enabled: g.enabled,
-      config: { ...g.config }
+      id: f.id,
+      originalId: f.id,
+      kind: f.kind,
+      enabled: f.enabled,
+      config: { ...f.config }
     });
-  }, _ = async (g) => {
-    if (await bn(`确认删除服务商 ${g}？此操作无法撤销。`, { title: "删除服务商", danger: !0 }))
+  }, P = async (f) => {
+    if (await Sn(`确认删除服务商 ${f}？此操作无法撤销。`, { title: "删除服务商", danger: !0 }))
       try {
-        await F.adminDeleteProvider(g), h.success(`已删除 ${g}`), b();
-      } catch (I) {
-        h.error("删除失败: " + I.message);
+        await F.adminDeleteProvider(f), u.success(`已删除 ${f}`), x();
+      } catch (R) {
+        u.error("删除失败: " + R.message);
       }
-  }, y = async (g) => {
+  }, m = async (f) => {
     try {
       await F.adminUpsertProvider({
-        id: g.id,
-        kind: g.kind,
-        enabled: !g.enabled,
-        config: g.config
-      }), h.success(`${g.id} 已${g.enabled ? "禁用" : "启用"}`), b();
-    } catch (I) {
-      h.error("操作失败: " + I.message);
+        id: f.id,
+        kind: f.kind,
+        enabled: !f.enabled,
+        config: f.config
+      }), u.success(`${f.id} 已${f.enabled ? "禁用" : "启用"}`), x();
+    } catch (R) {
+      u.error("操作失败: " + R.message);
     }
   };
-  return r ? /* @__PURE__ */ l("div", { style: Ze, children: /* @__PURE__ */ l("div", { style: Jt, children: "加载中..." }) }) : s ? /* @__PURE__ */ l("div", { style: Ze, children: /* @__PURE__ */ p("div", { style: { ...Jt, color: t("danger") }, children: [
+  return r ? /* @__PURE__ */ l("div", { style: Xe, children: /* @__PURE__ */ l("div", { style: Jt, children: "加载中..." }) }) : c ? /* @__PURE__ */ l("div", { style: Xe, children: /* @__PURE__ */ y("div", { style: { ...Jt, color: t("danger") }, children: [
     "加载失败: ",
-    s
-  ] }) }) : /* @__PURE__ */ p("div", { style: Ze, children: [
-    f,
-    /* @__PURE__ */ p("div", { style: Xt, children: [
+    c
+  ] }) }) : /* @__PURE__ */ y("div", { style: Xe, children: [
+    p,
+    /* @__PURE__ */ y("div", { style: Zt, children: [
       /* @__PURE__ */ l("h3", { style: Qt, children: "添加服务商" }),
-      /* @__PURE__ */ l("p", { style: Co, children: "每种类型的服务商可以创建多个实例（例如 xunhu_main / xunhu_backup），便于多商户号或主备切换。" }),
-      /* @__PURE__ */ l("div", { style: To, children: a.map((g) => /* @__PURE__ */ p("div", { style: Bo, children: [
-        /* @__PURE__ */ l("div", { style: { fontWeight: 600, color: t("text"), fontSize: 15 }, children: g.name }),
-        /* @__PURE__ */ l("div", { style: { fontSize: 12, color: t("textSecondary"), marginTop: 6 }, children: g.description }),
-        /* @__PURE__ */ p("div", { style: { fontSize: 12, color: t("textTertiary"), marginTop: 8 }, children: [
+      /* @__PURE__ */ l("p", { style: _o, children: "每种类型的服务商可以创建多个实例（例如 xunhu_main / xunhu_backup），便于多商户号或主备切换。" }),
+      /* @__PURE__ */ l("div", { style: Ro, children: a.map((f) => /* @__PURE__ */ y("div", { style: Io, children: [
+        /* @__PURE__ */ l("div", { style: { fontWeight: 600, color: t("text"), fontSize: 15 }, children: f.name }),
+        /* @__PURE__ */ l("div", { style: { fontSize: 12, color: t("textSecondary"), marginTop: 6 }, children: f.description }),
+        /* @__PURE__ */ y("div", { style: { fontSize: 12, color: t("textTertiary"), marginTop: 8 }, children: [
           "支持: ",
-          g.supported_methods.map(nt).join(" / ")
+          f.supported_methods.map(nt).join(" / ")
         ] }),
-        /* @__PURE__ */ l("button", { style: { ...xn, marginTop: 12, width: "100%" }, onClick: () => v(g), children: "+ 添加" })
-      ] }, g.kind)) })
+        /* @__PURE__ */ l("button", { style: { ...wn, marginTop: 12, width: "100%" }, onClick: () => w(f), children: "+ 添加" })
+      ] }, f.kind)) })
     ] }),
-    /* @__PURE__ */ p("div", { style: Xt, children: [
+    /* @__PURE__ */ y("div", { style: Zt, children: [
       /* @__PURE__ */ l("h3", { style: Qt, children: "已配置的服务商实例" }),
-      e.length === 0 ? /* @__PURE__ */ l("p", { style: _o, children: "暂未配置任何服务商。请在上方点「+ 添加」选择类型。" }) : /* @__PURE__ */ l("div", { style: Eo, children: e.map((g) => /* @__PURE__ */ p("div", { style: Ro, children: [
-        /* @__PURE__ */ p("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" }, children: [
-          /* @__PURE__ */ p("div", { children: [
-            /* @__PURE__ */ l("div", { style: { fontWeight: 600, color: t("text"), fontSize: 15 }, children: g.name || g.id }),
-            /* @__PURE__ */ p("div", { style: { fontSize: 12, color: t("textTertiary"), marginTop: 4, fontFamily: t("fontMono") }, children: [
-              g.id,
+      e.length === 0 ? /* @__PURE__ */ l("p", { style: Ao, children: "暂未配置任何服务商。请在上方点「+ 添加」选择类型。" }) : /* @__PURE__ */ l("div", { style: Po, children: e.map((f) => /* @__PURE__ */ y("div", { style: Mo, children: [
+        /* @__PURE__ */ y("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" }, children: [
+          /* @__PURE__ */ y("div", { children: [
+            /* @__PURE__ */ l("div", { style: { fontWeight: 600, color: t("text"), fontSize: 15 }, children: f.name || f.id }),
+            /* @__PURE__ */ y("div", { style: { fontSize: 12, color: t("textTertiary"), marginTop: 4, fontFamily: t("fontMono") }, children: [
+              f.id,
               " · ",
-              g.kind
+              f.kind
             ] })
           ] }),
-          /* @__PURE__ */ l("span", { style: g.is_running ? Sn : Io, children: g.is_running ? "运行中" : g.enabled ? "已启用未就绪" : "已禁用" })
+          /* @__PURE__ */ l("span", { style: f.is_running ? xn : zo, children: f.is_running ? "运行中" : f.enabled ? "已启用未就绪" : "已禁用" })
         ] }),
-        /* @__PURE__ */ p("div", { style: { fontSize: 12, color: t("textSecondary"), marginTop: 12 }, children: [
+        /* @__PURE__ */ y("div", { style: { fontSize: 12, color: t("textSecondary"), marginTop: 12 }, children: [
           "支持: ",
-          g.supported_methods.map(nt).join(" / ")
+          f.supported_methods.map(nt).join(" / ")
         ] }),
-        /* @__PURE__ */ p("div", { style: { display: "flex", gap: 8, marginTop: 16 }, children: [
-          /* @__PURE__ */ l("button", { style: be, onClick: () => S(g), children: "编辑" }),
-          /* @__PURE__ */ l("button", { style: be, onClick: () => y(g), children: g.enabled ? "禁用" : "启用" }),
-          /* @__PURE__ */ l("button", { style: { ...be, color: t("danger") }, onClick: () => _(g.id), children: "删除" })
+        /* @__PURE__ */ y("div", { style: { display: "flex", gap: 8, marginTop: 16 }, children: [
+          /* @__PURE__ */ l("button", { style: be, onClick: () => C(f), children: "编辑" }),
+          /* @__PURE__ */ l("button", { style: be, onClick: () => m(f), children: f.enabled ? "禁用" : "启用" }),
+          /* @__PURE__ */ l("button", { style: { ...be, color: t("danger") }, onClick: () => P(f.id), children: "删除" })
         ] })
-      ] }, g.id)) })
+      ] }, f.id)) })
     ] }),
-    c && /* @__PURE__ */ l(
-      wo,
+    s && /* @__PURE__ */ l(
+      To,
       {
-        editing: c,
+        editing: s,
         kinds: a,
-        onCancel: () => u(null),
-        onSaved: (g) => {
-          u(null), h.success(g), b();
+        onCancel: () => h(null),
+        onSaved: (f) => {
+          h(null), u.success(f), x();
         },
-        onError: (g) => h.error(g)
+        onError: (f) => u.error(f)
       }
     )
   ] });
 }
-function wo({
+function To({
   editing: e,
   kinds: i,
   onCancel: a,
   onSaved: o,
   onError: r
 }) {
-  const [n, s] = L(e), [d, c] = L(!1), u = kn(() => i.find((f) => f.kind === n.kind), [i, n.kind]), h = async () => {
-    if (!u) {
+  const [n, c] = L(e), [d, s] = L(!1), h = Cn(() => i.find((p) => p.kind === n.kind), [i, n.kind]), u = async () => {
+    if (!h) {
       r("未知的服务商类型");
       return;
     }
-    for (const f of u.field_descriptors)
-      if (f.required && !n.config[f.key]) {
-        r(`「${f.label}」必填`);
+    for (const p of h.field_descriptors)
+      if (p.required && !n.config[p.key]) {
+        r(`「${p.label}」必填`);
         return;
       }
-    if (!(n.mode === "edit" && n.originalId && n.id.trim() !== n.originalId && !await bn(
+    if (!(n.mode === "edit" && n.originalId && n.id.trim() !== n.originalId && !await Sn(
       `确认将实例 ID 从「${n.originalId}」重命名为「${n.id.trim()}」？
 
 所有历史订单的 provider_id 引用会在事务里同步更新；如果该商户号在第三方支付平台已经下过单，
 已发出去的回调地址（含原 ID）会失效——平台未来回调请求会路由不到本服务。`,
       { title: "重命名服务商 ID", danger: !0 }
     ))) {
-      c(!0);
+      s(!0);
       try {
-        const b = (await F.adminUpsertProvider({
+        const x = (await F.adminUpsertProvider({
           id: n.id.trim(),
           original_id: n.originalId,
           kind: n.kind,
           enabled: n.enabled,
           config: n.config
         })).id || n.id.trim();
-        o(n.mode === "create" ? `已创建 ${b}` : `已更新 ${b}`);
-      } catch (f) {
-        r("保存失败: " + f.message);
+        o(n.mode === "create" ? `已创建 ${x}` : `已更新 ${x}`);
+      } catch (p) {
+        r("保存失败: " + p.message);
       } finally {
-        c(!1);
+        s(!1);
       }
     }
   };
-  return /* @__PURE__ */ l("div", { style: Ao, onClick: a, children: /* @__PURE__ */ p("div", { style: zo, onClick: (f) => f.stopPropagation(), children: [
-    /* @__PURE__ */ p("div", { style: Lo, children: [
-      /* @__PURE__ */ p("h3", { style: { margin: 0, fontSize: 16, fontWeight: 600 }, children: [
+  return /* @__PURE__ */ l("div", { style: $o, onClick: a, children: /* @__PURE__ */ y("div", { style: Do, onClick: (p) => p.stopPropagation(), children: [
+    /* @__PURE__ */ y("div", { style: Fo, children: [
+      /* @__PURE__ */ y("h3", { style: { margin: 0, fontSize: 16, fontWeight: 600 }, children: [
         n.mode === "create" ? "添加" : "编辑",
         "服务商 - ",
-        (u == null ? void 0 : u.name) || n.kind
+        (h == null ? void 0 : h.name) || n.kind
       ] }),
-      /* @__PURE__ */ l("button", { style: No, onClick: a, children: "×" })
+      /* @__PURE__ */ l("button", { style: Uo, onClick: a, children: "×" })
     ] }),
-    /* @__PURE__ */ p("div", { style: $o, children: [
+    /* @__PURE__ */ y("div", { style: qo, children: [
       /* @__PURE__ */ l(
-        Xe,
+        Ze,
         {
           label: "实例 ID",
           description: n.mode === "edit" ? "可修改。改名时后端会在事务里同步更新所有历史订单的 provider_id 引用，回调路径也会立即指向新名字。" : "可选。留空则自动生成 epay_xunhu_1 之类的序号；也可以填一个有意义的名字如 xunhu_main / xunhu_backup 便于多商户号区分。",
@@ -3416,77 +3508,77 @@ function wo({
             {
               type: "text",
               value: n.id,
-              onChange: (f) => s({ ...n, id: f.target.value }),
+              onChange: (p) => c({ ...n, id: p.target.value }),
               placeholder: n.mode === "create" ? "留空自动生成" : "",
               style: { ...et, fontFamily: t("fontMono"), fontSize: 12 }
             }
           )
         }
       ),
-      /* @__PURE__ */ l(Xe, { label: "启用", children: /* @__PURE__ */ p("label", { style: { display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }, children: [
+      /* @__PURE__ */ l(Ze, { label: "启用", children: /* @__PURE__ */ y("label", { style: { display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }, children: [
         /* @__PURE__ */ l(
           "input",
           {
             type: "checkbox",
             checked: n.enabled,
-            onChange: (f) => s({ ...n, enabled: f.target.checked })
+            onChange: (p) => c({ ...n, enabled: p.target.checked })
           }
         ),
         /* @__PURE__ */ l("span", { style: { fontSize: 13, color: t("textSecondary") }, children: "勾选后该服务商参与支付路由" })
       ] }) }),
-      u == null ? void 0 : u.field_descriptors.map((f) => /* @__PURE__ */ l(Xe, { label: f.label, description: f.description, required: f.required, children: f.type === "textarea" ? /* @__PURE__ */ l(
+      h == null ? void 0 : h.field_descriptors.map((p) => /* @__PURE__ */ l(Ze, { label: p.label, description: p.description, required: p.required, children: p.type === "textarea" ? /* @__PURE__ */ l(
         "textarea",
         {
-          value: n.config[f.key] || "",
-          onChange: (b) => s({ ...n, config: { ...n.config, [f.key]: b.target.value } }),
-          placeholder: f.placeholder,
+          value: n.config[p.key] || "",
+          onChange: (x) => c({ ...n, config: { ...n.config, [p.key]: x.target.value } }),
+          placeholder: p.placeholder,
           style: { ...et, minHeight: 120, fontFamily: t("fontMono"), fontSize: 12 }
         }
-      ) : f.type === "bool" ? /* @__PURE__ */ l("label", { style: { display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }, children: /* @__PURE__ */ l(
+      ) : p.type === "bool" ? /* @__PURE__ */ l("label", { style: { display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }, children: /* @__PURE__ */ l(
         "input",
         {
           type: "checkbox",
-          checked: n.config[f.key] === "true",
-          onChange: (b) => s({ ...n, config: { ...n.config, [f.key]: b.target.checked ? "true" : "false" } })
+          checked: n.config[p.key] === "true",
+          onChange: (x) => c({ ...n, config: { ...n.config, [p.key]: x.target.checked ? "true" : "false" } })
         }
-      ) }) : f.type === "method-multi" ? /* @__PURE__ */ l(
-        vo,
+      ) }) : p.type === "method-multi" ? /* @__PURE__ */ l(
+        Eo,
         {
-          candidates: u.supported_methods,
-          value: n.config[f.key] || "",
-          onChange: (b) => s({ ...n, config: { ...n.config, [f.key]: b } })
+          candidates: h.supported_methods,
+          value: n.config[p.key] || "",
+          onChange: (x) => c({ ...n, config: { ...n.config, [p.key]: x } })
         }
       ) : /* @__PURE__ */ l(
         "input",
         {
-          type: f.type === "password" ? "password" : f.type === "number" ? "number" : "text",
-          value: n.config[f.key] || "",
-          onChange: (b) => s({ ...n, config: { ...n.config, [f.key]: b.target.value } }),
-          placeholder: f.placeholder,
+          type: p.type === "password" ? "password" : p.type === "number" ? "number" : "text",
+          value: n.config[p.key] || "",
+          onChange: (x) => c({ ...n, config: { ...n.config, [p.key]: x.target.value } }),
+          placeholder: p.placeholder,
           style: et
         }
-      ) }, f.key))
+      ) }, p.key))
     ] }),
-    /* @__PURE__ */ p("div", { style: Do, children: [
+    /* @__PURE__ */ y("div", { style: Wo, children: [
       /* @__PURE__ */ l("button", { style: be, onClick: a, disabled: d, children: "取消" }),
-      /* @__PURE__ */ l("button", { style: xn, onClick: h, disabled: d, children: d ? "保存中..." : "保存" })
+      /* @__PURE__ */ l("button", { style: wn, onClick: u, disabled: d, children: d ? "保存中..." : "保存" })
     ] })
   ] }) });
 }
-function vo({
+function Eo({
   candidates: e,
   value: i,
   onChange: a
 }) {
   const o = new Set(i.split(",").map((n) => n.trim()).filter(Boolean)), r = (n) => {
     o.has(n) ? o.delete(n) : o.add(n);
-    const s = e.filter((d) => o.has(d)).join(",");
-    a(s);
+    const c = e.filter((d) => o.has(d)).join(",");
+    a(c);
   };
-  return /* @__PURE__ */ p("div", { style: { display: "flex", flexWrap: "wrap", gap: 12 }, children: [
+  return /* @__PURE__ */ y("div", { style: { display: "flex", flexWrap: "wrap", gap: 12 }, children: [
     e.map((n) => {
-      const s = o.has(n);
-      return /* @__PURE__ */ p(
+      const c = o.has(n);
+      return /* @__PURE__ */ y(
         "label",
         {
           style: {
@@ -3494,13 +3586,13 @@ function vo({
             alignItems: "center",
             gap: 8,
             padding: "8px 14px",
-            border: `1px solid ${t(s ? "primary" : "glassBorder")}`,
+            border: `1px solid ${t(c ? "primary" : "glassBorder")}`,
             borderRadius: t("radiusMd"),
-            background: t(s ? "primarySubtle" : "bg"),
-            color: t(s ? "primary" : "text"),
+            background: t(c ? "primarySubtle" : "bg"),
+            color: t(c ? "primary" : "text"),
             cursor: "pointer",
             fontSize: 13,
-            fontWeight: s ? 600 : 400,
+            fontWeight: c ? 600 : 400,
             transition: "all 0.15s"
           },
           children: [
@@ -3508,7 +3600,7 @@ function vo({
               "input",
               {
                 type: "checkbox",
-                checked: s,
+                checked: c,
                 onChange: () => r(n),
                 style: { margin: 0 }
               }
@@ -3522,31 +3614,31 @@ function vo({
     e.length === 0 && /* @__PURE__ */ l("span", { style: { fontSize: 12, color: t("textTertiary") }, children: "该协议没有可选的支付方式" })
   ] });
 }
-function Xe({
+function Ze({
   label: e,
   description: i,
   required: a,
   children: o
 }) {
-  return /* @__PURE__ */ p("div", { style: { marginBottom: 16 }, children: [
-    /* @__PURE__ */ p("label", { style: Po, children: [
+  return /* @__PURE__ */ y("div", { style: { marginBottom: 16 }, children: [
+    /* @__PURE__ */ y("label", { style: Lo, children: [
       e,
       a && /* @__PURE__ */ l("span", { style: { color: t("danger"), marginLeft: 4 }, children: "*" })
     ] }),
     o,
-    i && /* @__PURE__ */ l("div", { style: Mo, children: i })
+    i && /* @__PURE__ */ l("div", { style: No, children: i })
   ] });
 }
 function nt(e) {
   return { alipay: "支付宝", wxpay: "微信支付" }[e] || e;
 }
-function ko(e) {
+function Bo(e) {
   const i = {};
   for (const a of e.field_descriptors)
     a.type === "bool" ? i[a.key] = "false" : i[a.key] = "";
   return i;
 }
-const Ze = {
+const Xe = {
   maxWidth: 1280,
   margin: "0 auto",
   padding: "24px 24px 48px",
@@ -3555,7 +3647,7 @@ const Ze = {
   padding: "40px 0",
   textAlign: "center",
   color: t("textSecondary")
-}, Co = {
+}, _o = {
   margin: "4px 0 16px",
   fontSize: 13,
   color: t("textSecondary")
@@ -3566,44 +3658,44 @@ const Ze = {
   color: t("text"),
   textTransform: "uppercase",
   letterSpacing: "0.04em"
-}, Xt = {
+}, Zt = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
   background: t("bgSurface"),
   padding: 20,
   marginBottom: 20
-}, To = {
+}, Ro = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
   gap: 12
-}, Bo = {
+}, Io = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusMd"),
   padding: 16,
   background: t("bgElevated")
-}, Eo = {
+}, Po = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
   gap: 12
-}, Ro = {
+}, Mo = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusMd"),
   padding: 16,
   background: t("bgElevated")
-}, _o = {
+}, Ao = {
   color: t("textTertiary"),
   textAlign: "center",
   padding: "24px 0",
   fontSize: 14
-}, Sn = {
+}, xn = {
   padding: "2px 8px",
   borderRadius: 4,
   background: t("successSubtle"),
   color: t("success"),
   fontSize: 11,
   fontWeight: 600
-}, Io = {
-  ...Sn,
+}, zo = {
+  ...xn,
   background: t("warningSubtle"),
   color: t("warning")
 }, be = {
@@ -3615,7 +3707,7 @@ const Ze = {
   cursor: "pointer",
   fontSize: 13,
   fontWeight: 500
-}, xn = {
+}, wn = {
   padding: "8px 16px",
   border: "none",
   borderRadius: t("radiusMd"),
@@ -3633,7 +3725,7 @@ const Ze = {
   color: t("text"),
   fontSize: 13,
   boxSizing: "border-box"
-}, Po = {
+}, Lo = {
   display: "block",
   fontSize: 12,
   fontWeight: 600,
@@ -3641,11 +3733,11 @@ const Ze = {
   marginBottom: 6,
   textTransform: "uppercase",
   letterSpacing: "0.03em"
-}, Mo = {
+}, No = {
   marginTop: 6,
   fontSize: 11,
   color: t("textTertiary")
-}, Ao = {
+}, $o = {
   position: "fixed",
   top: 0,
   left: 0,
@@ -3656,7 +3748,7 @@ const Ze = {
   alignItems: "center",
   justifyContent: "center",
   zIndex: 1e3
-}, zo = {
+}, Do = {
   width: 600,
   maxWidth: "92vw",
   maxHeight: "90vh",
@@ -3666,162 +3758,162 @@ const Ze = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
   overflow: "hidden"
-}, Lo = {
+}, Fo = {
   padding: "16px 20px",
   borderBottom: `1px solid ${t("glassBorder")}`,
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between"
-}, No = {
+}, Uo = {
   background: "transparent",
   border: "none",
   color: t("textSecondary"),
   fontSize: 24,
   cursor: "pointer",
   lineHeight: 1
-}, $o = {
+}, qo = {
   padding: 20,
   overflowY: "auto",
   flex: 1
-}, Do = {
+}, Wo = {
   padding: "12px 20px",
   borderTop: `1px solid ${t("glassBorder")}`,
   display: "flex",
   justifyContent: "flex-end",
   gap: 8
 };
-function Fo() {
-  const { toast: e, Toaster: i } = mn(), [a, o] = L([]), [r, n] = L(!0), [s, d] = L(!1), [c, u] = L(null), h = () => {
-    n(!0), F.adminListPackages().then((y) => o(y.list || [])).catch((y) => e.error(`加载套餐失败: ${String(y.message || y)}`)).finally(() => n(!1));
+function Oo() {
+  const { toast: e, Toaster: i } = bn(), [a, o] = L([]), [r, n] = L(!0), [c, d] = L(!1), [s, h] = L(null), u = () => {
+    n(!0), F.adminListPackages().then((m) => o(m.list || [])).catch((m) => e.error(`加载套餐失败: ${String(m.message || m)}`)).finally(() => n(!1));
   };
-  U(h, []);
-  const f = () => u({ id: 0, amount: "100", bonus: "15", title: "", sort: String(a.length * 10), enabled: !0 }), b = (y) => u({
-    id: y.id,
-    amount: String(y.amount),
-    bonus: String(y.bonus_amount),
-    title: y.title,
-    sort: String(y.sort_order),
-    enabled: y.enabled
-  }), v = async () => {
-    if (!c) return;
-    const y = Number(c.amount), g = Number(c.bonus);
-    if (!y || y <= 0) {
+  U(u, []);
+  const p = () => h({ id: 0, amount: "100", bonus: "15", title: "", sort: String(a.length * 10), enabled: !0 }), x = (m) => h({
+    id: m.id,
+    amount: String(m.amount),
+    bonus: String(m.bonus_amount),
+    title: m.title,
+    sort: String(m.sort_order),
+    enabled: m.enabled
+  }), w = async () => {
+    if (!s) return;
+    const m = Number(s.amount), f = Number(s.bonus);
+    if (!m || m <= 0) {
       e.error("套餐金额必须大于 0");
       return;
     }
-    if (g < 0 || Number.isNaN(g)) {
+    if (f < 0 || Number.isNaN(f)) {
       e.error("赠送额度不能为负数");
       return;
     }
     d(!0);
     try {
       await F.adminUpsertPackage({
-        id: c.id,
-        amount: y,
-        bonus_amount: g,
-        title: c.title.trim(),
-        enabled: c.enabled,
-        sort_order: Number(c.sort) || 0
-      }), e.success(c.id ? "套餐已更新" : "套餐已创建"), u(null), h();
-    } catch (I) {
-      e.error(String(I.message || I));
+        id: s.id,
+        amount: m,
+        bonus_amount: f,
+        title: s.title.trim(),
+        enabled: s.enabled,
+        sort_order: Number(s.sort) || 0
+      }), e.success(s.id ? "套餐已更新" : "套餐已创建"), h(null), u();
+    } catch (R) {
+      e.error(String(R.message || R));
     } finally {
       d(!1);
     }
-  }, S = async (y) => {
+  }, C = async (m) => {
     try {
       await F.adminUpsertPackage({
-        id: y.id,
-        amount: y.amount,
-        bonus_amount: y.bonus_amount,
-        title: y.title,
-        enabled: !y.enabled,
-        sort_order: y.sort_order
-      }), e.success(y.enabled ? "套餐已停用" : "套餐已启用"), h();
-    } catch (g) {
-      e.error(String(g.message || g));
+        id: m.id,
+        amount: m.amount,
+        bonus_amount: m.bonus_amount,
+        title: m.title,
+        enabled: !m.enabled,
+        sort_order: m.sort_order
+      }), e.success(m.enabled ? "套餐已停用" : "套餐已启用"), u();
+    } catch (f) {
+      e.error(String(f.message || f));
     }
-  }, _ = async (y) => {
-    if (window.confirm(`确认删除套餐「充 ${y.amount} 送 ${y.bonus_amount}」？历史订单的赠送不受影响。`))
+  }, P = async (m) => {
+    if (window.confirm(`确认删除套餐「充 ${m.amount} 送 ${m.bonus_amount}」？历史订单的赠送不受影响。`))
       try {
-        await F.adminDeletePackage(y.id), e.success("套餐已删除"), h();
-      } catch (g) {
-        e.error(String(g.message || g));
+        await F.adminDeletePackage(m.id), e.success("套餐已删除"), u();
+      } catch (f) {
+        e.error(String(f.message || f));
       }
   };
-  return /* @__PURE__ */ p("div", { style: Uo, children: [
+  return /* @__PURE__ */ y("div", { style: jo, children: [
     i,
-    /* @__PURE__ */ p("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }, children: [
-      /* @__PURE__ */ p("div", { children: [
-        /* @__PURE__ */ l("h2", { style: qo, children: "充值套餐" }),
+    /* @__PURE__ */ y("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }, children: [
+      /* @__PURE__ */ y("div", { children: [
+        /* @__PURE__ */ l("h2", { style: Ho, children: "充值套餐" }),
         /* @__PURE__ */ l("p", { style: { margin: "4px 0 0", color: t("textSecondary"), fontSize: 13 }, children: "用户点选套餐档才享赠送；自定义金额充值不参与。赠送在支付成功后以独立流水入账。" })
       ] }),
-      /* @__PURE__ */ l("button", { style: en, onClick: f, children: "新增套餐" })
+      /* @__PURE__ */ l("button", { style: en, onClick: p, children: "新增套餐" })
     ] }),
-    c && /* @__PURE__ */ p("div", { style: { ...Zt, marginBottom: 20 }, children: [
-      /* @__PURE__ */ l("h3", { style: Wo, children: c.id ? `编辑套餐 #${c.id}` : "新增套餐" }),
-      /* @__PURE__ */ p("div", { style: { display: "flex", flexWrap: "wrap", gap: 16, alignItems: "flex-end" }, children: [
-        /* @__PURE__ */ p("label", { style: le, children: [
+    s && /* @__PURE__ */ y("div", { style: { ...Xt, marginBottom: 20 }, children: [
+      /* @__PURE__ */ l("h3", { style: Vo, children: s.id ? `编辑套餐 #${s.id}` : "新增套餐" }),
+      /* @__PURE__ */ y("div", { style: { display: "flex", flexWrap: "wrap", gap: 16, alignItems: "flex-end" }, children: [
+        /* @__PURE__ */ y("label", { style: le, children: [
           /* @__PURE__ */ l("span", { style: se, children: "充值金额（$）" }),
-          /* @__PURE__ */ l("input", { type: "number", min: 1, value: c.amount, onChange: (y) => u({ ...c, amount: y.target.value }), style: me })
+          /* @__PURE__ */ l("input", { type: "number", min: 1, value: s.amount, onChange: (m) => h({ ...s, amount: m.target.value }), style: me })
         ] }),
-        /* @__PURE__ */ p("label", { style: le, children: [
+        /* @__PURE__ */ y("label", { style: le, children: [
           /* @__PURE__ */ l("span", { style: se, children: "赠送额度（$）" }),
-          /* @__PURE__ */ l("input", { type: "number", min: 0, value: c.bonus, onChange: (y) => u({ ...c, bonus: y.target.value }), style: me })
+          /* @__PURE__ */ l("input", { type: "number", min: 0, value: s.bonus, onChange: (m) => h({ ...s, bonus: m.target.value }), style: me })
         ] }),
-        /* @__PURE__ */ p("label", { style: le, children: [
+        /* @__PURE__ */ y("label", { style: le, children: [
           /* @__PURE__ */ l("span", { style: se, children: "标题（可选，按钮悬浮提示）" }),
-          /* @__PURE__ */ l("input", { type: "text", maxLength: 64, value: c.title, placeholder: "如：限时特惠", onChange: (y) => u({ ...c, title: y.target.value }), style: { ...me, width: 200 } })
+          /* @__PURE__ */ l("input", { type: "text", maxLength: 64, value: s.title, placeholder: "如：限时特惠", onChange: (m) => h({ ...s, title: m.target.value }), style: { ...me, width: 200 } })
         ] }),
-        /* @__PURE__ */ p("label", { style: le, children: [
+        /* @__PURE__ */ y("label", { style: le, children: [
           /* @__PURE__ */ l("span", { style: se, children: "排序（小在前）" }),
-          /* @__PURE__ */ l("input", { type: "number", value: c.sort, onChange: (y) => u({ ...c, sort: y.target.value }), style: { ...me, width: 90 } })
+          /* @__PURE__ */ l("input", { type: "number", value: s.sort, onChange: (m) => h({ ...s, sort: m.target.value }), style: { ...me, width: 90 } })
         ] }),
-        /* @__PURE__ */ p("label", { style: { ...le, flexDirection: "row", alignItems: "center", gap: 8 }, children: [
-          /* @__PURE__ */ l("input", { type: "checkbox", checked: c.enabled, onChange: (y) => u({ ...c, enabled: y.target.checked }) }),
+        /* @__PURE__ */ y("label", { style: { ...le, flexDirection: "row", alignItems: "center", gap: 8 }, children: [
+          /* @__PURE__ */ l("input", { type: "checkbox", checked: s.enabled, onChange: (m) => h({ ...s, enabled: m.target.checked }) }),
           /* @__PURE__ */ l("span", { style: se, children: "启用" })
         ] }),
-        /* @__PURE__ */ p("div", { style: { display: "flex", gap: 8 }, children: [
-          /* @__PURE__ */ l("button", { style: { ...en, opacity: s ? 0.6 : 1 }, disabled: s, onClick: v, children: s ? "保存中..." : "保存" }),
-          /* @__PURE__ */ l("button", { style: Oo, onClick: () => u(null), children: "取消" })
+        /* @__PURE__ */ y("div", { style: { display: "flex", gap: 8 }, children: [
+          /* @__PURE__ */ l("button", { style: { ...en, opacity: c ? 0.6 : 1 }, disabled: c, onClick: w, children: c ? "保存中..." : "保存" }),
+          /* @__PURE__ */ l("button", { style: Ko, onClick: () => h(null), children: "取消" })
         ] })
       ] })
     ] }),
-    /* @__PURE__ */ l("div", { style: Zt, children: r ? /* @__PURE__ */ l("p", { style: { margin: 0, color: t("textSecondary"), textAlign: "center", padding: "24px 0" }, children: "加载中..." }) : a.length === 0 ? /* @__PURE__ */ l("p", { style: { margin: 0, color: t("textSecondary"), textAlign: "center", padding: "24px 0" }, children: "暂无套餐。点击右上角「新增套餐」创建第一个优惠档（用户端在配置前显示默认金额档）。" }) : /* @__PURE__ */ p("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: 13 }, children: [
-      /* @__PURE__ */ l("thead", { children: /* @__PURE__ */ l("tr", { children: ["ID", "充值金额", "赠送", "用户实得", "标题", "排序", "状态", "操作"].map((y) => /* @__PURE__ */ l("th", { style: jo, children: y }, y)) }) }),
-      /* @__PURE__ */ l("tbody", { children: a.map((y) => /* @__PURE__ */ p("tr", { children: [
-        /* @__PURE__ */ l("td", { style: J, children: y.id }),
-        /* @__PURE__ */ l("td", { style: { ...J, fontWeight: 600 }, children: D(y.amount) }),
-        /* @__PURE__ */ l("td", { style: { ...J, color: y.bonus_amount > 0 ? t("success") : t("textTertiary") }, children: y.bonus_amount > 0 ? `+${D(y.bonus_amount)}` : "—" }),
-        /* @__PURE__ */ l("td", { style: J, children: D(y.amount + y.bonus_amount) }),
-        /* @__PURE__ */ l("td", { style: { ...J, color: t("textSecondary") }, children: y.title || "—" }),
-        /* @__PURE__ */ l("td", { style: J, children: y.sort_order }),
-        /* @__PURE__ */ l("td", { style: J, children: /* @__PURE__ */ l("span", { style: y.enabled ? Ho : Vo, children: y.enabled ? "启用中" : "已停用" }) }),
-        /* @__PURE__ */ l("td", { style: J, children: /* @__PURE__ */ p("div", { style: { display: "flex", gap: 8 }, children: [
-          /* @__PURE__ */ l("button", { style: tt, onClick: () => b(y), children: "编辑" }),
-          /* @__PURE__ */ l("button", { style: tt, onClick: () => S(y), children: y.enabled ? "停用" : "启用" }),
-          /* @__PURE__ */ l("button", { style: { ...tt, color: t("danger") }, onClick: () => _(y), children: "删除" })
+    /* @__PURE__ */ l("div", { style: Xt, children: r ? /* @__PURE__ */ l("p", { style: { margin: 0, color: t("textSecondary"), textAlign: "center", padding: "24px 0" }, children: "加载中..." }) : a.length === 0 ? /* @__PURE__ */ l("p", { style: { margin: 0, color: t("textSecondary"), textAlign: "center", padding: "24px 0" }, children: "暂无套餐。点击右上角「新增套餐」创建第一个优惠档（用户端在配置前显示默认金额档）。" }) : /* @__PURE__ */ y("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: 13 }, children: [
+      /* @__PURE__ */ l("thead", { children: /* @__PURE__ */ l("tr", { children: ["ID", "充值金额", "赠送", "用户实得", "标题", "排序", "状态", "操作"].map((m) => /* @__PURE__ */ l("th", { style: Go, children: m }, m)) }) }),
+      /* @__PURE__ */ l("tbody", { children: a.map((m) => /* @__PURE__ */ y("tr", { children: [
+        /* @__PURE__ */ l("td", { style: J, children: m.id }),
+        /* @__PURE__ */ l("td", { style: { ...J, fontWeight: 600 }, children: D(m.amount) }),
+        /* @__PURE__ */ l("td", { style: { ...J, color: m.bonus_amount > 0 ? t("success") : t("textTertiary") }, children: m.bonus_amount > 0 ? `+${D(m.bonus_amount)}` : "—" }),
+        /* @__PURE__ */ l("td", { style: J, children: D(m.amount + m.bonus_amount) }),
+        /* @__PURE__ */ l("td", { style: { ...J, color: t("textSecondary") }, children: m.title || "—" }),
+        /* @__PURE__ */ l("td", { style: J, children: m.sort_order }),
+        /* @__PURE__ */ l("td", { style: J, children: /* @__PURE__ */ l("span", { style: m.enabled ? Yo : Jo, children: m.enabled ? "启用中" : "已停用" }) }),
+        /* @__PURE__ */ l("td", { style: J, children: /* @__PURE__ */ y("div", { style: { display: "flex", gap: 8 }, children: [
+          /* @__PURE__ */ l("button", { style: tt, onClick: () => x(m), children: "编辑" }),
+          /* @__PURE__ */ l("button", { style: tt, onClick: () => C(m), children: m.enabled ? "停用" : "启用" }),
+          /* @__PURE__ */ l("button", { style: { ...tt, color: t("danger") }, onClick: () => P(m), children: "删除" })
         ] }) })
-      ] }, y.id)) })
+      ] }, m.id)) })
     ] }) })
   ] });
 }
-const Uo = {
+const jo = {
   maxWidth: 960,
   margin: "0 auto",
   padding: "24px 24px 48px",
   color: t("text")
-}, qo = {
+}, Ho = {
   margin: 0,
   fontSize: 22,
   fontWeight: 600,
   letterSpacing: "-0.01em"
-}, Zt = {
+}, Xt = {
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusLg"),
   background: t("bgSurface"),
   padding: "20px 24px"
-}, Wo = {
+}, Vo = {
   margin: "0 0 16px",
   fontSize: 13,
   fontWeight: 600,
@@ -3854,7 +3946,7 @@ const Uo = {
   fontWeight: 600,
   cursor: "pointer",
   transition: t("transition")
-}, Oo = {
+}, Ko = {
   padding: "10px 20px",
   border: `1px solid ${t("glassBorder")}`,
   borderRadius: t("radiusMd"),
@@ -3871,7 +3963,7 @@ const Uo = {
   color: t("primary"),
   fontSize: 13,
   cursor: "pointer"
-}, jo = {
+}, Go = {
   textAlign: "left",
   padding: "8px 10px",
   color: t("textTertiary"),
@@ -3882,29 +3974,29 @@ const Uo = {
   padding: "10px",
   borderBottom: `1px solid ${t("glassBorder")}`,
   verticalAlign: "middle"
-}, Ho = {
+}, Yo = {
   fontSize: 12,
   fontWeight: 600,
   padding: "2px 10px",
   borderRadius: 999,
   background: t("primarySubtle"),
   color: t("primary")
-}, Vo = {
+}, Jo = {
   fontSize: 12,
   fontWeight: 600,
   padding: "2px 10px",
   borderRadius: 999,
   background: t("bgElevated"),
   color: t("textTertiary")
-}, Yo = {
+}, Xo = {
   routes: [
-    { path: "/recharge", component: sr },
-    { path: "/orders", component: wr },
-    { path: "/admin/orders", component: Ar },
-    { path: "/admin/providers", component: xo },
-    { path: "/admin/packages", component: Fo }
+    { path: "/recharge", component: dr },
+    { path: "/orders", component: kr },
+    { path: "/admin/orders", component: $r },
+    { path: "/admin/providers", component: Co },
+    { path: "/admin/packages", component: Oo }
   ]
 };
 export {
-  Yo as default
+  Xo as default
 };
