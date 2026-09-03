@@ -9,6 +9,18 @@ import { t } from './i18n';
 const RESUME_ORDER_KEY = 'epay_last_order';
 const DEFAULT_AMOUNTS = [10, 30, 50, 100, 200, 500];
 
+/**
+ * 归一化自定义金额输入：只留数字与一个小数点，去掉前导零，小数最多两位。
+ * 允许空串——用户要能清空重输，空串在提交时按「请输入有效金额」拦下，而不是被当成 0。
+ */
+export function normalizeAmountInput(raw: string): string {
+  const digitsOnly = raw.replace(/[^\d.]/g, '');
+  const [intPart = '', ...rest] = digitsOnly.split('.');
+  const trimmedInt = intPart.replace(/^0+(?=\d)/, '');
+  if (!rest.length) return trimmedInt;
+  return `${trimmedInt || '0'}.${rest.join('').slice(0, 2)}`;
+}
+
 function availablePresetAmounts(minAmount: number, maxAmount: number): number[] {
   const amounts = DEFAULT_AMOUNTS.filter((value) => value >= minAmount && value <= maxAmount);
   if (minAmount > DEFAULT_AMOUNTS[0] && minAmount <= maxAmount && !amounts.includes(minAmount)) {
@@ -38,7 +50,15 @@ export default function RechargePage() {
   const [minAmount, setMinAmount] = useState(1);
   const [maxAmount, setMaxAmount] = useState(10000);
 
-  const [amount, setAmount] = useState<number>(30);
+  // 金额输入框保存用户敲进去的原文，数值由它派生。
+  //
+  // 不能写成 value={number} + setAmount(Number(e.target.value))：数值没变时 React 会跳过
+  // 重渲染，输入框里的文字就和状态脱节。实测两条路径都能复现出「01000000」：
+  //   a) 清空输入框 → Number('') 得 0 → 回弹成 "0"，光标停在它后面，接着敲就变成 "01000000"；
+  //   b) 已是 1000000 时在最前面插一个 0 → 数值仍是 1000000 → 不重渲染，前导零留在框里。
+  const [amountText, setAmountText] = useState('30');
+  const setAmount = (value: number) => setAmountText(String(value));
+  const amount = amountText.trim() === '' ? Number.NaN : Number(amountText);
   const [method, setMethod] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -353,12 +373,14 @@ export default function RechargePage() {
           <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 8, color: cssVar('textSecondary'), fontSize: 13 }}>
             <span>{t('自定义金额')}{availablePackages.length ? t('（不参与套餐赠送）') : ''}</span>
             <input
-              type="number"
-              min={minAmount}
-              max={maxAmount}
-              step={1}
-              value={amount}
-              onChange={(e) => { userChoseAmountRef.current = true; setSelectedPackageId(null); setAmount(Number(e.target.value)); }}
+              type="text"
+              inputMode="decimal"
+              value={amountText}
+              onChange={(e) => {
+                userChoseAmountRef.current = true;
+                setSelectedPackageId(null);
+                setAmountText(normalizeAmountInput(e.target.value));
+              }}
               style={inputStyle}
             />
             <span>$</span>
