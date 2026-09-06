@@ -328,93 +328,129 @@ export default function RechargePage() {
     );
   }
 
-  // 默认态：金额 + 渠道选择 + 提交
+  // 默认态:左列套餐 / 金额 + 支付方式,右列订单确认 + 去支付
   const availablePackages = packages.filter((item) => item.amount >= minAmount && item.amount <= maxAmount);
   const presetAmounts = availablePresetAmounts(minAmount, maxAmount);
+  const selectedPackage = availablePackages.find((item) => item.id === selectedPackageId) ?? null;
+  const bonus = selectedPackage && selectedPackage.bonus_amount > 0 ? selectedPackage.bonus_amount : 0;
   return (
     <div style={containerStyle}>
-      <h2 style={titleStyle}>{t('账户充值')}</h2>
+      <div style={pageHeadStyle}>
+        <h2 style={titleStyle}>{t('账户充值')}</h2>
+        <span style={rateBadgeStyle}>
+          {t('充值比例：')}<strong style={{ color: cssVar('text'), fontWeight: 600 }}>1 CNY = $1</strong>
+        </span>
+      </div>
 
-      <div style={panelStyle}>
-        <p style={rateHintStyle}>
-          {t('充值比例：')}<strong style={{ color: cssVar('text') }}>1 CNY = $1</strong>
-        </p>
-        <section>
-          <h3 style={sectionTitleStyle}>{availablePackages.length ? t('选择套餐') : t('选择金额')}</h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {availablePackages.length
-              ? availablePackages.map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => { userChoseAmountRef.current = true; setSelectedPackageId(p.id); setAmount(p.amount); }}
-                  style={selectedPackageId === p.id ? packageBtnActive : packageBtn}
-                  title={p.title || undefined}
-                >
-                  <span style={{ fontSize: 16, fontWeight: 600 }}>{formatRechargeCredit(p.amount, { compact: true })}</span>
-                  {p.bonus_amount > 0 && (
-                    <span style={selectedPackageId === p.id ? bonusBadgeActive : bonusBadge}>
-                      {t('送')} {formatRechargeCredit(p.bonus_amount, { compact: true })}
+      <div style={layoutStyle}>
+        <div style={{ flex: '1 1 420px', minWidth: 0 }}>
+          <section>
+            <h3 style={sectionTitleStyle}>{availablePackages.length ? t('选择套餐') : t('选择金额')}</h3>
+            <div style={packageGridStyle}>
+              {availablePackages.length
+                ? availablePackages.map((p) => {
+                  const active = selectedPackageId === p.id;
+                  return (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => { userChoseAmountRef.current = true; setSelectedPackageId(p.id); setAmount(p.amount); }}
+                      style={active ? packageCardActive : packageCard}
+                      aria-pressed={active}
+                      title={p.title || undefined}
+                    >
+                      <span style={packageLabelStyle}>{p.title || t('套餐')}</span>
+                      <span style={packageAmountStyle}>{formatRechargeCredit(p.amount, { compact: true })}</span>
+                      <span style={packageSubStyle}>
+                        {t('到账')} {formatRechargeCredit(p.amount + (p.bonus_amount > 0 ? p.bonus_amount : 0), { compact: true })}
+                        {p.bonus_amount > 0 ? ` · ${t('送')} ${formatRechargeCredit(p.bonus_amount, { compact: true })}` : ''}
+                      </span>
+                    </button>
+                  );
+                })
+                : presetAmounts.map((v) => {
+                  const active = selectedPackageId === null && amount === v;
+                  return (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => { userChoseAmountRef.current = true; setSelectedPackageId(null); setAmount(v); }}
+                      style={active ? packageCardActive : packageCard}
+                      aria-pressed={active}
+                    >
+                      <span style={packageAmountStyle}>{formatRechargeCredit(v, { compact: true })}</span>
+                      <span style={packageSubStyle}>{t('到账')} {formatRechargeCredit(v, { compact: true })}</span>
+                    </button>
+                  );
+                })}
+              <div style={customCardStyle}>
+                <span style={packageLabelStyle}>{t('自定义金额')}{availablePackages.length ? t('（不参与套餐赠送）') : ''}</span>
+                <div style={customInputRowStyle}>
+                  <span style={{ color: cssVar('textTertiary'), fontSize: 13 }}>$</span>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={amountText}
+                    onChange={(e) => {
+                      userChoseAmountRef.current = true;
+                      setSelectedPackageId(null);
+                      setAmountText(normalizeAmountInput(e.target.value));
+                    }}
+                    style={inputStyle}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section style={sectionStyle}>
+            <h3 style={sectionTitleStyle}>{t('选择支付方式')}</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {methods.map((m) => {
+                const active = method === m.key;
+                return (
+                  <button
+                    key={m.key}
+                    type="button"
+                    onClick={() => setMethod(m.key)}
+                    style={active ? channelRowActive : channelRow}
+                    aria-pressed={active}
+                    title={m.description}
+                  >
+                    <span style={{ display: 'flex', flexDirection: 'column', gap: 2, textAlign: 'left', minWidth: 0 }}>
+                      {/* label 来自后端支付方式配置(多为简体),已知名称经 t() 本地化,未知原样展示 */}
+                      <strong style={{ fontSize: 14, fontWeight: 600 }}>{t(m.label)}</strong>
+                      {m.description ? <span style={{ fontSize: 12, color: cssVar('textSecondary') }}>{m.description}</span> : null}
                     </span>
-                  )}
-                </button>
-              ))
-              : presetAmounts.map((v) => (
-                <button
-                  key={v}
-                  type="button"
-                  onClick={() => { userChoseAmountRef.current = true; setSelectedPackageId(null); setAmount(v); }}
-                  style={amount === v ? amountBtnActive : amountBtn}
-                >
-                  {formatRechargeCredit(v, { compact: true })}
-                </button>
-              ))}
-          </div>
-          <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 8, color: cssVar('textSecondary'), fontSize: 13 }}>
-            <span>{t('自定义金额')}{availablePackages.length ? t('（不参与套餐赠送）') : ''}</span>
-            <input
-              type="text"
-              inputMode="decimal"
-              value={amountText}
-              onChange={(e) => {
-                userChoseAmountRef.current = true;
-                setSelectedPackageId(null);
-                setAmountText(normalizeAmountInput(e.target.value));
-              }}
-              style={inputStyle}
-            />
-            <span>$</span>
-          </div>
-        </section>
+                    <span aria-hidden="true" style={active ? radioOnStyle : radioStyle} />
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        </div>
 
-        <section style={sectionStyle}>
-          <h3 style={sectionTitleStyle}>{t('选择支付方式')}</h3>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            {methods.map((m) => (
-              <button
-                key={m.key}
-                type="button"
-                onClick={() => setMethod(m.key)}
-                style={method === m.key ? channelCardActive : channelCard}
-                title={m.description}
-              >
-                {/* label 来自后端支付方式配置(多为简体),已知名称经 t() 本地化,未知原样展示 */}
-                {t(m.label)}
-              </button>
-            ))}
+        <aside style={orderPanelStyle}>
+          <h3 style={sectionTitleStyle}>{t('订单确认')}</h3>
+          <div style={orderRowStyle}>
+            <span>{t('充值金额')}</span>
+            <span style={monoStyle}>{formatRechargeCredit(amount)}</span>
           </div>
-        </section>
-
-        {error && <p style={{ color: cssVar('danger'), marginTop: 16, fontSize: 13 }}>{error}</p>}
-
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={submitting}
-          style={{ ...primaryBtnStyle, marginTop: 24, width: '100%', opacity: submitting ? 0.6 : 1 }}
-        >
-          {submitting ? t('处理中...') : t('立即支付')}
-        </button>
+          <div style={{ ...orderRowStyle, borderBottom: 'none' }}>
+            <span>{t('到账余额')}</span>
+            <span style={{ ...monoStyle, fontSize: 20, fontWeight: 600 }}>{formatRechargeCredit(amount + bonus)}</span>
+          </div>
+          {error && <p style={{ color: cssVar('danger'), margin: '8px 0 0', fontSize: 13 }}>{error}</p>}
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={submitting}
+            style={{ ...primaryBtnStyle, marginTop: 16, width: '100%', opacity: submitting ? 0.6 : 1 }}
+          >
+            {submitting ? t('处理中...') : `${t('去支付')} ${formatRechargeCredit(amount)}`}
+          </button>
+          <p style={orderHintStyle}>{t('余额 1:1 抵扣，不设赠送；若后台配置了套餐赠送，卡片上会标出赠送额。')}</p>
+        </aside>
       </div>
     </div>
   );
@@ -447,7 +483,7 @@ function closedOrderTitle(s: string): string {
 //   - 文字：text / textSecondary / textTertiary 三级层次
 
 const containerStyle: React.CSSProperties = {
-  maxWidth: 720,
+  maxWidth: 1040,
   margin: '0 auto',
   padding: '24px 24px 48px',
   color: cssVar('text'),
@@ -478,16 +514,6 @@ const sectionStyle: React.CSSProperties = {
   marginTop: 28,
 };
 
-const rateHintStyle: React.CSSProperties = {
-  margin: '0 0 20px',
-  padding: '10px 12px',
-  border: `1px solid ${cssVar('glassBorder')}`,
-  borderRadius: cssVar('radiusMd'),
-  background: cssVar('bgElevated'),
-  color: cssVar('textSecondary'),
-  fontSize: 13,
-  lineHeight: 1.6,
-};
 
 const sectionTitleStyle: React.CSSProperties = {
   margin: '0 0 12px',
@@ -498,80 +524,13 @@ const sectionTitleStyle: React.CSSProperties = {
   letterSpacing: '0.04em',
 };
 
-const amountBtn: React.CSSProperties = {
-  minWidth: 88,
-  padding: '12px 18px',
-  border: `1px solid ${cssVar('glassBorder')}`,
-  borderRadius: cssVar('radiusMd'),
-  background: cssVar('bg'),
-  color: cssVar('text'),
-  cursor: 'pointer',
-  fontSize: 15,
-  fontWeight: 500,
-  transition: cssVar('transition'),
-};
 
-const amountBtnActive: React.CSSProperties = {
-  ...amountBtn,
-  borderColor: cssVar('primary'),
-  background: cssVar('primarySubtle'),
-  color: cssVar('primary'),
-  fontWeight: 600,
-};
 
-const packageBtn: React.CSSProperties = {
-  ...amountBtn,
-  minWidth: 104,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: 4,
-};
 
-const packageBtnActive: React.CSSProperties = {
-  ...packageBtn,
-  borderColor: cssVar('primary'),
-  background: cssVar('primarySubtle'),
-  color: cssVar('primary'),
-};
 
-const bonusBadge: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 600,
-  padding: '1px 8px',
-  borderRadius: 999,
-  background: cssVar('bgElevated'),
-  color: cssVar('success'),
-  border: `1px solid ${cssVar('glassBorder')}`,
-};
 
-const bonusBadgeActive: React.CSSProperties = {
-  ...bonusBadge,
-  background: cssVar('primary'),
-  color: cssVar('textInverse'),
-  border: 'none',
-};
 
-const channelCard: React.CSSProperties = {
-  minWidth: 140,
-  padding: '16px 24px',
-  border: `1px solid ${cssVar('glassBorder')}`,
-  borderRadius: cssVar('radiusMd'),
-  background: cssVar('bgElevated'),
-  color: cssVar('text'),
-  cursor: 'pointer',
-  fontSize: 14,
-  fontWeight: 500,
-  transition: cssVar('transition'),
-};
 
-const channelCardActive: React.CSSProperties = {
-  ...channelCard,
-  borderColor: cssVar('primary'),
-  background: cssVar('primarySubtle'),
-  color: cssVar('primary'),
-  fontWeight: 600,
-};
 
 const inputStyle: React.CSSProperties = {
   padding: '8px 12px',
@@ -642,4 +601,155 @@ const inlineCodeStyle: React.CSSProperties = {
   borderRadius: 4,
   background: cssVar('bg'),
   color: cssVar('textSecondary'),
+};
+
+// ---- 默认态(套餐 / 支付方式 / 订单确认)的样式:发丝线、4-6px 圆角、零投影,选中态 = 墨色描边 + 橙色下划线 ----
+const pageHeadStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+  gap: 16,
+  marginBottom: 18,
+};
+
+const rateBadgeStyle: React.CSSProperties = {
+  color: cssVar('textSecondary'),
+  fontSize: 12,
+  whiteSpace: 'nowrap',
+};
+
+const layoutStyle: React.CSSProperties = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'flex-start',
+  gap: 20,
+};
+
+const packageGridStyle: React.CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+  gap: 10,
+};
+
+const packageCard: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: 4,
+  padding: '12px 14px',
+  border: `1px solid ${cssVar('glassBorder')}`,
+  borderRadius: cssVar('radiusMd'),
+  background: cssVar('bgSurface'),
+  color: cssVar('text'),
+  font: 'inherit',
+  textAlign: 'left',
+  cursor: 'pointer',
+  transition: 'border-color 0.12s',
+};
+
+const packageCardActive: React.CSSProperties = {
+  ...packageCard,
+  borderColor: cssVar('text'),
+  boxShadow: 'inset 0 -2px 0 var(--ag-accent, var(--ag-primary))',
+};
+
+const customCardStyle: React.CSSProperties = {
+  ...packageCard,
+  gridColumn: 'span 2',
+  cursor: 'default',
+  gap: 6,
+};
+
+const packageLabelStyle: React.CSSProperties = {
+  color: cssVar('textTertiary'),
+  fontSize: 11,
+  letterSpacing: '0.04em',
+};
+
+const packageAmountStyle: React.CSSProperties = {
+  fontFamily: cssVar('fontMono'),
+  fontSize: 18,
+  fontWeight: 600,
+  fontVariantNumeric: 'tabular-nums',
+};
+
+const packageSubStyle: React.CSSProperties = {
+  color: cssVar('textSecondary'),
+  fontSize: 12,
+};
+
+const customInputRowStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 6,
+  width: '100%',
+};
+
+const channelRow: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: 12,
+  width: '100%',
+  padding: '12px 14px',
+  border: `1px solid ${cssVar('glassBorder')}`,
+  borderRadius: cssVar('radiusMd'),
+  background: cssVar('bgSurface'),
+  color: cssVar('text'),
+  font: 'inherit',
+  cursor: 'pointer',
+  transition: 'border-color 0.12s',
+};
+
+const channelRowActive: React.CSSProperties = {
+  ...channelRow,
+  borderColor: cssVar('text'),
+  background: cssVar('bgElevated'),
+};
+
+const radioStyle: React.CSSProperties = {
+  flexShrink: 0,
+  width: 16,
+  height: 16,
+  borderRadius: 999,
+  border: `1px solid ${cssVar('glassBorder')}`,
+  background: cssVar('bgSurface'),
+};
+
+const radioOnStyle: React.CSSProperties = {
+  ...radioStyle,
+  border: `5px solid ${cssVar('text')}`,
+};
+
+const orderPanelStyle: React.CSSProperties = {
+  flex: '0 1 340px',
+  minWidth: 260,
+  padding: '16px 18px 18px',
+  border: `1px solid ${cssVar('glassBorder')}`,
+  borderRadius: cssVar('radiusMd'),
+  background: cssVar('bgSurface'),
+};
+
+const orderRowStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+  gap: 12,
+  padding: '10px 0',
+  borderBottom: `1px solid ${cssVar('glassBorder')}`,
+  color: cssVar('textSecondary'),
+  fontSize: 13,
+};
+
+const monoStyle: React.CSSProperties = {
+  fontFamily: cssVar('fontMono'),
+  color: cssVar('text'),
+  fontVariantNumeric: 'tabular-nums',
+};
+
+const orderHintStyle: React.CSSProperties = {
+  margin: '10px 0 0',
+  color: cssVar('textTertiary'),
+  fontSize: 12,
+  lineHeight: 1.5,
 };

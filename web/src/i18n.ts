@@ -57,6 +57,13 @@ function currentLang(): Lang {
 // zh-HK 用香港用语：充值→增值、支付宝→支付寶、二维码→二維碼、扫码→掃碼。
 
 const zhHK: Record<string, string> = {
+  '到账': '到帳',
+  '套餐': '套餐',
+  '订单确认': '訂單確認',
+  '充值金额': '儲值金額',
+  '到账余额': '到帳餘額',
+  '去支付': '去支付',
+  '余额 1:1 抵扣，不设赠送；若后台配置了套餐赠送，卡片上会标出赠送额。': '餘額 1:1 抵扣，不設贈送；若後台配置了套餐贈送，卡片上會標出贈送額。',
   '加载中...': '載入中...',
   '加载失败: ': '載入失敗: ',
   '加载支付方式失败: ': '載入支付方式失敗: ',
@@ -128,6 +135,13 @@ const zhHK: Record<string, string> = {
 };
 
 const en: Record<string, string> = {
+  '到账': 'Credited',
+  '套餐': 'Package',
+  '订单确认': 'Order summary',
+  '充值金额': 'Top-up amount',
+  '到账余额': 'Credited balance',
+  '去支付': 'Pay',
+  '余额 1:1 抵扣，不设赠送；若后台配置了套餐赠送，卡片上会标出赠送额。': 'Balance is credited 1:1 with no bonus; if a package bonus is configured, it is shown on the card.',
   '加载中...': 'Loading...',
   '加载失败: ': 'Failed to load: ',
   '加载支付方式失败: ': 'Failed to load payment methods: ',
@@ -199,6 +213,13 @@ const en: Record<string, string> = {
 };
 
 const ja: Record<string, string> = {
+  '到账': '入金',
+  '套餐': 'プラン',
+  '订单确认': '注文確認',
+  '充值金额': 'チャージ金額',
+  '到账余额': '入金後残高',
+  '去支付': '支払う',
+  '余额 1:1 抵扣，不设赠送；若后台配置了套餐赠送，卡片上会标出赠送额。': '残高は 1:1 で入金され、ボーナスはありません。プランにボーナスが設定されている場合はカードに表示されます。',
   '加载中...': '読み込み中...',
   '加载失败: ': '読み込みに失敗しました: ',
   '加载支付方式失败: ': '支払い方法の読み込みに失敗しました: ',
@@ -270,6 +291,13 @@ const ja: Record<string, string> = {
 };
 
 const es: Record<string, string> = {
+  '到账': 'Acreditado',
+  '套餐': 'Paquete',
+  '订单确认': 'Resumen del pedido',
+  '充值金额': 'Importe de recarga',
+  '到账余额': 'Saldo acreditado',
+  '去支付': 'Pagar',
+  '余额 1:1 抵扣，不设赠送；若后台配置了套餐赠送，卡片上会标出赠送额。': 'El saldo se acredita 1:1 sin bonificación; si un paquete incluye bonificación, se muestra en la tarjeta.',
   '加载中...': 'Cargando...',
   '加载失败: ': 'Error al cargar: ',
   '加载支付方式失败: ': 'Error al cargar los métodos de pago: ',
