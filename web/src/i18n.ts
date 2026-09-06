@@ -57,6 +57,7 @@ function currentLang(): Lang {
 // zh-HK 用香港用语：充值→增值、支付宝→支付寶、二维码→二維碼、扫码→掃碼。
 
 const zhHK: Record<string, string> = {
+  '最低': '最低',
   '到账': '到帳',
   '套餐': '套餐',
   '订单确认': '訂單確認',
@@ -135,6 +136,7 @@ const zhHK: Record<string, string> = {
 };
 
 const en: Record<string, string> = {
+  '最低': 'Min',
   '到账': 'Credited',
   '套餐': 'Package',
   '订单确认': 'Order summary',
@@ -213,6 +215,7 @@ const en: Record<string, string> = {
 };
 
 const ja: Record<string, string> = {
+  '最低': '最低',
   '到账': '入金',
   '套餐': 'プラン',
   '订单确认': '注文確認',
@@ -291,6 +294,7 @@ const ja: Record<string, string> = {
 };
 
 const es: Record<string, string> = {
+  '最低': 'Mín.',
   '到账': 'Acreditado',
   '套餐': 'Paquete',
   '订单确认': 'Resumen del pedido',
